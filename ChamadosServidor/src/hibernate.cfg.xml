@@ -6,9 +6,32 @@
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/chamados?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password">root</property>
+    <property name="hibernate.connection.password"/>
     <property name="hibernate.show_sql">false</property>
     <property name="hibernate.hbm2ddl.auto">update</property>
+    <mapping class="br.com.chamados.model.Cidade"/>
+    <mapping class="br.com.chamados.model.Funcao"/>
+    <mapping class="br.com.chamados.model.CategoriaTres"/>
+    <mapping class="br.com.chamados.model.Acompanhamento"/>
+    <mapping class="br.com.chamados.model.FuncionarioHasTelaId"/>
+    <mapping class="br.com.chamados.model.CategoriaDois"/>
+    <mapping class="br.com.chamados.model.Pais"/>
+    <mapping class="br.com.chamados.model.Interacao"/>
+    <mapping class="br.com.chamados.model.Estado"/>
+    <mapping class="br.com.chamados.model.Bairro"/>
+    <mapping class="br.com.chamados.model.CategoriaUm"/>
+    <mapping class="br.com.chamados.model.Funcionario"/>
+    <mapping class="br.com.chamados.model.InteracaoId"/>
     <mapping class="br.com.chamados.model.Pessoa"/>
+    <mapping class="br.com.chamados.model.Tela"/>
+    <mapping class="br.com.chamados.model.Chamado"/>
+    <mapping class="br.com.chamados.model.Prioridade"/>
+    <mapping class="br.com.chamados.model.Setor"/>
+    <mapping class="br.com.chamados.model.Origim"/>
+    <mapping class="br.com.chamados.model.FuncionarioHasTela"/>
+    <mapping class="br.com.chamados.model.Tipo"/>
+    <mapping class="br.com.chamados.model.Cliente"/>
+    <mapping class="br.com.chamados.model.Situacao"/>
+    <mapping class="br.com.chamados.model.Nivel"/>
   </session-factory>
 </hibernate-configuration>

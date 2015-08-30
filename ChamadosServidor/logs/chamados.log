@@ -1,0 +1,104 @@
+2015-08-23 18:54:51,650 [main]  INFO br.com.chamados.view.Chamados:18 - Teste
+2015-08-23 18:54:52,198 [main]  WARN org.hibernate.internal.util.xml.DTDEntityResolver:74 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+2015-08-23 18:54:52,869 [main]  WARN org.hibernate.engine.jdbc.internal.JdbcServicesImpl:169 - HHH000342: Could not obtain connection to query metadata : Accès refusé pour l'utilisateur: 'root'@'@localhost' (mot de passe: OUI)
+2015-08-23 18:54:53,411 [main] ERROR org.hibernate.tool.hbm2ddl.SchemaUpdate:201 - HHH000319: Could not get database metadata
+java.sql.SQLException: Accès refusé pour l'utilisateur: 'root'@'@localhost' (mot de passe: OUI)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:946)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:2985)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:885)
+	at com.mysql.jdbc.MysqlIO.secureAuth411(MysqlIO.java:3421)
+	at com.mysql.jdbc.MysqlIO.doHandshake(MysqlIO.java:1247)
+	at com.mysql.jdbc.Connection.createNewIO(Connection.java:2775)
+	at com.mysql.jdbc.Connection.<init>(Connection.java:1555)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:285)
+	at org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl.getConnection(DriverManagerConnectionProviderImpl.java:204)
+	at org.hibernate.tool.hbm2ddl.SuppliedConnectionProviderConnectionHelper.prepare(SuppliedConnectionProviderConnectionHelper.java:51)
+	at org.hibernate.tool.hbm2ddl.SchemaUpdate.execute(SchemaUpdate.java:194)
+	at org.hibernate.tool.hbm2ddl.SchemaUpdate.execute(SchemaUpdate.java:178)
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:506)
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1794)
+	at br.com.chamados.config.HibernateUtil.<clinit>(HibernateUtil.java:24)
+	at br.com.chamados.control.DAO.insert(DAO.java:33)
+	at br.com.chamados.view.Chamados.main(Chamados.java:26)
+2015-08-23 18:54:53,419 [main] ERROR org.hibernate.tool.hbm2ddl.SchemaUpdate:247 - HHH000299: Could not complete schema update
+java.sql.SQLException: Accès refusé pour l'utilisateur: 'root'@'@localhost' (mot de passe: OUI)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:946)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:2985)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:885)
+	at com.mysql.jdbc.MysqlIO.secureAuth411(MysqlIO.java:3421)
+	at com.mysql.jdbc.MysqlIO.doHandshake(MysqlIO.java:1247)
+	at com.mysql.jdbc.Connection.createNewIO(Connection.java:2775)
+	at com.mysql.jdbc.Connection.<init>(Connection.java:1555)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:285)
+	at org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl.getConnection(DriverManagerConnectionProviderImpl.java:204)
+	at org.hibernate.tool.hbm2ddl.SuppliedConnectionProviderConnectionHelper.prepare(SuppliedConnectionProviderConnectionHelper.java:51)
+	at org.hibernate.tool.hbm2ddl.SchemaUpdate.execute(SchemaUpdate.java:194)
+	at org.hibernate.tool.hbm2ddl.SchemaUpdate.execute(SchemaUpdate.java:178)
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:506)
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1794)
+	at br.com.chamados.config.HibernateUtil.<clinit>(HibernateUtil.java:24)
+	at br.com.chamados.control.DAO.insert(DAO.java:33)
+	at br.com.chamados.view.Chamados.main(Chamados.java:26)
+2015-08-23 18:54:53,468 [main]  WARN org.hibernate.engine.jdbc.spi.SqlExceptionHelper:145 - SQL Error: 1045, SQLState: 28000
+2015-08-23 18:54:53,468 [main] ERROR org.hibernate.engine.jdbc.spi.SqlExceptionHelper:147 - Accès refusé pour l'utilisateur: 'root'@'@localhost' (mot de passe: OUI)
+2015-08-23 18:56:52,485 [main]  INFO br.com.chamados.view.Chamados:18 - Teste
+2015-08-23 18:56:52,732 [main]  WARN org.hibernate.internal.util.xml.DTDEntityResolver:74 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+2015-08-23 18:56:52,907 [main]  WARN org.hibernate.engine.jdbc.internal.JdbcServicesImpl:169 - HHH000342: Could not obtain connection to query metadata : Base 'chamados' inconnue
+2015-08-23 18:56:53,252 [main] ERROR org.hibernate.tool.hbm2ddl.SchemaUpdate:201 - HHH000319: Could not get database metadata
+com.mysql.jdbc.exceptions.MySQLSyntaxErrorException: Base 'chamados' inconnue
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:936)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:2985)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:885)
+	at com.mysql.jdbc.MysqlIO.secureAuth411(MysqlIO.java:3421)
+	at com.mysql.jdbc.MysqlIO.doHandshake(MysqlIO.java:1247)
+	at com.mysql.jdbc.Connection.createNewIO(Connection.java:2775)
+	at com.mysql.jdbc.Connection.<init>(Connection.java:1555)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:285)
+	at org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl.getConnection(DriverManagerConnectionProviderImpl.java:204)
+	at org.hibernate.tool.hbm2ddl.SuppliedConnectionProviderConnectionHelper.prepare(SuppliedConnectionProviderConnectionHelper.java:51)
+	at org.hibernate.tool.hbm2ddl.SchemaUpdate.execute(SchemaUpdate.java:194)
+	at org.hibernate.tool.hbm2ddl.SchemaUpdate.execute(SchemaUpdate.java:178)
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:506)
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1794)
+	at br.com.chamados.config.HibernateUtil.<clinit>(HibernateUtil.java:24)
+	at br.com.chamados.control.DAO.insert(DAO.java:33)
+	at br.com.chamados.view.Chamados.main(Chamados.java:26)
+2015-08-23 18:56:53,254 [main] ERROR org.hibernate.tool.hbm2ddl.SchemaUpdate:247 - HHH000299: Could not complete schema update
+com.mysql.jdbc.exceptions.MySQLSyntaxErrorException: Base 'chamados' inconnue
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:936)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:2985)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:885)
+	at com.mysql.jdbc.MysqlIO.secureAuth411(MysqlIO.java:3421)
+	at com.mysql.jdbc.MysqlIO.doHandshake(MysqlIO.java:1247)
+	at com.mysql.jdbc.Connection.createNewIO(Connection.java:2775)
+	at com.mysql.jdbc.Connection.<init>(Connection.java:1555)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:285)
+	at org.hibernate.service.jdbc.connections.internal.DriverManagerConnectionProviderImpl.getConnection(DriverManagerConnectionProviderImpl.java:204)
+	at org.hibernate.tool.hbm2ddl.SuppliedConnectionProviderConnectionHelper.prepare(SuppliedConnectionProviderConnectionHelper.java:51)
+	at org.hibernate.tool.hbm2ddl.SchemaUpdate.execute(SchemaUpdate.java:194)
+	at org.hibernate.tool.hbm2ddl.SchemaUpdate.execute(SchemaUpdate.java:178)
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:506)
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1794)
+	at br.com.chamados.config.HibernateUtil.<clinit>(HibernateUtil.java:24)
+	at br.com.chamados.control.DAO.insert(DAO.java:33)
+	at br.com.chamados.view.Chamados.main(Chamados.java:26)
+2015-08-23 18:56:53,303 [main]  WARN org.hibernate.engine.jdbc.spi.SqlExceptionHelper:145 - SQL Error: 1049, SQLState: 42000
+2015-08-23 18:56:53,303 [main] ERROR org.hibernate.engine.jdbc.spi.SqlExceptionHelper:147 - Base 'chamados' inconnue
+2015-08-23 18:59:41,879 [main]  INFO br.com.chamados.view.Chamados:18 - Teste
+2015-08-23 18:59:42,151 [main]  WARN org.hibernate.internal.util.xml.DTDEntityResolver:74 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+2015-08-23 18:59:43,309 [main]  INFO br.com.chamados.view.Chamados:28 - 01444099094 - Lucas Schneider
+2015-08-23 18:59:43,329 [main]  INFO br.com.chamados.view.Chamados:38 - 014785236 - Lucas Maciel
+2015-08-23 18:59:43,409 [main]  INFO br.com.chamados.view.Chamados:42 - 01444099094 - Lucas Schneider
+2015-08-23 18:59:43,412 [main]  INFO br.com.chamados.view.Chamados:42 - 014785236 - Lucas Maciel
+2015-08-23 18:59:43,483 [main]  INFO br.com.chamados.view.Chamados:55 - 014785236 - Lucas Pedro
+2015-08-24 19:50:32,677 [main]  INFO br.com.chamados.view.Chamados:18 - Teste
+2015-08-24 19:50:33,089 [main]  WARN org.hibernate.internal.util.xml.DTDEntityResolver:74 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+2015-08-24 19:50:35,314 [main]  WARN org.hibernate.engine.jdbc.spi.SqlExceptionHelper:145 - SQL Error: 1364, SQLState: HY000
+2015-08-24 19:50:35,315 [main] ERROR org.hibernate.engine.jdbc.spi.SqlExceptionHelper:147 - Field 'rg' doesn't have a default value
+2015-08-24 19:50:35,319 [main] ERROR br.com.chamados.control.DAO:42 - could not execute statement
+2015-08-24 19:50:35,323 [main]  INFO br.com.chamados.view.Chamados:28 - 01444099094 - Lucas Schneider
+2015-08-24 19:50:35,324 [main]  WARN org.hibernate.engine.jdbc.spi.SqlExceptionHelper:145 - SQL Error: 1364, SQLState: HY000
+2015-08-24 19:50:35,325 [main] ERROR org.hibernate.engine.jdbc.spi.SqlExceptionHelper:147 - Field 'rg' doesn't have a default value
+2015-08-24 19:50:35,648 [main] ERROR br.com.chamados.control.DAO:42 - could not execute statement
+2015-08-24 19:50:35,648 [main]  INFO br.com.chamados.view.Chamados:38 - 014785236 - Lucas Maciel
+2015-08-24 19:50:35,688 [main] ERROR br.com.chamados.control.DAO:58 - Batch update returned unexpected row count from update [0]; actual row count: 0; expected: 1
