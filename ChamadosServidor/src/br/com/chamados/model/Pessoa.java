@@ -1,5 +1,5 @@
 package br.com.chamados.model;
-// Generated 24/08/2015 20:26:41 by Hibernate Tools 4.3.1
+// Generated 30/08/2015 21:21:25 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -11,6 +11,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -27,30 +29,47 @@ public class Pessoa  implements java.io.Serializable {
 
 
      private Integer id;
+     private Bairro bairro;
+     private Cidade cidade;
+     private Cliente cliente;
      private String nome;
      private int idade;
+     private Date dataNascimento;
+     private String email;
+     private String telefone;
      private String cpf;
      private String rg;
-     private Date dataNascimento;
+     private Set chamados = new HashSet(0);
      private Set funcionarios = new HashSet(0);
 
     public Pessoa() {
     }
 
 	
-    public Pessoa(String nome, int idade, String cpf, String rg, Date dataNascimento) {
+    public Pessoa(Bairro bairro, Cidade cidade, Cliente cliente, String nome, int idade, Date dataNascimento, String email, String telefone, String cpf, String rg) {
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.cliente = cliente;
         this.nome = nome;
         this.idade = idade;
+        this.dataNascimento = dataNascimento;
+        this.email = email;
+        this.telefone = telefone;
         this.cpf = cpf;
         this.rg = rg;
-        this.dataNascimento = dataNascimento;
     }
-    public Pessoa(String nome, int idade, String cpf, String rg, Date dataNascimento, Set funcionarios) {
+    public Pessoa(Bairro bairro, Cidade cidade, Cliente cliente, String nome, int idade, Date dataNascimento, String email, String telefone, String cpf, String rg, Set chamados, Set funcionarios) {
+       this.bairro = bairro;
+       this.cidade = cidade;
+       this.cliente = cliente;
        this.nome = nome;
        this.idade = idade;
+       this.dataNascimento = dataNascimento;
+       this.email = email;
+       this.telefone = telefone;
        this.cpf = cpf;
        this.rg = rg;
-       this.dataNascimento = dataNascimento;
+       this.chamados = chamados;
        this.funcionarios = funcionarios;
     }
    
@@ -64,6 +83,36 @@ public class Pessoa  implements java.io.Serializable {
     
     public void setId(Integer id) {
         this.id = id;
+    }
+
+@ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="bairro_id", nullable=false)
+    public Bairro getBairro() {
+        return this.bairro;
+    }
+    
+    public void setBairro(Bairro bairro) {
+        this.bairro = bairro;
+    }
+
+@ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="cidade_id", nullable=false)
+    public Cidade getCidade() {
+        return this.cidade;
+    }
+    
+    public void setCidade(Cidade cidade) {
+        this.cidade = cidade;
+    }
+
+@ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="cliente_id", nullable=false)
+    public Cliente getCliente() {
+        return this.cliente;
+    }
+    
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     
@@ -86,6 +135,36 @@ public class Pessoa  implements java.io.Serializable {
         this.idade = idade;
     }
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="data_nascimento", nullable=false, length=0)
+    public Date getDataNascimento() {
+        return this.dataNascimento;
+    }
+    
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    
+    @Column(name="email", nullable=false, length=45)
+    public String getEmail() {
+        return this.email;
+    }
+    
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    
+    @Column(name="telefone", nullable=false, length=45)
+    public String getTelefone() {
+        return this.telefone;
+    }
+    
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
     
     @Column(name="cpf", nullable=false, length=45)
     public String getCpf() {
@@ -106,14 +185,13 @@ public class Pessoa  implements java.io.Serializable {
         this.rg = rg;
     }
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="data_nascimento", nullable=false, length=0)
-    public Date getDataNascimento() {
-        return this.dataNascimento;
+@OneToMany(fetch=FetchType.LAZY, mappedBy="pessoa")
+    public Set getChamados() {
+        return this.chamados;
     }
     
-    public void setDataNascimento(Date dataNascimento) {
-        this.dataNascimento = dataNascimento;
+    public void setChamados(Set chamados) {
+        this.chamados = chamados;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="pessoa")

@@ -1,14 +1,14 @@
 package br.com.chamados.model;
-// Generated 24/08/2015 20:26:41 by Hibernate Tools 4.3.1
+// Generated 30/08/2015 21:21:25 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -25,8 +25,9 @@ import javax.persistence.TemporalType;
 public class Interacao  implements java.io.Serializable {
 
 
-     private InteracaoId id;
+     private Integer id;
      private Acompanhamento acompanhamento;
+     private Chamado chamado;
      private String descricao;
      private Date data;
      private Integer autorId;
@@ -39,15 +40,15 @@ public class Interacao  implements java.io.Serializable {
     }
 
 	
-    public Interacao(InteracaoId id, Acompanhamento acompanhamento, String descricao, Date data) {
-        this.id = id;
+    public Interacao(Acompanhamento acompanhamento, Chamado chamado, String descricao, Date data) {
         this.acompanhamento = acompanhamento;
+        this.chamado = chamado;
         this.descricao = descricao;
         this.data = data;
     }
-    public Interacao(InteracaoId id, Acompanhamento acompanhamento, String descricao, Date data, Integer autorId, Character tipoAutor, Boolean solucao, Boolean privado, Boolean email) {
-       this.id = id;
+    public Interacao(Acompanhamento acompanhamento, Chamado chamado, String descricao, Date data, Integer autorId, Character tipoAutor, Boolean solucao, Boolean privado, Boolean email) {
        this.acompanhamento = acompanhamento;
+       this.chamado = chamado;
        this.descricao = descricao;
        this.data = data;
        this.autorId = autorId;
@@ -57,17 +58,15 @@ public class Interacao  implements java.io.Serializable {
        this.email = email;
     }
    
-     @EmbeddedId
+     @Id @GeneratedValue(strategy=IDENTITY)
 
     
-    @AttributeOverrides( {
-        @AttributeOverride(name="id", column=@Column(name="id", nullable=false) ), 
-        @AttributeOverride(name="chamadoId", column=@Column(name="chamado_id", nullable=false) ) } )
-    public InteracaoId getId() {
+    @Column(name="id", unique=true, nullable=false)
+    public Integer getId() {
         return this.id;
     }
     
-    public void setId(InteracaoId id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -79,6 +78,16 @@ public class Interacao  implements java.io.Serializable {
     
     public void setAcompanhamento(Acompanhamento acompanhamento) {
         this.acompanhamento = acompanhamento;
+    }
+
+@ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="chamado_id", nullable=false)
+    public Chamado getChamado() {
+        return this.chamado;
+    }
+    
+    public void setChamado(Chamado chamado) {
+        this.chamado = chamado;
     }
 
     
@@ -150,6 +159,9 @@ public class Interacao  implements java.io.Serializable {
     public void setEmail(Boolean email) {
         this.email = email;
     }
+
+
+
 
 }
 

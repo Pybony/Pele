@@ -1,5 +1,5 @@
 package br.com.chamados.model;
-// Generated 24/08/2015 20:26:41 by Hibernate Tools 4.3.1
+// Generated 30/08/2015 21:21:25 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -25,13 +25,15 @@ public class CategoriaUm  implements java.io.Serializable {
 
      private Integer id;
      private String descricao;
+     private Set chamados = new HashSet(0);
      private Set categoriaDoises = new HashSet(0);
 
     public CategoriaUm() {
     }
 
-    public CategoriaUm(String descricao, Set categoriaDoises) {
+    public CategoriaUm(String descricao, Set chamados, Set categoriaDoises) {
        this.descricao = descricao;
+       this.chamados = chamados;
        this.categoriaDoises = categoriaDoises;
     }
    
@@ -55,6 +57,15 @@ public class CategoriaUm  implements java.io.Serializable {
     
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="categoriaUm")
+    public Set getChamados() {
+        return this.chamados;
+    }
+    
+    public void setChamados(Set chamados) {
+        this.chamados = chamados;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="categoriaUm")

@@ -1,5 +1,5 @@
 package br.com.chamados.model;
-// Generated 24/08/2015 20:26:41 by Hibernate Tools 4.3.1
+// Generated 30/08/2015 21:21:25 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -28,7 +28,9 @@ public class Cidade  implements java.io.Serializable {
      private String nome;
      private String cep;
      private Set bairros = new HashSet(0);
+     private Set funcionarios = new HashSet(0);
      private Set clientes = new HashSet(0);
+     private Set pessoas = new HashSet(0);
 
     public Cidade() {
     }
@@ -40,13 +42,15 @@ public class Cidade  implements java.io.Serializable {
         this.nome = nome;
         this.cep = cep;
     }
-    public Cidade(int id, Estado estado, String nome, String cep, Set bairros, Set clientes) {
+    public Cidade(int id, Estado estado, String nome, String cep, Set bairros, Set funcionarios, Set clientes, Set pessoas) {
        this.id = id;
        this.estado = estado;
        this.nome = nome;
        this.cep = cep;
        this.bairros = bairros;
+       this.funcionarios = funcionarios;
        this.clientes = clientes;
+       this.pessoas = pessoas;
     }
    
      @Id 
@@ -101,12 +105,30 @@ public class Cidade  implements java.io.Serializable {
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="cidade")
+    public Set getFuncionarios() {
+        return this.funcionarios;
+    }
+    
+    public void setFuncionarios(Set funcionarios) {
+        this.funcionarios = funcionarios;
+    }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="cidade")
     public Set getClientes() {
         return this.clientes;
     }
     
     public void setClientes(Set clientes) {
         this.clientes = clientes;
+    }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="cidade")
+    public Set getPessoas() {
+        return this.pessoas;
+    }
+    
+    public void setPessoas(Set pessoas) {
+        this.pessoas = pessoas;
     }
 
 

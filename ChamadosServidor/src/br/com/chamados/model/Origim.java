@@ -1,10 +1,14 @@
 package br.com.chamados.model;
-// Generated 24/08/2015 20:26:41 by Hibernate Tools 4.3.1
+// Generated 30/08/2015 21:21:25 by Hibernate Tools 4.3.1
 
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -19,13 +23,20 @@ public class Origim  implements java.io.Serializable {
 
      private int id;
      private String descricao;
+     private Set chamados = new HashSet(0);
 
     public Origim() {
     }
 
+	
     public Origim(int id, String descricao) {
+        this.id = id;
+        this.descricao = descricao;
+    }
+    public Origim(int id, String descricao, Set chamados) {
        this.id = id;
        this.descricao = descricao;
+       this.chamados = chamados;
     }
    
      @Id 
@@ -48,6 +59,15 @@ public class Origim  implements java.io.Serializable {
     
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="origim")
+    public Set getChamados() {
+        return this.chamados;
+    }
+    
+    public void setChamados(Set chamados) {
+        this.chamados = chamados;
     }
 
 

@@ -1,5 +1,5 @@
 package br.com.chamados.model;
-// Generated 24/08/2015 20:26:41 by Hibernate Tools 4.3.1
+// Generated 30/08/2015 21:21:25 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -26,6 +26,8 @@ public class Bairro  implements java.io.Serializable {
      private int id;
      private Cidade cidade;
      private String descricao;
+     private Set pessoas = new HashSet(0);
+     private Set funcionarios = new HashSet(0);
      private Set clientes = new HashSet(0);
 
     public Bairro() {
@@ -37,10 +39,12 @@ public class Bairro  implements java.io.Serializable {
         this.cidade = cidade;
         this.descricao = descricao;
     }
-    public Bairro(int id, Cidade cidade, String descricao, Set clientes) {
+    public Bairro(int id, Cidade cidade, String descricao, Set pessoas, Set funcionarios, Set clientes) {
        this.id = id;
        this.cidade = cidade;
        this.descricao = descricao;
+       this.pessoas = pessoas;
+       this.funcionarios = funcionarios;
        this.clientes = clientes;
     }
    
@@ -74,6 +78,24 @@ public class Bairro  implements java.io.Serializable {
     
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="bairro")
+    public Set getPessoas() {
+        return this.pessoas;
+    }
+    
+    public void setPessoas(Set pessoas) {
+        this.pessoas = pessoas;
+    }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="bairro")
+    public Set getFuncionarios() {
+        return this.funcionarios;
+    }
+    
+    public void setFuncionarios(Set funcionarios) {
+        this.funcionarios = funcionarios;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="bairro")

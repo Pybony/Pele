@@ -1,13 +1,16 @@
 package br.com.chamados.model;
-// Generated 24/08/2015 20:26:41 by Hibernate Tools 4.3.1
+// Generated 30/08/2015 21:21:25 by Hibernate Tools 4.3.1
 
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -28,11 +31,25 @@ public class Cliente  implements java.io.Serializable {
      private String endereco;
      private String telefone;
      private String email;
+     private Set funcionarios = new HashSet(0);
+     private Set chamados = new HashSet(0);
+     private Set pessoas = new HashSet(0);
 
     public Cliente() {
     }
 
+	
     public Cliente(int id, Bairro bairro, Cidade cidade, String nome, String cgc, String endereco, String telefone, String email) {
+        this.id = id;
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.nome = nome;
+        this.cgc = cgc;
+        this.endereco = endereco;
+        this.telefone = telefone;
+        this.email = email;
+    }
+    public Cliente(int id, Bairro bairro, Cidade cidade, String nome, String cgc, String endereco, String telefone, String email, Set funcionarios, Set chamados, Set pessoas) {
        this.id = id;
        this.bairro = bairro;
        this.cidade = cidade;
@@ -41,6 +58,9 @@ public class Cliente  implements java.io.Serializable {
        this.endereco = endereco;
        this.telefone = telefone;
        this.email = email;
+       this.funcionarios = funcionarios;
+       this.chamados = chamados;
+       this.pessoas = pessoas;
     }
    
      @Id 
@@ -123,6 +143,33 @@ public class Cliente  implements java.io.Serializable {
     
     public void setEmail(String email) {
         this.email = email;
+    }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="cliente")
+    public Set getFuncionarios() {
+        return this.funcionarios;
+    }
+    
+    public void setFuncionarios(Set funcionarios) {
+        this.funcionarios = funcionarios;
+    }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="cliente")
+    public Set getChamados() {
+        return this.chamados;
+    }
+    
+    public void setChamados(Set chamados) {
+        this.chamados = chamados;
+    }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="cliente")
+    public Set getPessoas() {
+        return this.pessoas;
+    }
+    
+    public void setPessoas(Set pessoas) {
+        this.pessoas = pessoas;
     }
 
 

@@ -1,5 +1,5 @@
 package br.com.chamados.model;
-// Generated 24/08/2015 20:26:41 by Hibernate Tools 4.3.1
+// Generated 30/08/2015 21:21:25 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -29,30 +29,41 @@ public class Funcionario  implements java.io.Serializable {
 
 
      private Integer id;
+     private Bairro bairro;
+     private Cidade cidade;
+     private Cliente cliente;
      private Funcao funcao;
      private Pessoa pessoa;
+     private Setor setor;
      private Date dataAdmicao;
-     private String setor;
      private Date dataDesligamento;
      private Set funcionarioHasTelas = new HashSet(0);
+     private Set chamados = new HashSet(0);
 
     public Funcionario() {
     }
 
 	
-    public Funcionario(Funcao funcao, Pessoa pessoa, Date dataAdmicao, String setor) {
+    public Funcionario(Bairro bairro, Cidade cidade, Cliente cliente, Funcao funcao, Pessoa pessoa, Setor setor, Date dataAdmicao) {
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.cliente = cliente;
         this.funcao = funcao;
         this.pessoa = pessoa;
-        this.dataAdmicao = dataAdmicao;
         this.setor = setor;
+        this.dataAdmicao = dataAdmicao;
     }
-    public Funcionario(Funcao funcao, Pessoa pessoa, Date dataAdmicao, String setor, Date dataDesligamento, Set funcionarioHasTelas) {
+    public Funcionario(Bairro bairro, Cidade cidade, Cliente cliente, Funcao funcao, Pessoa pessoa, Setor setor, Date dataAdmicao, Date dataDesligamento, Set funcionarioHasTelas, Set chamados) {
+       this.bairro = bairro;
+       this.cidade = cidade;
+       this.cliente = cliente;
        this.funcao = funcao;
        this.pessoa = pessoa;
-       this.dataAdmicao = dataAdmicao;
        this.setor = setor;
+       this.dataAdmicao = dataAdmicao;
        this.dataDesligamento = dataDesligamento;
        this.funcionarioHasTelas = funcionarioHasTelas;
+       this.chamados = chamados;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -65,6 +76,36 @@ public class Funcionario  implements java.io.Serializable {
     
     public void setId(Integer id) {
         this.id = id;
+    }
+
+@ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="bairro_id", nullable=false)
+    public Bairro getBairro() {
+        return this.bairro;
+    }
+    
+    public void setBairro(Bairro bairro) {
+        this.bairro = bairro;
+    }
+
+@ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="cidade_id", nullable=false)
+    public Cidade getCidade() {
+        return this.cidade;
+    }
+    
+    public void setCidade(Cidade cidade) {
+        this.cidade = cidade;
+    }
+
+@ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="cliente_id", nullable=false)
+    public Cliente getCliente() {
+        return this.cliente;
+    }
+    
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
@@ -87,6 +128,16 @@ public class Funcionario  implements java.io.Serializable {
         this.pessoa = pessoa;
     }
 
+@ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="setor_id", nullable=false)
+    public Setor getSetor() {
+        return this.setor;
+    }
+    
+    public void setSetor(Setor setor) {
+        this.setor = setor;
+    }
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="data_admicao", nullable=false, length=0)
     public Date getDataAdmicao() {
@@ -95,16 +146,6 @@ public class Funcionario  implements java.io.Serializable {
     
     public void setDataAdmicao(Date dataAdmicao) {
         this.dataAdmicao = dataAdmicao;
-    }
-
-    
-    @Column(name="setor", nullable=false, length=45)
-    public String getSetor() {
-        return this.setor;
-    }
-    
-    public void setSetor(String setor) {
-        this.setor = setor;
     }
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -124,6 +165,15 @@ public class Funcionario  implements java.io.Serializable {
     
     public void setFuncionarioHasTelas(Set funcionarioHasTelas) {
         this.funcionarioHasTelas = funcionarioHasTelas;
+    }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="funcionario")
+    public Set getChamados() {
+        return this.chamados;
+    }
+    
+    public void setChamados(Set chamados) {
+        this.chamados = chamados;
     }
 
 

@@ -1,8 +1,10 @@
 package br.com.chamados.model;
-// Generated 24/08/2015 20:26:41 by Hibernate Tools 4.3.1
+// Generated 30/08/2015 21:21:25 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,6 +13,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -26,52 +29,55 @@ public class Chamado  implements java.io.Serializable {
 
 
      private Integer id;
+     private CategoriaUm categoriaUm;
+     private Chamado chamado;
+     private Cliente cliente;
+     private Funcionario funcionario;
+     private Origim origim;
+     private Pessoa pessoa;
+     private Prioridade prioridade;
      private Situacao situacao;
+     private Tipo tipo;
      private int idAbertura;
-     private int idSolicitante;
      private String titulo;
-     private String descrissao;
+     private String descricao;
      private Date dataAbertura;
      private Date dataFechamento;
      private Date dataPrevista;
-     private int categoriaUmId;
-     private int funcionarioId;
-     private int tipoId;
-     private int prioridadeId;
-     private int origimId;
-     private Integer idChamadoPrincipal;
+     private Set chamados = new HashSet(0);
+     private Set interacaos = new HashSet(0);
 
     public Chamado() {
     }
 
 	
-    public Chamado(Situacao situacao, int idAbertura, int idSolicitante, String titulo, String descrissao, int categoriaUmId, int funcionarioId, int tipoId, int prioridadeId, int origimId) {
+    public Chamado(CategoriaUm categoriaUm, Origim origim, Prioridade prioridade, Situacao situacao, Tipo tipo, int idAbertura, String titulo) {
+        this.categoriaUm = categoriaUm;
+        this.origim = origim;
+        this.prioridade = prioridade;
         this.situacao = situacao;
+        this.tipo = tipo;
         this.idAbertura = idAbertura;
-        this.idSolicitante = idSolicitante;
         this.titulo = titulo;
-        this.descrissao = descrissao;
-        this.categoriaUmId = categoriaUmId;
-        this.funcionarioId = funcionarioId;
-        this.tipoId = tipoId;
-        this.prioridadeId = prioridadeId;
-        this.origimId = origimId;
     }
-    public Chamado(Situacao situacao, int idAbertura, int idSolicitante, String titulo, String descrissao, Date dataAbertura, Date dataFechamento, Date dataPrevista, int categoriaUmId, int funcionarioId, int tipoId, int prioridadeId, int origimId, Integer idChamadoPrincipal) {
+    public Chamado(CategoriaUm categoriaUm, Chamado chamado, Cliente cliente, Funcionario funcionario, Origim origim, Pessoa pessoa, Prioridade prioridade, Situacao situacao, Tipo tipo, int idAbertura, String titulo, String descricao, Date dataAbertura, Date dataFechamento, Date dataPrevista, Set chamados, Set interacaos) {
+       this.categoriaUm = categoriaUm;
+       this.chamado = chamado;
+       this.cliente = cliente;
+       this.funcionario = funcionario;
+       this.origim = origim;
+       this.pessoa = pessoa;
+       this.prioridade = prioridade;
        this.situacao = situacao;
+       this.tipo = tipo;
        this.idAbertura = idAbertura;
-       this.idSolicitante = idSolicitante;
        this.titulo = titulo;
-       this.descrissao = descrissao;
+       this.descricao = descricao;
        this.dataAbertura = dataAbertura;
        this.dataFechamento = dataFechamento;
        this.dataPrevista = dataPrevista;
-       this.categoriaUmId = categoriaUmId;
-       this.funcionarioId = funcionarioId;
-       this.tipoId = tipoId;
-       this.prioridadeId = prioridadeId;
-       this.origimId = origimId;
-       this.idChamadoPrincipal = idChamadoPrincipal;
+       this.chamados = chamados;
+       this.interacaos = interacaos;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -87,6 +93,76 @@ public class Chamado  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="categoria_um_id", nullable=false)
+    public CategoriaUm getCategoriaUm() {
+        return this.categoriaUm;
+    }
+    
+    public void setCategoriaUm(CategoriaUm categoriaUm) {
+        this.categoriaUm = categoriaUm;
+    }
+
+@ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="id_chamado_principal")
+    public Chamado getChamado() {
+        return this.chamado;
+    }
+    
+    public void setChamado(Chamado chamado) {
+        this.chamado = chamado;
+    }
+
+@ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="cliente_id")
+    public Cliente getCliente() {
+        return this.cliente;
+    }
+    
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+@ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="funcionario_id")
+    public Funcionario getFuncionario() {
+        return this.funcionario;
+    }
+    
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }
+
+@ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="origem_id", nullable=false)
+    public Origim getOrigim() {
+        return this.origim;
+    }
+    
+    public void setOrigim(Origim origim) {
+        this.origim = origim;
+    }
+
+@ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="pessoa_id")
+    public Pessoa getPessoa() {
+        return this.pessoa;
+    }
+    
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }
+
+@ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="prioridade_id", nullable=false)
+    public Prioridade getPrioridade() {
+        return this.prioridade;
+    }
+    
+    public void setPrioridade(Prioridade prioridade) {
+        this.prioridade = prioridade;
+    }
+
+@ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="situacao_id", nullable=false)
     public Situacao getSituacao() {
         return this.situacao;
@@ -94,6 +170,16 @@ public class Chamado  implements java.io.Serializable {
     
     public void setSituacao(Situacao situacao) {
         this.situacao = situacao;
+    }
+
+@ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="tipo_id", nullable=false)
+    public Tipo getTipo() {
+        return this.tipo;
+    }
+    
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
     }
 
     
@@ -107,16 +193,6 @@ public class Chamado  implements java.io.Serializable {
     }
 
     
-    @Column(name="id_solicitante", nullable=false)
-    public int getIdSolicitante() {
-        return this.idSolicitante;
-    }
-    
-    public void setIdSolicitante(int idSolicitante) {
-        this.idSolicitante = idSolicitante;
-    }
-
-    
     @Column(name="titulo", nullable=false, length=45)
     public String getTitulo() {
         return this.titulo;
@@ -127,13 +203,13 @@ public class Chamado  implements java.io.Serializable {
     }
 
     
-    @Column(name="descrissao", nullable=false, length=45)
-    public String getDescrissao() {
-        return this.descrissao;
+    @Column(name="descricao", length=45)
+    public String getDescricao() {
+        return this.descricao;
     }
     
-    public void setDescrissao(String descrissao) {
-        this.descrissao = descrissao;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -166,64 +242,22 @@ public class Chamado  implements java.io.Serializable {
         this.dataPrevista = dataPrevista;
     }
 
-    
-    @Column(name="categoria_um_id", nullable=false)
-    public int getCategoriaUmId() {
-        return this.categoriaUmId;
+@OneToMany(fetch=FetchType.LAZY, mappedBy="chamado")
+    public Set getChamados() {
+        return this.chamados;
     }
     
-    public void setCategoriaUmId(int categoriaUmId) {
-        this.categoriaUmId = categoriaUmId;
-    }
-
-    
-    @Column(name="funcionario_id", nullable=false)
-    public int getFuncionarioId() {
-        return this.funcionarioId;
-    }
-    
-    public void setFuncionarioId(int funcionarioId) {
-        this.funcionarioId = funcionarioId;
+    public void setChamados(Set chamados) {
+        this.chamados = chamados;
     }
 
-    
-    @Column(name="tipo_id", nullable=false)
-    public int getTipoId() {
-        return this.tipoId;
+@OneToMany(fetch=FetchType.LAZY, mappedBy="chamado")
+    public Set getInteracaos() {
+        return this.interacaos;
     }
     
-    public void setTipoId(int tipoId) {
-        this.tipoId = tipoId;
-    }
-
-    
-    @Column(name="prioridade_id", nullable=false)
-    public int getPrioridadeId() {
-        return this.prioridadeId;
-    }
-    
-    public void setPrioridadeId(int prioridadeId) {
-        this.prioridadeId = prioridadeId;
-    }
-
-    
-    @Column(name="origim_id", nullable=false)
-    public int getOrigimId() {
-        return this.origimId;
-    }
-    
-    public void setOrigimId(int origimId) {
-        this.origimId = origimId;
-    }
-
-    
-    @Column(name="id_chamado_principal")
-    public Integer getIdChamadoPrincipal() {
-        return this.idChamadoPrincipal;
-    }
-    
-    public void setIdChamadoPrincipal(Integer idChamadoPrincipal) {
-        this.idChamadoPrincipal = idChamadoPrincipal;
+    public void setInteracaos(Set interacaos) {
+        this.interacaos = interacaos;
     }
 
 
