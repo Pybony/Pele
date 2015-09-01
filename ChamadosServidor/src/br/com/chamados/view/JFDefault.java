@@ -19,8 +19,18 @@ public class JFDefault extends javax.swing.JFrame {
      */
     public JFDefault() {
         initComponents();
-        Icon icone = new ImageIcon( "./imagens/lupa.jpg" );
-        jButton2.setIcon(icone);
+        Icon deletar = new ImageIcon( "./imagens/deletar.png" );
+        Icon inserir = new ImageIcon( "./imagens/inserir.png" );
+        Icon alterar = new ImageIcon( "./imagens/alterar.png" );
+        Icon pesquisar = new ImageIcon( "./imagens/pesquisar.png" );
+        Icon salvar = new ImageIcon( "./imagens/salvar.png" );
+        Icon vapara = new ImageIcon( "./imagens/vapara.png" );
+        jbDeletar.setIcon(deletar);
+        jbInserir.setIcon(inserir);
+        jbAlterar.setIcon(alterar);
+        jbPesquisar.setIcon(pesquisar);
+        jbVaPara.setIcon(vapara);
+        this.setSize(800, 600);
     }
 
     /**
@@ -31,58 +41,60 @@ public class JFDefault extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jPHead = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        jbVaPara = new javax.swing.JButton();
+        jbPesquisar = new javax.swing.JButton();
+        jbInserir = new javax.swing.JButton();
+        jbAlterar = new javax.swing.JButton();
+        jbDeletar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(800, 600));
 
-        jButton1.setText("Vá para");
+        jbVaPara.setText("Vá para");
 
-        jButton2.setText("");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jbPesquisar.setText("Pesquisar");
+        jbPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jbPesquisarActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Inserir");
+        jbInserir.setText("Inserir");
 
-        jButton4.setText("Alterar");
+        jbAlterar.setText("Alterar");
 
-        jButton5.setText("Deletar");
+        jbDeletar.setText("Deletar");
 
         javax.swing.GroupLayout jPHeadLayout = new javax.swing.GroupLayout(jPHead);
         jPHead.setLayout(jPHeadLayout);
         jPHeadLayout.setHorizontalGroup(
             jPHeadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPHeadLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1)
+                .addGap(96, 96, 96)
+                .addComponent(jbVaPara)
                 .addGap(14, 14, 14)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jbPesquisar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbInserir)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbAlterar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbDeletar)
+                .addContainerGap(124, Short.MAX_VALUE))
         );
         jPHeadLayout.setVerticalGroup(
             jPHeadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPHeadLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPHeadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5))
+                .addGroup(jPHeadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jbDeletar)
+                    .addComponent(jbAlterar)
+                    .addComponent(jbInserir)
+                    .addComponent(jbPesquisar)
+                    .addComponent(jbVaPara))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -96,15 +108,15 @@ public class JFDefault extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPHead, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 245, Short.MAX_VALUE))
+                .addGap(0, 281, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jbPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPesquisarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jbPesquisarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -143,11 +155,11 @@ public class JFDefault extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JPanel jPHead;
+    private javax.swing.JButton jbAlterar;
+    private javax.swing.JButton jbDeletar;
+    private javax.swing.JButton jbInserir;
+    private javax.swing.JButton jbPesquisar;
+    private javax.swing.JButton jbVaPara;
     // End of variables declaration//GEN-END:variables
 }
