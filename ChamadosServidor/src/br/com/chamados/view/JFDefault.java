@@ -41,7 +41,6 @@ public class JFDefault extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         jPHead = new javax.swing.JPanel();
         jbVaPara = new javax.swing.JButton();
@@ -51,7 +50,6 @@ public class JFDefault extends javax.swing.JFrame {
         jbDeletar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 600));
 
         jbVaPara.setText("Vá para");
 
@@ -73,7 +71,7 @@ public class JFDefault extends javax.swing.JFrame {
         jPHeadLayout.setHorizontalGroup(
             jPHeadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPHeadLayout.createSequentialGroup()
-                .addGap(96, 96, 96)
+                .addGap(178, 178, 178)
                 .addComponent(jbVaPara)
                 .addGap(14, 14, 14)
                 .addComponent(jbPesquisar)
@@ -83,19 +81,19 @@ public class JFDefault extends javax.swing.JFrame {
                 .addComponent(jbAlterar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbDeletar)
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addContainerGap(247, Short.MAX_VALUE))
         );
         jPHeadLayout.setVerticalGroup(
             jPHeadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPHeadLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(20, 20, 20)
                 .addGroup(jPHeadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jbDeletar)
                     .addComponent(jbAlterar)
                     .addComponent(jbInserir)
                     .addComponent(jbPesquisar)
                     .addComponent(jbVaPara))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -108,7 +106,7 @@ public class JFDefault extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPHead, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 281, Short.MAX_VALUE))
+                .addGap(0, 535, Short.MAX_VALUE))
         );
 
         pack();
