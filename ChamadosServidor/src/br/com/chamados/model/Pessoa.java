@@ -44,7 +44,6 @@ public class Pessoa  implements java.io.Serializable {
 
     public Pessoa() {
     }
-
 	
     public Pessoa(Bairro bairro, Cidade cidade, Cliente cliente, String nome, int idade, Date dataNascimento, String email, String telefone, String cpf, String rg) {
         this.bairro = bairro;
