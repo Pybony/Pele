@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 06/09/2015 10:21:08 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="br.com.chamados.model.Pessoa" table="pessoa" catalog="chamados" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="bairro" class="br.com.chamados.model.Bairro" fetch="select">
+            <column name="bairro_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="cidade" class="br.com.chamados.model.Cidade" fetch="select">
+            <column name="cidade_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="empresa" class="br.com.chamados.model.Empresa" fetch="select">
+            <column name="empresa_id" not-null="true" />
+        </many-to-one>
+        <property name="nome" type="string">
+            <column name="nome" length="45" not-null="true" />
+        </property>
+        <property name="idade" type="int">
+            <column name="idade" not-null="true" />
+        </property>
+        <property name="dataNascimento" type="timestamp">
+            <column name="data_nascimento" length="0" not-null="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="45" not-null="true" />
+        </property>
+        <property name="telefone" type="string">
+            <column name="telefone" length="45" not-null="true" />
+        </property>
+        <property name="cpf" type="string">
+            <column name="cpf" length="45" not-null="true" />
+        </property>
+        <property name="rg" type="string">
+            <column name="rg" length="45" not-null="true" />
+        </property>
+        <set name="chamados" table="chamado" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="pessoa_id" />
+            </key>
+            <one-to-many class="br.com.chamados.model.Chamado" />
+        </set>
+        <set name="funcionarios" table="funcionario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="pessoa_id" not-null="true" />
+            </key>
+            <one-to-many class="br.com.chamados.model.Funcionario" />
+        </set>
+    </class>
+</hibernate-mapping>

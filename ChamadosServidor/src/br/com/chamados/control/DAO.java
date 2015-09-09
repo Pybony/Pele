@@ -7,6 +7,7 @@ package br.com.chamados.control;
 
 import br.com.chamados.config.HibernateUtil;
 import br.com.chamados.config.LogChamados;
+import br.com.chamados.genericos.Cookies;
 import java.io.Serializable;
 import java.util.List;
 import org.apache.log4j.Logger;
@@ -29,28 +30,13 @@ public class DAO<T> {
     public DAO() {
     }
 
-    public void insert(Object object) {
+    public void save(Object object) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transacion = null;
         try {
+            session.createSQLQuery("SET @username = " + Cookies.usuario.getId()).executeUpdate();
             transacion = session.beginTransaction();
-            session.save(object);
-            transacion.commit();
-        } catch (HibernateException e) {
-            transacion.rollback();
-            e.printStackTrace();
-            logger.error(e.getMessage());
-        } finally {
-            session.close();
-        }
-    }
-
-    public void update(Object object) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transacion = null;
-        try {
-            transacion = session.beginTransaction();
-            session.update(object);
+            session.saveOrUpdate(object);
             transacion.commit();
         } catch (HibernateException e) {
             transacion.rollback();
@@ -65,6 +51,7 @@ public class DAO<T> {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transacion = null;
         try {
+            session.createSQLQuery("SET @username = " + Cookies.usuario.getId()).executeUpdate();
             transacion = session.beginTransaction();
             session.delete(object);
             transacion.commit();

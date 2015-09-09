@@ -2,26 +2,28 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="chamados"/>
-  <table-filter match-name="tipo"/>
-  <table-filter match-name="pessoa"/>
-  <table-filter match-name="chamado"/>
-  <table-filter match-name="interacao"/>
-  <table-filter match-name="cidade"/>
-  <table-filter match-name="prioridade"/>
-  <table-filter match-name="nivel"/>
-  <table-filter match-name="funcao"/>
-  <table-filter match-name="setor"/>
-  <table-filter match-name="situacao"/>
-  <table-filter match-name="acompanhamento"/>
-  <table-filter match-name="origim"/>
-  <table-filter match-name="funcionario"/>
-  <table-filter match-name="funcionario_has_tela"/>
-  <table-filter match-name="categoria_tres"/>
-  <table-filter match-name="pais"/>
-  <table-filter match-name="categoria_dois"/>
-  <table-filter match-name="tela"/>
   <table-filter match-name="categoria_um"/>
   <table-filter match-name="estado"/>
+  <table-filter match-name="funcionario"/>
+  <table-filter match-name="nivel"/>
+  <table-filter match-name="categoria_tres"/>
+  <table-filter match-name="acompanhamento"/>
+  <table-filter match-name="categoria_dois"/>
+  <table-filter match-name="setor"/>
+  <table-filter match-name="interacao"/>
+  <table-filter match-name="empresa"/>
+  <table-filter match-name="funcao"/>
   <table-filter match-name="bairro"/>
-  <table-filter match-name="cliente"/>
+  <table-filter match-name="pais"/>
+  <table-filter match-name="permissoes"/>
+  <table-filter match-name="cidade"/>
+  <table-filter match-name="tipo"/>
+  <table-filter match-name="chamado"/>
+  <table-filter match-name="usuario"/>
+  <table-filter match-name="auditoria"/>
+  <table-filter match-name="pessoa"/>
+  <table-filter match-name="situacao"/>
+  <table-filter match-name="tela"/>
+  <table-filter match-name="prioridade"/>
+  <table-filter match-name="origim"/>
 </hibernate-reverse-engineering>
