@@ -11,6 +11,6 @@ package br.com.chamados.view;
  */
 public class Main {
     public static void main(String args[]){
-        new JFEPF().setVisible(true);
+        new JFEmpresa().setVisible(true);
     }
 }

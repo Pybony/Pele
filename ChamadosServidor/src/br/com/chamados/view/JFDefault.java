@@ -7,6 +7,8 @@ package br.com.chamados.view;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -48,10 +50,16 @@ public class JFDefault extends javax.swing.JFrame {
         jbInserir = new javax.swing.JButton();
         jbAlterar = new javax.swing.JButton();
         jbDeletar = new javax.swing.JButton();
+        mainDesktopPane = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jbVaPara.setText("Vá para");
+        jbVaPara.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbVaParaActionPerformed(evt);
+            }
+        });
 
         jbPesquisar.setText("Pesquisar");
         jbPesquisar.addActionListener(new java.awt.event.ActionListener() {
@@ -96,17 +104,33 @@ public class JFDefault extends javax.swing.JFrame {
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
+        mainDesktopPane.setPreferredSize(new java.awt.Dimension(800, 600));
+
+        javax.swing.GroupLayout mainDesktopPaneLayout = new javax.swing.GroupLayout(mainDesktopPane);
+        mainDesktopPane.setLayout(mainDesktopPaneLayout);
+        mainDesktopPaneLayout.setHorizontalGroup(
+            mainDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        mainDesktopPaneLayout.setVerticalGroup(
+            mainDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 569, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPHead, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(mainDesktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPHead, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 535, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(mainDesktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -115,6 +139,12 @@ public class JFDefault extends javax.swing.JFrame {
     private void jbPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPesquisarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jbPesquisarActionPerformed
+
+    private void jbVaParaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVaParaActionPerformed
+        JInternalFrame JIFrameVaPara = new JIFVaPara();
+        mainDesktopPane.add(JIFrameVaPara);
+        JIFrameVaPara.setVisible(true);
+    }//GEN-LAST:event_jbVaParaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -159,5 +189,6 @@ public class JFDefault extends javax.swing.JFrame {
     private javax.swing.JButton jbInserir;
     private javax.swing.JButton jbPesquisar;
     private javax.swing.JButton jbVaPara;
+    private javax.swing.JDesktopPane mainDesktopPane;
     // End of variables declaration//GEN-END:variables
 }
