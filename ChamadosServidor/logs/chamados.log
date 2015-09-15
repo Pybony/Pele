@@ -102,3 +102,5 @@ com.mysql.jdbc.exceptions.MySQLSyntaxErrorException: Base 'chamados' inconnue
 2015-08-24 19:50:35,648 [main] ERROR br.com.chamados.control.DAO:42 - could not execute statement
 2015-08-24 19:50:35,648 [main]  INFO br.com.chamados.view.Chamados:38 - 014785236 - Lucas Maciel
 2015-08-24 19:50:35,688 [main] ERROR br.com.chamados.control.DAO:58 - Batch update returned unexpected row count from update [0]; actual row count: 0; expected: 1
+2015-09-09 20:52:28,132 [AWT-EventQueue-0]  WARN org.hibernate.internal.util.xml.DTDEntityResolver:74 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+2015-09-12 18:26:43,479 [AWT-EventQueue-0]  WARN org.hibernate.internal.util.xml.DTDEntityResolver:74 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!

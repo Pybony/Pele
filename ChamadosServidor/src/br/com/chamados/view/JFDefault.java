@@ -13,12 +13,12 @@ import javax.swing.ImageIcon;
  *
  * @author Jonas C. Rosa
  */
-public class JfDefault extends javax.swing.JFrame {
+public class JFDefault extends javax.swing.JFrame {
 
     /**
      * Creates new form JFSetor
      */
-    public JfDefault() {
+    public JFDefault() {
         initComponents();
         Icon deletar = new ImageIcon("./imagens/deletar.png");
         Icon inserir = new ImageIcon("./imagens/inserir.png");

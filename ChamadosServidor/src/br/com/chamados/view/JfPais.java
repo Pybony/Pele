@@ -10,6 +10,7 @@ import br.com.chamados.genericos.AcoesPainel;
 import br.com.chamados.genericos.Cookies;
 import br.com.chamados.model.Pais;
 import br.com.chamados.model.Permissoes;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -38,10 +39,21 @@ public class JfPais extends JFrame implements AcoesPainel {
 
     private void vaPara(String id) {
         try {
+            String sql = "";
+            if(id.equals("0")){
+                sql = "SELECT p FROM Pais p WHERE id >= " + id + " ORDER BY id";
+            } else {
+                sql = "SELECT p FROM Pais p WHERE id = " + id + " ORDER BY id";
+            }
             DAO<Pais> dao = new DAO<>();
-            Pais pais = dao.query("SELECT p FROM Pais p WHERE id >= " + id + " ORDER BY id").get(0);
-            jtId.setText(String.valueOf(pais.getId()));
-            jtNome.setText(pais.getNome());
+            List<Pais> lista = dao.query(sql);
+            if (lista.size() == 0) {
+                JOptionPane.showMessageDialog(null, "Id não encontrado.");
+            } else {
+                Pais pais = lista.get(0);
+                jtId.setText(String.valueOf(pais.getId()));
+                jtNome.setText(pais.getNome());
+            }
         } catch (Exception e) {
 
         }

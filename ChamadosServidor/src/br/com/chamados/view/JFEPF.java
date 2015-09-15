@@ -12,7 +12,7 @@ import javax.swing.ImageIcon;
  *
  * @author Jonas C. Rosa
  */
-public class JFEPF extends JfDefault {
+public class JFEPF extends JFDefault {
 
     /**
      * Creates new form JFSetor
