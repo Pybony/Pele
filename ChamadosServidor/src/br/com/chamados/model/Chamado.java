@@ -1,5 +1,5 @@
 package br.com.chamados.model;
-// Generated 06/09/2015 10:21:06 by Hibernate Tools 4.3.1
+// Generated 20/09/2015 15:42:06 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -28,8 +28,8 @@ public class Chamado  implements java.io.Serializable {
      private Date dataAbertura;
      private Date dataFechamento;
      private Date dataPrevista;
-     private Set interacaos = new HashSet(0);
      private Set chamados = new HashSet(0);
+     private Set interacaos = new HashSet(0);
 
     public Chamado() {
     }
@@ -44,7 +44,7 @@ public class Chamado  implements java.io.Serializable {
         this.idAbertura = idAbertura;
         this.titulo = titulo;
     }
-    public Chamado(CategoriaUm categoriaUm, Chamado chamado, Empresa empresa, Funcionario funcionario, Origim origim, Pessoa pessoa, Prioridade prioridade, Situacao situacao, Tipo tipo, int idAbertura, String titulo, String descricao, Date dataAbertura, Date dataFechamento, Date dataPrevista, Set interacaos, Set chamados) {
+    public Chamado(CategoriaUm categoriaUm, Chamado chamado, Empresa empresa, Funcionario funcionario, Origim origim, Pessoa pessoa, Prioridade prioridade, Situacao situacao, Tipo tipo, int idAbertura, String titulo, String descricao, Date dataAbertura, Date dataFechamento, Date dataPrevista, Set chamados, Set interacaos) {
        this.categoriaUm = categoriaUm;
        this.chamado = chamado;
        this.empresa = empresa;
@@ -60,8 +60,8 @@ public class Chamado  implements java.io.Serializable {
        this.dataAbertura = dataAbertura;
        this.dataFechamento = dataFechamento;
        this.dataPrevista = dataPrevista;
-       this.interacaos = interacaos;
        this.chamados = chamados;
+       this.interacaos = interacaos;
     }
    
     public Integer getId() {
@@ -176,19 +176,19 @@ public class Chamado  implements java.io.Serializable {
     public void setDataPrevista(Date dataPrevista) {
         this.dataPrevista = dataPrevista;
     }
-    public Set getInteracaos() {
-        return this.interacaos;
-    }
-    
-    public void setInteracaos(Set interacaos) {
-        this.interacaos = interacaos;
-    }
     public Set getChamados() {
         return this.chamados;
     }
     
     public void setChamados(Set chamados) {
         this.chamados = chamados;
+    }
+    public Set getInteracaos() {
+        return this.interacaos;
+    }
+    
+    public void setInteracaos(Set interacaos) {
+        this.interacaos = interacaos;
     }
 
 

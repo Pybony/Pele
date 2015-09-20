@@ -1,5 +1,5 @@
 package br.com.chamados.model;
-// Generated 06/09/2015 10:21:06 by Hibernate Tools 4.3.1
+// Generated 20/09/2015 15:42:06 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -11,8 +11,9 @@ import java.util.Set;
 public class Estado  implements java.io.Serializable {
 
 
-     private int id;
+     private Integer id;
      private Pais pais;
+     private String sigla;
      private String nome;
      private Set cidades = new HashSet(0);
 
@@ -20,23 +21,23 @@ public class Estado  implements java.io.Serializable {
     }
 
 	
-    public Estado(int id, Pais pais, String nome) {
-        this.id = id;
+    public Estado(Pais pais, String sigla, String nome) {
         this.pais = pais;
+        this.sigla = sigla;
         this.nome = nome;
     }
-    public Estado(int id, Pais pais, String nome, Set cidades) {
-       this.id = id;
+    public Estado(Pais pais, String sigla, String nome, Set cidades) {
        this.pais = pais;
+       this.sigla = sigla;
        this.nome = nome;
        this.cidades = cidades;
     }
    
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
     
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     public Pais getPais() {
@@ -45,6 +46,13 @@ public class Estado  implements java.io.Serializable {
     
     public void setPais(Pais pais) {
         this.pais = pais;
+    }
+    public String getSigla() {
+        return this.sigla;
+    }
+    
+    public void setSigla(String sigla) {
+        this.sigla = sigla;
     }
     public String getNome() {
         return this.nome;

@@ -1,5 +1,5 @@
 package br.com.chamados.model;
-// Generated 06/09/2015 10:21:06 by Hibernate Tools 4.3.1
+// Generated 20/09/2015 15:42:06 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -14,9 +14,9 @@ public class Bairro  implements java.io.Serializable {
      private int id;
      private Cidade cidade;
      private String descricao;
+     private Set pessoas = new HashSet(0);
      private Set funcionarios = new HashSet(0);
      private Set empresas = new HashSet(0);
-     private Set pessoas = new HashSet(0);
 
     public Bairro() {
     }
@@ -27,13 +27,13 @@ public class Bairro  implements java.io.Serializable {
         this.cidade = cidade;
         this.descricao = descricao;
     }
-    public Bairro(int id, Cidade cidade, String descricao, Set funcionarios, Set empresas, Set pessoas) {
+    public Bairro(int id, Cidade cidade, String descricao, Set pessoas, Set funcionarios, Set empresas) {
        this.id = id;
        this.cidade = cidade;
        this.descricao = descricao;
+       this.pessoas = pessoas;
        this.funcionarios = funcionarios;
        this.empresas = empresas;
-       this.pessoas = pessoas;
     }
    
     public int getId() {
@@ -57,6 +57,13 @@ public class Bairro  implements java.io.Serializable {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+    public Set getPessoas() {
+        return this.pessoas;
+    }
+    
+    public void setPessoas(Set pessoas) {
+        this.pessoas = pessoas;
+    }
     public Set getFuncionarios() {
         return this.funcionarios;
     }
@@ -70,13 +77,6 @@ public class Bairro  implements java.io.Serializable {
     
     public void setEmpresas(Set empresas) {
         this.empresas = empresas;
-    }
-    public Set getPessoas() {
-        return this.pessoas;
-    }
-    
-    public void setPessoas(Set pessoas) {
-        this.pessoas = pessoas;
     }
 
 

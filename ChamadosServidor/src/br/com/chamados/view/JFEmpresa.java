@@ -11,6 +11,7 @@ import br.com.chamados.genericos.Cookies;
 import br.com.chamados.model.Empresa;
 import br.com.chamados.model.Permissoes;
 import br.com.chamados.utils.CampoInteiro;
+import br.com.chamados.utils.CombosDAO;
 import br.com.chamados.utils.DesabilitaCampos;
 import br.com.chamados.utils.HabilitaCampos;
 import br.com.chamados.utils.LimparCampos;
@@ -39,6 +40,7 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
         jpDefault.setBounds(10, 10, 450, 180);
         this.add(jpDefault);
         jpDefault.setAcoesCadastro(this);
+        new CombosDAO().popularEstado(jcEstado, 0);
 //        vaPara("0");
     }
 
@@ -61,9 +63,9 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
         jlCgc = new javax.swing.JLabel();
         jtCgc = new CampoInteiro();
         jlCidadeEmpresa = new javax.swing.JLabel();
-        jcCidade = new javax.swing.JComboBox();
+        jcEstado = new javax.swing.JComboBox();
         jlBairroEmpresa = new javax.swing.JLabel();
-        jcBairro = new javax.swing.JComboBox();
+        jcCidade = new javax.swing.JComboBox();
         jbSalvar = new javax.swing.JButton();
         jbCancelar = new javax.swing.JButton();
 
@@ -85,15 +87,19 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
 
         jtCgc.setEnabled(false);
 
-        jlCidadeEmpresa.setText("Cidade");
+        jlCidadeEmpresa.setText("Estado");
+
+        jcEstado.setEnabled(false);
+        jcEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcEstadoActionPerformed(evt);
+            }
+        });
+
+        jlBairroEmpresa.setText("Cidade");
 
         jcCidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jcCidade.setEnabled(false);
-
-        jlBairroEmpresa.setText("Bairro");
-
-        jcBairro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jcBairro.setEnabled(false);
 
         javax.swing.GroupLayout jpEmpresaLayout = new javax.swing.GroupLayout(jpEmpresa);
         jpEmpresa.setLayout(jpEmpresaLayout);
@@ -121,11 +127,11 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
                 .addGroup(jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jpEmpresaLayout.createSequentialGroup()
-                        .addComponent(jcCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jcEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jlBairroEmpresa)
                         .addGap(18, 18, 18)
-                        .addComponent(jcBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jcCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jtCgc, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(20, Short.MAX_VALUE))
@@ -144,9 +150,9 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
                 .addGap(18, 18, 18)
                 .addGroup(jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlCidadeEmpresa)
-                    .addComponent(jcCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlBairroEmpresa)
-                    .addComponent(jcBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlEmailEmpresa)
@@ -180,7 +186,7 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jbSalvar))
                     .addComponent(jpEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,6 +221,15 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
             JOptionPane.showMessageDialog(null, "Erro ao salvar");
         }
     }//GEN-LAST:event_jbSalvarActionPerformed
+
+    private void jcEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcEstadoActionPerformed
+        jcCidade.removeAllItems();
+        if (jcEstado.getSelectedIndex() > 0) {
+            new CombosDAO().popularCidade(jcCidade,
+                    jcEstado.getSelectedIndex());
+            jcCidade.setEnabled(true);
+        }
+    }//GEN-LAST:event_jcEstadoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -254,8 +269,8 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbSalvar;
-    private javax.swing.JComboBox jcBairro;
     private javax.swing.JComboBox jcCidade;
+    private javax.swing.JComboBox jcEstado;
     private javax.swing.JLabel jlBairroEmpresa;
     private javax.swing.JLabel jlCgc;
     private javax.swing.JLabel jlCidadeEmpresa;

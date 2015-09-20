@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 06/09/2015 10:21:08 by Hibernate Tools 4.3.1 -->
+<!-- Generated 20/09/2015 15:42:09 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="br.com.chamados.model.CategoriaUm" table="categoria_um" catalog="chamados" optimistic-lock="version">
         <id name="id" type="java.lang.Integer">
@@ -11,17 +11,17 @@
         <property name="descricao" type="string">
             <column name="descricao" length="45" />
         </property>
-        <set name="categoriaDoises" table="categoria_dois" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="categoria_um_id" not-null="true" />
-            </key>
-            <one-to-many class="br.com.chamados.model.CategoriaDois" />
-        </set>
         <set name="chamados" table="chamado" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="categoria_um_id" not-null="true" />
             </key>
             <one-to-many class="br.com.chamados.model.Chamado" />
+        </set>
+        <set name="categoriaDoises" table="categoria_dois" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="categoria_um_id" not-null="true" />
+            </key>
+            <one-to-many class="br.com.chamados.model.CategoriaDois" />
         </set>
     </class>
 </hibernate-mapping>

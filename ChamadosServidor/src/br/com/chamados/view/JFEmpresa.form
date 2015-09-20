@@ -33,7 +33,7 @@
                   </Group>
                   <Component id="jpEmpresa" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="23" max="32767" attributes="0"/>
+              <EmptySpace pref="18" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -85,11 +85,11 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jtTelefone" min="-2" pref="280" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
-                          <Component id="jcCidade" min="-2" pref="175" max="-2" attributes="0"/>
+                          <Component id="jcEstado" min="-2" pref="175" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jlBairroEmpresa" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jcBairro" min="-2" pref="175" max="-2" attributes="0"/>
+                          <Component id="jcCidade" min="-2" pref="175" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jtCgc" min="-2" pref="272" max="-2" attributes="0"/>
                       <Component id="jtEmail" min="-2" pref="280" max="-2" attributes="0"/>
@@ -114,9 +114,9 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jlCidadeEmpresa" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jcCidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jcEstado" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jlBairroEmpresa" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jcBairro" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jcCidade" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -179,28 +179,26 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jlCidadeEmpresa">
           <Properties>
+            <Property name="text" type="java.lang.String" value="Estado"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="jcEstado">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="0"/>
+            </Property>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcEstadoActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jlBairroEmpresa">
+          <Properties>
             <Property name="text" type="java.lang.String" value="Cidade"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="jcCidade">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
-              </StringArray>
-            </Property>
-            <Property name="enabled" type="boolean" value="false"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jlBairroEmpresa">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Bairro"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JComboBox" name="jcBairro">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="4">
