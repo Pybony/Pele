@@ -23,25 +23,31 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="820" max="32767" attributes="0"/>
-          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="jbCancelar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jbSalvar" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <Component id="jpEmpresa" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
+              <EmptySpace pref="23" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="682" max="32767" attributes="0"/>
-          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  <Component id="jpEmpresa" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace pref="63" max="32767" attributes="0"/>
+              <Component id="jpEmpresa" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jbSalvar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jbCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -52,73 +58,86 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="jlTelefoneEmpresa" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="jlEmailEmpresa" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="jlCgc" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="jlNomeEmpresa" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="jlCidadeEmpresa" alignment="1" min="-2" max="-2" attributes="0"/>
-                  </Group>
+              <Group type="102" attributes="0">
+                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                  <Component id="jlNomeEmpresa" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="jtNome" min="-2" pref="272" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jtfNomeEmpresa" alignment="0" min="-2" pref="272" max="-2" attributes="0"/>
-                      <Component id="jtfCgc" alignment="0" min="-2" pref="280" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jcCidadeEmpresa" min="-2" pref="175" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="jlEmailEmpresa" min="-2" max="-2" attributes="0"/>
+                              <Component id="jlCidadeEmpresa" min="-2" max="-2" attributes="0"/>
+                              <Component id="jlCgc" alignment="1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jlTelefoneEmpresa" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jtTelefone" min="-2" pref="280" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="jcCidade" min="-2" pref="175" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jlBairroEmpresa" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jcBairroEmpresa" min="-2" pref="175" max="-2" attributes="0"/>
+                          <Component id="jcBairro" min="-2" pref="175" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="jtfEmailEmpresa" alignment="0" min="-2" pref="280" max="-2" attributes="0"/>
-                      <Component id="jtfTelefoneEmpresa" alignment="0" min="-2" pref="280" max="-2" attributes="0"/>
+                      <Component id="jtCgc" min="-2" pref="272" max="-2" attributes="0"/>
+                      <Component id="jtEmail" min="-2" pref="280" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="208" max="32767" attributes="0"/>
+                  <EmptySpace pref="20" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jlNomeEmpresa" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jtfNomeEmpresa" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jtNome" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jtCgc" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jlCgc" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jtfCgc" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jcCidadeEmpresa" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jlCidadeEmpresa" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jcCidade" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jlBairroEmpresa" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jcBairroEmpresa" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jcBairro" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jlEmailEmpresa" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jtfEmailEmpresa" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jtEmail" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jlTelefoneEmpresa" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jtfTelefoneEmpresa" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jtTelefone" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="175" max="32767" attributes="0"/>
+                  <EmptySpace pref="22" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JTextField" name="jtfNomeEmpresa">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfNomeEmpresaActionPerformed"/>
-          </Events>
+        <Component class="javax.swing.JTextField" name="jtNome">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jlNomeEmpresa">
           <Properties>
@@ -130,28 +149,40 @@
             <Property name="text" type="java.lang.String" value="Email"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jtfEmailEmpresa">
+        <Component class="javax.swing.JTextField" name="jtEmail">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jlTelefoneEmpresa">
           <Properties>
             <Property name="text" type="java.lang.String" value="Telefone"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jtfTelefoneEmpresa">
+        <Component class="javax.swing.JTextField" name="jtTelefone">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jlCgc">
           <Properties>
             <Property name="text" type="java.lang.String" value="CGC"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jtfCgc">
+        <Component class="javax.swing.JTextField" name="jtCgc">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new CampoInteiro()"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="jlCidadeEmpresa">
           <Properties>
             <Property name="text" type="java.lang.String" value="Cidade"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jcCidadeEmpresa">
+        <Component class="javax.swing.JComboBox" name="jcCidade">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="4">
@@ -161,6 +192,7 @@
                 <StringItem index="3" value="Item 4"/>
               </StringArray>
             </Property>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jlBairroEmpresa">
@@ -168,7 +200,7 @@
             <Property name="text" type="java.lang.String" value="Bairro"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jcBairroEmpresa">
+        <Component class="javax.swing.JComboBox" name="jcBairro">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="4">
@@ -178,9 +210,24 @@
                 <StringItem index="3" value="Item 4"/>
               </StringArray>
             </Property>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="jbSalvar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Salvar"/>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbSalvarActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jbCancelar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cancelar"/>
+      </Properties>
+    </Component>
   </SubComponents>
 </Form>

@@ -5,19 +5,41 @@
  */
 package br.com.chamados.view;
 
+import br.com.chamados.control.DAO;
+import br.com.chamados.genericos.AcoesPainel;
+import br.com.chamados.genericos.Cookies;
+import br.com.chamados.model.Empresa;
+import br.com.chamados.model.Permissoes;
+import br.com.chamados.utils.CampoInteiro;
+import br.com.chamados.utils.DesabilitaCampos;
+import br.com.chamados.utils.HabilitaCampos;
+import br.com.chamados.utils.LimparCampos;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Jonas C. Rosa
  */
-public class JFEmpresa extends JFDefault {
+public class JFEmpresa extends JFrame implements AcoesPainel {
 
     /**
      * Creates new form JFEmpresa
      */
     public JFEmpresa() {
         initComponents();
+        initMyComponents();
         this.setTitle("Empresas");
         
+    }
+    
+     private void initMyComponents() {
+        JpDefault jpDefault = new JpDefault();
+        jpDefault.setBounds(10, 10, 450, 180);
+        this.add(jpDefault);
+        jpDefault.setAcoesCadastro(this);
+//        vaPara("0");
     }
 
     /**
@@ -30,124 +52,169 @@ public class JFEmpresa extends JFDefault {
     private void initComponents() {
 
         jpEmpresa = new javax.swing.JPanel();
-        jtfNomeEmpresa = new javax.swing.JTextField();
+        jtNome = new javax.swing.JTextField();
         jlNomeEmpresa = new javax.swing.JLabel();
         jlEmailEmpresa = new javax.swing.JLabel();
-        jtfEmailEmpresa = new javax.swing.JTextField();
+        jtEmail = new javax.swing.JTextField();
         jlTelefoneEmpresa = new javax.swing.JLabel();
-        jtfTelefoneEmpresa = new javax.swing.JTextField();
+        jtTelefone = new javax.swing.JTextField();
         jlCgc = new javax.swing.JLabel();
-        jtfCgc = new javax.swing.JTextField();
+        jtCgc = new CampoInteiro();
         jlCidadeEmpresa = new javax.swing.JLabel();
-        jcCidadeEmpresa = new javax.swing.JComboBox();
+        jcCidade = new javax.swing.JComboBox();
         jlBairroEmpresa = new javax.swing.JLabel();
-        jcBairroEmpresa = new javax.swing.JComboBox();
+        jcBairro = new javax.swing.JComboBox();
+        jbSalvar = new javax.swing.JButton();
+        jbCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jtfNomeEmpresa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfNomeEmpresaActionPerformed(evt);
-            }
-        });
+        jtNome.setEnabled(false);
 
         jlNomeEmpresa.setText("Nome");
 
         jlEmailEmpresa.setText("Email");
 
+        jtEmail.setEnabled(false);
+
         jlTelefoneEmpresa.setText("Telefone");
+
+        jtTelefone.setEnabled(false);
 
         jlCgc.setText("CGC");
 
+        jtCgc.setEnabled(false);
+
         jlCidadeEmpresa.setText("Cidade");
 
-        jcCidadeEmpresa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcCidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcCidade.setEnabled(false);
 
         jlBairroEmpresa.setText("Bairro");
 
-        jcBairroEmpresa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcBairro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcBairro.setEnabled(false);
 
         javax.swing.GroupLayout jpEmpresaLayout = new javax.swing.GroupLayout(jpEmpresa);
         jpEmpresa.setLayout(jpEmpresaLayout);
         jpEmpresaLayout.setHorizontalGroup(
             jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpEmpresaLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jlTelefoneEmpresa)
-                    .addComponent(jlEmailEmpresa)
-                    .addComponent(jlCgc)
-                    .addComponent(jlNomeEmpresa)
-                    .addComponent(jlCidadeEmpresa))
+                .addGap(24, 24, 24)
+                .addComponent(jlNomeEmpresa)
                 .addGap(18, 18, 18)
+                .addComponent(jtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jpEmpresaLayout.createSequentialGroup()
                 .addGroup(jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtfNomeEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfCgc, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jpEmpresaLayout.createSequentialGroup()
-                        .addComponent(jcCidadeEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15)
+                        .addGroup(jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jlEmailEmpresa)
+                            .addComponent(jlCidadeEmpresa)
+                            .addComponent(jlCgc))
+                        .addGap(21, 21, 21))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpEmpresaLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jlTelefoneEmpresa)
+                        .addGap(18, 18, 18)))
+                .addGroup(jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jpEmpresaLayout.createSequentialGroup()
+                        .addComponent(jcCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jlBairroEmpresa)
                         .addGap(18, 18, 18)
-                        .addComponent(jcBairroEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jtfEmailEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfTelefoneEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(208, Short.MAX_VALUE))
+                        .addComponent(jcBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtCgc, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jpEmpresaLayout.setVerticalGroup(
             jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpEmpresaLayout.createSequentialGroup()
-                .addGap(58, 58, 58)
+                .addContainerGap()
                 .addGroup(jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlNomeEmpresa)
-                    .addComponent(jtfNomeEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtCgc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlCgc))
                 .addGap(18, 18, 18)
                 .addGroup(jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlCgc)
-                    .addComponent(jtfCgc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jcCidadeEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlCidadeEmpresa)
+                    .addComponent(jcCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlBairroEmpresa)
-                    .addComponent(jcBairroEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlEmailEmpresa)
-                    .addComponent(jtfEmailEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlTelefoneEmpresa)
-                    .addComponent(jtfTelefoneEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(175, Short.MAX_VALUE))
+                    .addComponent(jtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
+
+        jbSalvar.setText("Salvar");
+        jbSalvar.setEnabled(false);
+        jbSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalvarActionPerformed(evt);
+            }
+        });
+
+        jbCancelar.setText("Cancelar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 820, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jpEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jbCancelar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbSalvar))
+                    .addComponent(jpEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 682, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jpEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(63, Short.MAX_VALUE)
+                .addComponent(jpEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbSalvar)
+                    .addComponent(jbCancelar))
+                .addGap(19, 19, 19))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jtfNomeEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNomeEmpresaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfNomeEmpresaActionPerformed
+    private void jbSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalvarActionPerformed
+         try {
+            Empresa empresa = new Empresa();
+            empresa.setNome(jtNome.getText());
+            empresa.setCgc(jtCgc.getText());
+            empresa.setEmail(jtEmail.getText());
+            empresa.setTelefone(jtTelefone.getText());
+            DAO<Empresa> dao = new DAO<>();
+            dao.save(empresa);
+            JOptionPane.showMessageDialog(null, "Salvo com sucesso");
+             DesabilitaCampos.run(jpEmpresa);
+             LimparCampos.run(jpEmpresa);
+             jbSalvar.setEnabled(false);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao salvar");
+        }
+    }//GEN-LAST:event_jbSalvarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -185,8 +252,10 @@ public class JFEmpresa extends JFDefault {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox jcBairroEmpresa;
-    private javax.swing.JComboBox jcCidadeEmpresa;
+    private javax.swing.JButton jbCancelar;
+    private javax.swing.JButton jbSalvar;
+    private javax.swing.JComboBox jcBairro;
+    private javax.swing.JComboBox jcCidade;
     private javax.swing.JLabel jlBairroEmpresa;
     private javax.swing.JLabel jlCgc;
     private javax.swing.JLabel jlCidadeEmpresa;
@@ -194,9 +263,51 @@ public class JFEmpresa extends JFDefault {
     private javax.swing.JLabel jlNomeEmpresa;
     private javax.swing.JLabel jlTelefoneEmpresa;
     private javax.swing.JPanel jpEmpresa;
-    private javax.swing.JTextField jtfCgc;
-    private javax.swing.JTextField jtfEmailEmpresa;
-    private javax.swing.JTextField jtfNomeEmpresa;
-    private javax.swing.JTextField jtfTelefoneEmpresa;
+    private javax.swing.JTextField jtCgc;
+    private javax.swing.JTextField jtEmail;
+    private javax.swing.JTextField jtNome;
+    private javax.swing.JTextField jtTelefone;
     // End of variables declaration//GEN-END:variables
+
+    public void vaPara(String id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void pesquisar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void inserir() {
+        HabilitaCampos.run(jpEmpresa);
+        LimparCampos.run(jpEmpresa);
+        jbSalvar.setEnabled(true);
+    }
+
+    @Override
+    public void alterar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void deletar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void checkEnabled(JButton jbInserir, JButton jbAlterar, JButton jbDeletar) {
+        for (Permissoes permissoes : Cookies.listaPermissoes) {
+            if (permissoes.getTela().getDescricao().equalsIgnoreCase("JfPais")) {
+                jbInserir.setEnabled(permissoes.getInserir());
+                jbAlterar.setEnabled(permissoes.getAlterar());
+                jbDeletar.setEnabled(permissoes.getDeletar());
+            }
+        }
+    }
+
+    @Override
+    public void vaPara() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

@@ -16,7 +16,6 @@ import javax.swing.JTextField;
 public class CampoCPF extends CampoInteiro {
 
     private ValidaCPF valida;
-    private boolean validate;
 
     public CampoCPF() {
         addFocusListener(new java.awt.event.FocusAdapter() {
@@ -31,19 +30,10 @@ public class CampoCPF extends CampoInteiro {
         if (getText().length() >= 1) {
             valida = new ValidaCPF(getText());
             if (!valida.isCPF()) {
-                JOptionPane.showMessageDialog(null, "CPF inválido!");
-                grabFocus();
+               Messages.addMessage("CPF inválido!");
+            }else{
+                setText(valida.imprimeCPF());
             }
         }
     }
-
-    public boolean isValidate() {
-        return validate;
-    }
-
-    public void setValidate(boolean validate) {
-        this.validate = validate;
-    }
-    
-    
 }

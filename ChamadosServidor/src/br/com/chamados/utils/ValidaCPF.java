@@ -21,7 +21,7 @@ public class ValidaCPF {
 
     public boolean isCPF() {
 
-        String CPF = this.cpf;
+        String CPF = removeFormat();
 
 // considera-se erro CPF's formados por uma sequencia de numeros iguais
         if (!this.valida(CPF)) {
@@ -80,9 +80,9 @@ public class ValidaCPF {
 
     public String imprimeCPF() {
 
-        String CPF = this.cpf;
+        String CPF = removeFormat();
 
-        if (!this.valida(this.cpf)) {
+        if (!this.valida(CPF)) {
             return null;
         }
 
@@ -91,7 +91,7 @@ public class ValidaCPF {
     }
 
     public boolean valida(String CPF) {
-        
+
         if (CPF.equals("00000000000") || CPF.equals("11111111111")
                 || CPF.equals("22222222222") || CPF.equals("33333333333")
                 || CPF.equals("44444444444") || CPF.equals("55555555555")
@@ -101,5 +101,30 @@ public class ValidaCPF {
             return (false);
         }
         return true;
+    }
+
+    public boolean isFormated() {
+        try {
+            return (this.cpf.substring(3, 4).equals(".")
+                    && this.cpf.substring(7, 8).equals(".")
+                    && this.cpf.substring(11, 12).equals("-"));
+        } catch (Exception e) {
+            return false;
+        }
+
+    }
+
+    public String removeFormat() {
+        String cpf = "";
+        if (isFormated()) {
+            for (int i = 0; i < this.cpf.length(); i++) {
+                if (!Character.toString(this.cpf.charAt(i)).equals(".")
+                        && !Character.toString(this.cpf.charAt(i)).equals("-")) {
+                    cpf = cpf + Character.toString(this.cpf.charAt(i));
+                }
+            }
+            return cpf;
+        }
+        return this.cpf;
     }
 }
