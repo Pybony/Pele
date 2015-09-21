@@ -7,12 +7,13 @@ package br.com.chamados.view;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 
 /**
  *
  * @author Jonas C. Rosa
  */
-public class JFEPF extends JFDefault {
+public class JFEPF extends JFrame {
 
     /**
      * Creates new form JFSetor
