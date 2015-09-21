@@ -26,12 +26,13 @@ import org.hibernate.criterion.Restrictions;
 public class DAO<T> {
 
     private final Logger logger = Logger.getLogger(LogChamados.class);
+    private static Session session;
 
     public DAO() {
     }
 
     public void save(Object object) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        session = HibernateUtil.getSessionFactory().openSession();
         Transaction transacion = null;
         try {
             session.createSQLQuery("SET @username = " + Cookies.usuario.getId()).executeUpdate();
@@ -48,7 +49,7 @@ public class DAO<T> {
     }
 
     public void delete(Object object) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        session = HibernateUtil.getSessionFactory().openSession();
         Transaction transacion = null;
         try {
             session.createSQLQuery("SET @username = " + Cookies.usuario.getId()).executeUpdate();
@@ -65,21 +66,28 @@ public class DAO<T> {
     }
 
     public T queryById(String campo, Serializable valor, Class clazz) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        session = HibernateUtil.getSessionFactory().openSession();
         Criteria criteria = session.createCriteria(clazz);
         criteria.add(Restrictions.eq(campo, valor));
         return (T) criteria.uniqueResult();
     }
 
     public List<T> queryList(Class clazz) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        session = HibernateUtil.getSessionFactory().openSession();
         Criteria criteria = session.createCriteria(clazz);
         return (List<T>) criteria.list();
     }
 
     public List<T> query(String sql) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery(sql);
         return (List<T>) query.list();
+    }
+    
+    public static Session getSession(){
+        if(session == null){
+            return session = HibernateUtil.getSessionFactory().openSession();
+        }
+        return session;
     }
 }
