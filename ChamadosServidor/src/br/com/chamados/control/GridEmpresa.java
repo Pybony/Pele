@@ -23,6 +23,11 @@ public class GridEmpresa {
     public void popularTabelaEmpresa(JTable tabela, String criterio) {
         // dados da tabela
         Object[][] dadosTabela = null;
+        int id;
+        String nome;
+        String cgc;
+        String email;
+        String telefone;
 
         // cabecalho da tabela
         Object[] cabecalho = new Object[5];
@@ -36,15 +41,15 @@ public class GridEmpresa {
         try {
             String sql = "SELECT COUNT(*) FROM Empresa";
             Long resultL = (Long) DAO.getSession().createQuery(sql).uniqueResult();
-            
+
             Integer result = 0;
-            
+
             try {
                 result = Integer.valueOf(resultL.toString());
             } catch (Exception e) {
                 System.out.println("Capacidade do Integer estourou.");
             }
-            
+
             System.out.println(result);
             dadosTabela = new Object[result][5];
 
@@ -52,43 +57,24 @@ public class GridEmpresa {
             System.out.println("Erro ao consultar qtde empresas: " + e);
         }
 
-//        int lin = 0;
+        String sql = "SELECT c"
+                + " FROM Empresa c";
+        DAO<Empresa> empresaDao = new DAO<>();
+        List<Empresa> empresa = empresaDao.query(sql);
 
         // efetua consulta de dados no banco e atribui no componente JTable
         try {
-
-            String sql = "SELECT c.id, c.nome, c.cgc, c.email, c.telefone"
-                    + " FROM Empresa c";
-            
-            DAO<Empresa> empresaDao = new DAO<>();
-            List<Empresa> empresa = empresaDao.query(sql);
-
             for (int i = 0; i < empresa.size(); i++) {
-                
-                Empresa objeto = empresa.get(i);
-                
-                int id = objeto.getId();
-                String nome = objeto.getNome();
-                String cgc = objeto.getCgc();
-                String email = objeto.getEmail();
-                String telefone = objeto.getTelefone();
-                dadosTabela[i][0] = id;
-                dadosTabela[i][1] = nome;
-                dadosTabela[i][2] = cgc;
-                dadosTabela[i][3] = email;
-                dadosTabela[i][4] = telefone;
 
+                dadosTabela[i][0] = empresa.get(i).getId();
+                dadosTabela[i][1] = empresa.get(i).getNome();
+                dadosTabela[i][2] = empresa.get(i).getCgc();
+                dadosTabela[i][3] = empresa.get(i).getEmail();
+                dadosTabela[i][4] = empresa.get(i).getTelefone();
             }
 
-            // caso a coluna precise exibir uma imagem
-//                if (resultadoQ.getBoolean("Situacao")) {
-//                    dadosTabela[lin][2] = new ImageIcon(getClass().getClassLoader().getResource("Interface/imagens/status_ativo.png"));
-//                } else {
-//                    dadosTabela[lin][2] = new ImageIcon(getClass().getClassLoader().getResource("Interface/imagens/status_inativo.png"));
-//                }
-//            lin++;
         } catch (Exception e) {
-            System.out.println("problemas para popular tabela...");
+            System.out.println("Problemas para popular tabela...");
             e.printStackTrace();
         }
 
