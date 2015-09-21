@@ -382,6 +382,7 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
     @Override
     public void pesquisar() {
         jtEmpresa.setSelectedIndex(1);
+        
     }
 
     @Override
