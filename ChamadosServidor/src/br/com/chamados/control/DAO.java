@@ -90,4 +90,10 @@ public class DAO<T> {
         }
         return session;
     }
+    
+    public Object count(String sql) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(sql);
+        return query.uniqueResult();
+    }
 }

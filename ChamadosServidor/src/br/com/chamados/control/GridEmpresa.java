@@ -19,6 +19,7 @@ import org.hibernate.Hibernate;
 public class GridEmpresa {
 
     Hibernate session;
+    DAO<Empresa> empresaDao = new DAO<>();
 
     public void popularTabelaEmpresa(JTable tabela, String criterio) {
         // dados da tabela
@@ -40,17 +41,10 @@ public class GridEmpresa {
         // cria matriz de acordo com nº de registros da tabela
         try {
             String sql = "SELECT COUNT(*) FROM Empresa";
-            Long resultL = (Long) DAO.getSession().createQuery(sql).uniqueResult();
-
-            Integer result = 0;
-
-            try {
-                result = Integer.valueOf(resultL.toString());
-            } catch (Exception e) {
-                System.out.println("Capacidade do Integer estourou.");
-            }
+            Integer result = Integer.parseInt(empresaDao.count(sql).toString());
 
             System.out.println(result);
+
             dadosTabela = new Object[result][5];
 
         } catch (Exception e) {
@@ -66,6 +60,7 @@ public class GridEmpresa {
         try {
             for (int i = 0; i < empresa.size(); i++) {
 
+                System.out.println(empresa.get(i).getId());
                 dadosTabela[i][0] = empresa.get(i).getId();
                 dadosTabela[i][1] = empresa.get(i).getNome();
                 dadosTabela[i][2] = empresa.get(i).getCgc();

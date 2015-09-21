@@ -94,6 +94,12 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
 
         jbCancelar.setText("Cancelar");
 
+        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane1MouseClicked(evt);
+            }
+        });
+
         jtNome.setEnabled(false);
 
         jlNomeEmpresa.setText("Nome");
@@ -285,6 +291,10 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
             jcCidade.setEnabled(true);
         }
     }//GEN-LAST:event_jcEstadoActionPerformed
+
+    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
+        new GridEmpresa().popularTabelaEmpresa(jTable1, null);
+    }//GEN-LAST:event_jTabbedPane1MouseClicked
 
     /**
      * @param args the command line arguments
