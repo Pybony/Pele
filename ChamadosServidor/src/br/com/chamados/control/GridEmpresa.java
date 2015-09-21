@@ -47,6 +47,7 @@ public class GridEmpresa {
 
             dadosTabela = new Object[result][5];
 
+            
         } catch (Exception e) {
             System.out.println("Erro ao consultar qtde empresas: " + e);
         }

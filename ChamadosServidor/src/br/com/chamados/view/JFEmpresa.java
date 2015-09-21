@@ -294,6 +294,7 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
 
     private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
         new GridEmpresa().popularTabelaEmpresa(jTable1, null);
+        
     }//GEN-LAST:event_jTabbedPane1MouseClicked
 
     /**
