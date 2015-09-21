@@ -47,6 +47,7 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
         jpDefault.setAcoesCadastro(this);
         new CombosDAO().popularEstado(jcEstado, 0);
         new GridEmpresa().popularTabelaEmpresa(jTable1, null);
+        
 //        vaPara("0");
     }
 
