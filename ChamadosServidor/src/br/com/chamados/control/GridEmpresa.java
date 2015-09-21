@@ -72,7 +72,6 @@ public class GridEmpresa {
                 String cgc = objeto.getCgc();
                 String email = objeto.getEmail();
                 String telefone = objeto.getTelefone();
-                
                 dadosTabela[i][0] = id;
                 dadosTabela[i][1] = nome;
                 dadosTabela[i][2] = cgc;
