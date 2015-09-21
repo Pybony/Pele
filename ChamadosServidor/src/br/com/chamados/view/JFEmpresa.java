@@ -62,7 +62,7 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
 
         jbSalvar = new javax.swing.JButton();
         jbCancelar = new javax.swing.JButton();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jtEmpresa = new javax.swing.JTabbedPane();
         jpEmpresa = new javax.swing.JPanel();
         jtNome = new javax.swing.JTextField();
         jlNomeEmpresa = new javax.swing.JLabel();
@@ -94,31 +94,36 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
 
         jbCancelar.setText("Cancelar");
 
-        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jtEmpresa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTabbedPane1MouseClicked(evt);
+                jtEmpresaMouseClicked(evt);
             }
         });
 
         jtNome.setEnabled(false);
+        jtNome.setName("Nome"); // NOI18N
 
         jlNomeEmpresa.setText("Nome");
 
         jlEmailEmpresa.setText("Email");
 
         jtEmail.setEnabled(false);
+        jtEmail.setName("Email"); // NOI18N
 
         jlTelefoneEmpresa.setText("Telefone");
 
         jtTelefone.setEnabled(false);
+        jtTelefone.setName("Telefone"); // NOI18N
 
         jlCgc.setText("CGC");
 
         jtCgc.setEnabled(false);
+        jtCgc.setName("CGC"); // NOI18N
 
         jlCidadeEmpresa.setText("Estado");
 
         jcEstado.setEnabled(false);
+        jcEstado.setName("Estado"); // NOI18N
         jcEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcEstadoActionPerformed(evt);
@@ -129,10 +134,12 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
 
         jcCidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jcCidade.setEnabled(false);
+        jcCidade.setName("Cidade"); // NOI18N
 
         jlEmailEmpresa1.setText("Endereço");
 
         jtEndereco.setEnabled(false);
+        jtEndereco.setName("Endereço"); // NOI18N
 
         javax.swing.GroupLayout jpEmpresaLayout = new javax.swing.GroupLayout(jpEmpresa);
         jpEmpresa.setLayout(jpEmpresaLayout);
@@ -199,7 +206,17 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
                 .addGap(20, 20, 20))
         );
 
-        jTabbedPane1.addTab("Empresa", jpEmpresa);
+        jtNome.getAccessibleContext().setAccessibleName("Nome");
+        jtEmail.getAccessibleContext().setAccessibleName("E-mail");
+        jtTelefone.getAccessibleContext().setAccessibleName("Telefone");
+        jtTelefone.getAccessibleContext().setAccessibleDescription("");
+        jtCgc.getAccessibleContext().setAccessibleName("CGC");
+        jcEstado.getAccessibleContext().setAccessibleName("Estado");
+        jcCidade.getAccessibleContext().setAccessibleName("Cidade");
+        jtEndereco.getAccessibleContext().setAccessibleName("Endereço");
+        jtEndereco.getAccessibleContext().setAccessibleDescription("");
+
+        jtEmpresa.addTab("Empresa", jpEmpresa);
 
         jTable1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -228,13 +245,13 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Busca", jPanel1);
+        jtEmpresa.addTab("Busca", jPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jtEmpresa, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jbCancelar)
@@ -246,7 +263,7 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(77, 77, 77)
-                .addComponent(jTabbedPane1)
+                .addComponent(jtEmpresa)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbCancelar)
@@ -294,10 +311,10 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
         }
     }//GEN-LAST:event_jcEstadoActionPerformed
 
-    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
+    private void jtEmpresaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtEmpresaMouseClicked
         new GridEmpresa().popularTabelaEmpresa(jTable1, null);
 
-    }//GEN-LAST:event_jTabbedPane1MouseClicked
+    }//GEN-LAST:event_jtEmpresaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -337,7 +354,6 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbSalvar;
@@ -353,6 +369,7 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
     private javax.swing.JPanel jpEmpresa;
     private javax.swing.JTextField jtCgc;
     private javax.swing.JTextField jtEmail;
+    private javax.swing.JTabbedPane jtEmpresa;
     private javax.swing.JTextField jtEndereco;
     private javax.swing.JTextField jtNome;
     private javax.swing.JTextField jtTelefone;
@@ -364,7 +381,7 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
 
     @Override
     public void pesquisar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        jtEmpresa.setSelectedIndex(1);
     }
 
     @Override

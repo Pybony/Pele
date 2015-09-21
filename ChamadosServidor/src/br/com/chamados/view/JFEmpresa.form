@@ -23,7 +23,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jTabbedPane1" alignment="1" max="32767" attributes="0"/>
+          <Component id="jtEmpresa" alignment="1" max="32767" attributes="0"/>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
               <Component id="jbCancelar" min="-2" max="-2" attributes="0"/>
@@ -37,7 +37,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
-              <Component id="jTabbedPane1" max="32767" attributes="0"/>
+              <Component id="jtEmpresa" max="32767" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jbCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -63,9 +63,9 @@
         <Property name="text" type="java.lang.String" value="Cancelar"/>
       </Properties>
     </Component>
-    <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
+    <Container class="javax.swing.JTabbedPane" name="jtEmpresa">
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTabbedPane1MouseClicked"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jtEmpresaMouseClicked"/>
       </Events>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
@@ -163,7 +163,11 @@
             <Component class="javax.swing.JTextField" name="jtNome">
               <Properties>
                 <Property name="enabled" type="boolean" value="false"/>
+                <Property name="name" type="java.lang.String" value="Nome" noResource="true"/>
               </Properties>
+              <AccessibilityProperties>
+                <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Nome"/>
+              </AccessibilityProperties>
             </Component>
             <Component class="javax.swing.JLabel" name="jlNomeEmpresa">
               <Properties>
@@ -178,7 +182,11 @@
             <Component class="javax.swing.JTextField" name="jtEmail">
               <Properties>
                 <Property name="enabled" type="boolean" value="false"/>
+                <Property name="name" type="java.lang.String" value="Email" noResource="true"/>
               </Properties>
+              <AccessibilityProperties>
+                <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="E-mail"/>
+              </AccessibilityProperties>
             </Component>
             <Component class="javax.swing.JLabel" name="jlTelefoneEmpresa">
               <Properties>
@@ -188,7 +196,12 @@
             <Component class="javax.swing.JTextField" name="jtTelefone">
               <Properties>
                 <Property name="enabled" type="boolean" value="false"/>
+                <Property name="name" type="java.lang.String" value="Telefone" noResource="true"/>
               </Properties>
+              <AccessibilityProperties>
+                <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Telefone"/>
+                <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value=""/>
+              </AccessibilityProperties>
             </Component>
             <Component class="javax.swing.JLabel" name="jlCgc">
               <Properties>
@@ -198,7 +211,11 @@
             <Component class="javax.swing.JTextField" name="jtCgc">
               <Properties>
                 <Property name="enabled" type="boolean" value="false"/>
+                <Property name="name" type="java.lang.String" value="CGC" noResource="true"/>
               </Properties>
+              <AccessibilityProperties>
+                <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="CGC"/>
+              </AccessibilityProperties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new CampoInteiro()"/>
               </AuxValues>
@@ -214,7 +231,11 @@
                   <StringArray count="0"/>
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
+                <Property name="name" type="java.lang.String" value="Estado" noResource="true"/>
               </Properties>
+              <AccessibilityProperties>
+                <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Estado"/>
+              </AccessibilityProperties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcEstadoActionPerformed"/>
               </Events>
@@ -235,7 +256,11 @@
                   </StringArray>
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
+                <Property name="name" type="java.lang.String" value="Cidade" noResource="true"/>
               </Properties>
+              <AccessibilityProperties>
+                <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Cidade"/>
+              </AccessibilityProperties>
             </Component>
             <Component class="javax.swing.JLabel" name="jlEmailEmpresa1">
               <Properties>
@@ -245,7 +270,12 @@
             <Component class="javax.swing.JTextField" name="jtEndereco">
               <Properties>
                 <Property name="enabled" type="boolean" value="false"/>
+                <Property name="name" type="java.lang.String" value="Endere&#xe7;o" noResource="true"/>
               </Properties>
+              <AccessibilityProperties>
+                <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Endere&#xe7;o"/>
+                <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value=""/>
+              </AccessibilityProperties>
             </Component>
           </SubComponents>
         </Container>

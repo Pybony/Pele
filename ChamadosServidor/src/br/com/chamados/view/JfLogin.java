@@ -9,6 +9,7 @@ import br.com.chamados.control.DAO;
 import br.com.chamados.genericos.Cookies;
 import br.com.chamados.model.Permissoes;
 import br.com.chamados.model.Usuario;
+import br.com.chamados.utils.HabilitaCampos;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -34,25 +35,23 @@ public class JfLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jpLogin = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jtLogin = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jbLogar = new javax.swing.JButton();
-        jbCancelar = new javax.swing.JButton();
         jpSenha = new javax.swing.JPasswordField();
+        jbCancelar = new javax.swing.JButton();
+        jbLogar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Login");
 
+        jtLogin.setName("Login"); // NOI18N
+
         jLabel2.setText("Senha");
 
-        jbLogar.setText("Logar");
-        jbLogar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbLogarActionPerformed(evt);
-            }
-        });
+        jpSenha.setName("Senha"); // NOI18N
 
         jbCancelar.setText("Cancelar");
         jbCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -61,63 +60,86 @@ public class JfLogin extends javax.swing.JFrame {
             }
         });
 
+        jbLogar.setText("Logar");
+        jbLogar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLogarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jpLoginLayout = new javax.swing.GroupLayout(jpLogin);
+        jpLogin.setLayout(jpLoginLayout);
+        jpLoginLayout.setHorizontalGroup(
+            jpLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpLoginLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpLoginLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jtLogin)
+                        .addGap(26, 26, 26))
+                    .addGroup(jpLoginLayout.createSequentialGroup()
+                        .addGroup(jpLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpLoginLayout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jpSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpLoginLayout.createSequentialGroup()
+                                .addComponent(jbCancelar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbLogar)))
+                        .addContainerGap(27, Short.MAX_VALUE))))
+        );
+        jpLoginLayout.setVerticalGroup(
+            jpLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpLoginLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jpLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jpSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbLogar)
+                    .addComponent(jbCancelar)))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jtLogin)
-                    .addComponent(jpSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jbCancelar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jbLogar)
-                .addContainerGap())
+            .addComponent(jpLogin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jpSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbLogar)
-                    .addComponent(jbCancelar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jpLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLogarActionPerformed
-        String login = jtLogin.getText().toString();
-        String senha = new String(jpSenha.getPassword());
-        DAO<Usuario> daoUsuario = new DAO<>();
-        DAO<Permissoes> daoPermissoes = new DAO<>();
-        try {
-            Usuario usuario = daoUsuario.query("SELECT u FROM Usuario u WHERE login = '" + login + "' AND senha = '" + senha + "'").get(0);
-            List<Permissoes> listaPermissoes = daoPermissoes.query("SELECT p FROM Permissoes p WHERE usuario = " + usuario.getId());
-            Cookies.usuario = usuario;
-            Cookies.listaPermissoes = listaPermissoes;
-            new JfMenu().setVisible(true);
-            dispose();
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Usuário e senha inválidos.");
+        if (HabilitaCampos.validar(jpLogin)) {
+            String login = jtLogin.getText().toString();
+            String senha = new String(jpSenha.getPassword());
+            DAO<Usuario> daoUsuario = new DAO<>();
+            DAO<Permissoes> daoPermissoes = new DAO<>();
+            try {
+                Usuario usuario = daoUsuario.query("SELECT u FROM Usuario u WHERE login = '" + login + "' AND senha = '" + senha + "'").get(0);
+                List<Permissoes> listaPermissoes = daoPermissoes.query("SELECT p FROM Permissoes p WHERE usuario = " + usuario.getId());
+                Cookies.usuario = usuario;
+                Cookies.listaPermissoes = listaPermissoes;
+                new JfMenu().setVisible(true);
+                dispose();
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Usuário e senha inválidos.");
+            }
         }
     }//GEN-LAST:event_jbLogarActionPerformed
 
@@ -130,6 +152,7 @@ public class JfLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbLogar;
+    private javax.swing.JPanel jpLogin;
     private javax.swing.JPasswordField jpSenha;
     private javax.swing.JTextField jtLogin;
     // End of variables declaration//GEN-END:variables
