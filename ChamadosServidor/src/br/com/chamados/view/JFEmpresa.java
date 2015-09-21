@@ -47,7 +47,7 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
         jpDefault.setAcoesCadastro(this);
         new CombosDAO().popularEstado(jcEstado, 0);
         new GridEmpresa().popularTabelaEmpresa(jTable1, null);
-        
+
 //        vaPara("0");
     }
 
@@ -272,10 +272,12 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
             empresa.setCidade(cidade);
             empresa.setBairro(bairro);
             DAO<Empresa> dao = new DAO<>();
-            dao.save(empresa);
-            JOptionPane.showMessageDialog(null, "Salvo com sucesso");
-            DesabilitaCampos.run(jpEmpresa);
-            LimparCampos.run(jpEmpresa);
+            if (HabilitaCampos.validar(jpEmpresa)) {
+                dao.save(empresa);
+                JOptionPane.showMessageDialog(null, "Salvo com sucesso");
+                DesabilitaCampos.run(jpEmpresa);
+                LimparCampos.run(jpEmpresa);
+            }
             jbSalvar.setEnabled(false);
         } catch (HibernateException e) {
             e.printStackTrace();
@@ -294,7 +296,7 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
 
     private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
         new GridEmpresa().popularTabelaEmpresa(jTable1, null);
-        
+
     }//GEN-LAST:event_jTabbedPane1MouseClicked
 
     /**
