@@ -5,6 +5,7 @@
  */
 package br.com.chamados.view;
 
+import br.com.chamados.config.LogChamados;
 import br.com.chamados.control.DAO;
 import br.com.chamados.genericos.AcoesPainel;
 import br.com.chamados.genericos.Cookies;
@@ -14,12 +15,15 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author lksbr
  */
 public class JfPais extends JFrame implements AcoesPainel {
+    
+    Logger logger = Logger.getLogger(LogChamados.class);
 
     /**
      * Creates new form JfPais
@@ -28,7 +32,7 @@ public class JfPais extends JFrame implements AcoesPainel {
         initComponents();
         initMyComponents();
     }
-
+    
     private void initMyComponents() {
         JpDefault jpDefault = new JpDefault();
         jpDefault.setBounds(10, 10, 450, 180);
@@ -36,11 +40,11 @@ public class JfPais extends JFrame implements AcoesPainel {
         jpDefault.setAcoesCadastro(this);
         vaPara("0");
     }
-
+    
     private void vaPara(String id) {
         try {
             String sql = "";
-            if(id.equals("0")){
+            if (id.equals("0")) {
                 sql = "SELECT p FROM Pais p WHERE id >= " + id + " ORDER BY id";
             } else {
                 sql = "SELECT p FROM Pais p WHERE id = " + id + " ORDER BY id";
@@ -51,11 +55,12 @@ public class JfPais extends JFrame implements AcoesPainel {
                 JOptionPane.showMessageDialog(null, "Id não encontrado.");
             } else {
                 Pais pais = lista.get(0);
+                logger.info("Vá para ID = " + pais.getId());
                 jtId.setText(String.valueOf(pais.getId()));
                 jtNome.setText(pais.getNome());
             }
         } catch (Exception e) {
-
+            
         }
     }
 
@@ -165,12 +170,12 @@ public class JfPais extends JFrame implements AcoesPainel {
         String retorno = JOptionPane.showInputDialog("Vá para");
         vaPara(retorno);
     }
-
+    
     @Override
     public void pesquisar() {
-
+        
     }
-
+    
     @Override
     public void inserir() {
         DAO<Pais> dao = new DAO<>();
@@ -184,15 +189,15 @@ public class JfPais extends JFrame implements AcoesPainel {
         }
         jtNome.setEditable(true);
         jbSalvar.setEnabled(true);
-
+        
     }
-
+    
     @Override
     public void alterar() {
         jtNome.setEditable(true);
         jbSalvar.setEnabled(true);
     }
-
+    
     @Override
     public void deletar() {
         Pais pais = new Pais();
@@ -204,7 +209,7 @@ public class JfPais extends JFrame implements AcoesPainel {
             dao.delete(pais);
         }
     }
-
+    
     @Override
     public void checkEnabled(JButton jbInserir, JButton jbAlterar, JButton jbDeletar) {
         for (Permissoes permissoes : Cookies.listaPermissoes) {

@@ -1,5 +1,5 @@
 package br.com.chamados.model;
-// Generated 20/09/2015 15:42:06 by Hibernate Tools 4.3.1
+// Generated 21/09/2015 21:01:59 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -20,8 +20,8 @@ public class Empresa  implements java.io.Serializable {
      private String telefone;
      private String email;
      private Set funcionarios = new HashSet(0);
-     private Set chamados = new HashSet(0);
      private Set pessoas = new HashSet(0);
+     private Set chamados = new HashSet(0);
 
     public Empresa() {
     }
@@ -37,7 +37,7 @@ public class Empresa  implements java.io.Serializable {
         this.telefone = telefone;
         this.email = email;
     }
-    public Empresa(int id, Bairro bairro, Cidade cidade, String nome, String cgc, String endereco, String telefone, String email, Set funcionarios, Set chamados, Set pessoas) {
+    public Empresa(int id, Bairro bairro, Cidade cidade, String nome, String cgc, String endereco, String telefone, String email, Set funcionarios, Set pessoas, Set chamados) {
        this.id = id;
        this.bairro = bairro;
        this.cidade = cidade;
@@ -47,8 +47,8 @@ public class Empresa  implements java.io.Serializable {
        this.telefone = telefone;
        this.email = email;
        this.funcionarios = funcionarios;
-       this.chamados = chamados;
        this.pessoas = pessoas;
+       this.chamados = chamados;
     }
    
     public int getId() {
@@ -114,19 +114,19 @@ public class Empresa  implements java.io.Serializable {
     public void setFuncionarios(Set funcionarios) {
         this.funcionarios = funcionarios;
     }
-    public Set getChamados() {
-        return this.chamados;
-    }
-    
-    public void setChamados(Set chamados) {
-        this.chamados = chamados;
-    }
     public Set getPessoas() {
         return this.pessoas;
     }
     
     public void setPessoas(Set pessoas) {
         this.pessoas = pessoas;
+    }
+    public Set getChamados() {
+        return this.chamados;
+    }
+    
+    public void setChamados(Set chamados) {
+        this.chamados = chamados;
     }
 
 

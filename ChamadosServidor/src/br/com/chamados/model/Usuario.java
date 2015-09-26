@@ -1,5 +1,5 @@
 package br.com.chamados.model;
-// Generated 20/09/2015 15:42:06 by Hibernate Tools 4.3.1
+// Generated 21/09/2015 21:01:59 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -14,9 +14,8 @@ public class Usuario  implements java.io.Serializable {
      private Integer id;
      private String login;
      private String senha;
-     private Set funcionarios = new HashSet(0);
-     private Set permicoeses = new HashSet(0);
      private Set permissoeses = new HashSet(0);
+     private Set funcionarios = new HashSet(0);
      private Set auditorias = new HashSet(0);
 
     public Usuario() {
@@ -27,12 +26,11 @@ public class Usuario  implements java.io.Serializable {
         this.login = login;
         this.senha = senha;
     }
-    public Usuario(String login, String senha, Set funcionarios, Set permicoeses, Set permissoeses, Set auditorias) {
+    public Usuario(String login, String senha, Set permissoeses, Set funcionarios, Set auditorias) {
        this.login = login;
        this.senha = senha;
-       this.funcionarios = funcionarios;
-       this.permicoeses = permicoeses;
        this.permissoeses = permissoeses;
+       this.funcionarios = funcionarios;
        this.auditorias = auditorias;
     }
    
@@ -57,26 +55,19 @@ public class Usuario  implements java.io.Serializable {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-    public Set getFuncionarios() {
-        return this.funcionarios;
-    }
-    
-    public void setFuncionarios(Set funcionarios) {
-        this.funcionarios = funcionarios;
-    }
-    public Set getPermicoeses() {
-        return this.permicoeses;
-    }
-    
-    public void setPermicoeses(Set permicoeses) {
-        this.permicoeses = permicoeses;
-    }
     public Set getPermissoeses() {
         return this.permissoeses;
     }
     
     public void setPermissoeses(Set permissoeses) {
         this.permissoeses = permissoeses;
+    }
+    public Set getFuncionarios() {
+        return this.funcionarios;
+    }
+    
+    public void setFuncionarios(Set funcionarios) {
+        this.funcionarios = funcionarios;
     }
     public Set getAuditorias() {
         return this.auditorias;
