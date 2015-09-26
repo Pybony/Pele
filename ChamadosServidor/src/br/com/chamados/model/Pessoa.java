@@ -1,5 +1,5 @@
 package br.com.chamados.model;
-// Generated 21/09/2015 21:01:59 by Hibernate Tools 4.3.1
+// Generated 26/09/2015 15:38:57 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -13,9 +13,7 @@ public class Pessoa  implements java.io.Serializable {
 
 
      private Integer id;
-     private Bairro bairro;
      private Cidade cidade;
-     private Empresa empresa;
      private String nome;
      private int idade;
      private Date dataNascimento;
@@ -23,17 +21,14 @@ public class Pessoa  implements java.io.Serializable {
      private String telefone;
      private String cpf;
      private String rg;
-     private Set chamados = new HashSet(0);
-     private Funcionario funcionario;
+     private Set funcionarios = new HashSet(0);
 
     public Pessoa() {
     }
 
 	
-    public Pessoa(Bairro bairro, Cidade cidade, Empresa empresa, String nome, int idade, Date dataNascimento, String email, String telefone, String cpf, String rg) {
-        this.bairro = bairro;
+    public Pessoa(Cidade cidade, String nome, int idade, Date dataNascimento, String email, String telefone, String cpf, String rg) {
         this.cidade = cidade;
-        this.empresa = empresa;
         this.nome = nome;
         this.idade = idade;
         this.dataNascimento = dataNascimento;
@@ -42,10 +37,8 @@ public class Pessoa  implements java.io.Serializable {
         this.cpf = cpf;
         this.rg = rg;
     }
-    public Pessoa(Bairro bairro, Cidade cidade, Empresa empresa, String nome, int idade, Date dataNascimento, String email, String telefone, String cpf, String rg, Set chamados, Funcionario funcionario) {
-       this.bairro = bairro;
+    public Pessoa(Cidade cidade, String nome, int idade, Date dataNascimento, String email, String telefone, String cpf, String rg, Set funcionarios) {
        this.cidade = cidade;
-       this.empresa = empresa;
        this.nome = nome;
        this.idade = idade;
        this.dataNascimento = dataNascimento;
@@ -53,8 +46,7 @@ public class Pessoa  implements java.io.Serializable {
        this.telefone = telefone;
        this.cpf = cpf;
        this.rg = rg;
-       this.chamados = chamados;
-       this.funcionario = funcionario;
+       this.funcionarios = funcionarios;
     }
    
     public Integer getId() {
@@ -64,26 +56,12 @@ public class Pessoa  implements java.io.Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
-    public Bairro getBairro() {
-        return this.bairro;
-    }
-    
-    public void setBairro(Bairro bairro) {
-        this.bairro = bairro;
-    }
     public Cidade getCidade() {
         return this.cidade;
     }
     
     public void setCidade(Cidade cidade) {
         this.cidade = cidade;
-    }
-    public Empresa getEmpresa() {
-        return this.empresa;
-    }
-    
-    public void setEmpresa(Empresa empresa) {
-        this.empresa = empresa;
     }
     public String getNome() {
         return this.nome;
@@ -134,19 +112,12 @@ public class Pessoa  implements java.io.Serializable {
     public void setRg(String rg) {
         this.rg = rg;
     }
-    public Set getChamados() {
-        return this.chamados;
+    public Set getFuncionarios() {
+        return this.funcionarios;
     }
     
-    public void setChamados(Set chamados) {
-        this.chamados = chamados;
-    }
-    public Funcionario getFuncionario() {
-        return this.funcionario;
-    }
-    
-    public void setFuncionario(Funcionario funcionario) {
-        this.funcionario = funcionario;
+    public void setFuncionarios(Set funcionarios) {
+        this.funcionarios = funcionarios;
     }
 
 

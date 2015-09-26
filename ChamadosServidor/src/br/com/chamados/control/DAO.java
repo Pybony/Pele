@@ -31,7 +31,7 @@ public class DAO<T> {
     public DAO() {
     }
 
-    public void save(Object object) {
+    public boolean save(Object object) {
         session = HibernateUtil.getSessionFactory().openSession();
         Transaction transacion = null;
         try {
@@ -39,12 +39,15 @@ public class DAO<T> {
             transacion = session.beginTransaction();
             session.saveOrUpdate(object);
             transacion.commit();
+            return true;
         } catch (HibernateException e) {
             transacion.rollback();
             e.printStackTrace();
             logger.error(e.getMessage());
+            return false;
         } finally {
             session.close();
+            logger.info("fechou sesão");
         }
     }
 
@@ -83,14 +86,14 @@ public class DAO<T> {
         Query query = session.createQuery(sql);
         return (List<T>) query.list();
     }
-    
-    public static Session getSession(){
-        if(session == null){
+
+    public static Session getSession() {
+        if (session == null) {
             return session = HibernateUtil.getSessionFactory().openSession();
         }
         return session;
     }
-    
+
     public Object count(String sql) {
         session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery(sql);

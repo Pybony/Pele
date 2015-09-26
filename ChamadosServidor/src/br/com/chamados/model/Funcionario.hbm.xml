@@ -1,28 +1,22 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 21/09/2015 21:02:00 by Hibernate Tools 4.3.1 -->
+<!-- Generated 26/09/2015 15:38:59 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="br.com.chamados.model.Funcionario" table="funcionario" catalog="chamados" optimistic-lock="version">
-        <id name="pessoaId" type="int">
-            <column name="pessoa_id" />
-            <generator class="foreign">
-                <param name="property">pessoa</param>
-            </generator>
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
         </id>
-        <many-to-one name="bairro" class="br.com.chamados.model.Bairro" fetch="select">
-            <column name="bairro_id" not-null="true" />
-        </many-to-one>
-        <many-to-one name="cidade" class="br.com.chamados.model.Cidade" fetch="select">
-            <column name="cidade_id" not-null="true" />
-        </many-to-one>
         <many-to-one name="empresa" class="br.com.chamados.model.Empresa" fetch="select">
             <column name="empresa_id" not-null="true" />
         </many-to-one>
         <many-to-one name="funcao" class="br.com.chamados.model.Funcao" fetch="select">
             <column name="funcao_id" not-null="true" />
         </many-to-one>
-        <one-to-one name="pessoa" class="br.com.chamados.model.Pessoa" constrained="true"></one-to-one>
+        <many-to-one name="pessoa" class="br.com.chamados.model.Pessoa" fetch="select">
+            <column name="pessoa_id" not-null="true" />
+        </many-to-one>
         <many-to-one name="setor" class="br.com.chamados.model.Setor" fetch="select">
             <column name="setor_id" not-null="true" />
         </many-to-one>
@@ -35,9 +29,6 @@
         <property name="dataDesligamento" type="timestamp">
             <column name="data_desligamento" length="0" />
         </property>
-        <property name="id" type="int">
-            <column name="id" not-null="true" />
-        </property>
         <set name="chamadosForFuncionarioAberturaId" table="chamado" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="funcionario_abertura_id" not-null="true" />
@@ -46,7 +37,7 @@
         </set>
         <set name="chamadosForFuncionarioAtendenteId" table="chamado" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="funcionario_atendente_id" not-null="true" />
+                <column name="funcionario_atendente_id" />
             </key>
             <one-to-many class="br.com.chamados.model.Chamado" />
         </set>

@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.chamados.control;
+package br.com.chamados.dao;
 
 import br.com.chamados.config.LogChamados;
+import br.com.chamados.control.DAO;
 import br.com.chamados.model.Empresa;
 import java.util.List;
 import javax.swing.JTable;
@@ -15,13 +16,20 @@ import org.apache.log4j.Logger;
 
 /**
  *
- * @author Jonas C. Rosa
+ * @author lksbr
  */
-public class GridEmpresa {
+public class EmpresaDao {
 
     static Logger logger = Logger.getLogger(LogChamados.class);
 
-    public void popularTabelaEmpresa(JTable tabela, String criterio) {
+    public static boolean save(Empresa empresa) {
+        boolean retorno = true;
+        DAO<Empresa> dao = new DAO<>();
+        retorno = dao.save(empresa);
+        return retorno;
+    }
+
+    public static void popularTabela(JTable tabela, String criterio) {
 
         DAO<Empresa> dao = new DAO<>();
 
@@ -46,12 +54,12 @@ public class GridEmpresa {
             String sql = "SELECT COUNT(*) FROM Empresa";
             Integer result = Integer.parseInt(dao.count(sql).toString());
 
-            logger.info(result);
+            System.out.println(result);
 
             dadosTabela = new Object[result][5];
 
         } catch (Exception e) {
-            logger.warn("Erro ao consultar qtde empresas: " + e);
+            System.out.println("Erro ao consultar qtde empresas: " + e);
         }
 
         String sql = "SELECT c FROM Empresa c";

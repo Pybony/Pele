@@ -1,5 +1,5 @@
 package br.com.chamados.model;
-// Generated 21/09/2015 21:01:59 by Hibernate Tools 4.3.1
+// Generated 26/09/2015 15:38:57 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -11,12 +11,10 @@ import java.util.Set;
 public class Cidade  implements java.io.Serializable {
 
 
-     private int id;
+     private Integer id;
      private Estado estado;
      private String nome;
      private String cep;
-     private Set bairros = new HashSet(0);
-     private Set funcionarios = new HashSet(0);
      private Set empresas = new HashSet(0);
      private Set pessoas = new HashSet(0);
 
@@ -24,28 +22,24 @@ public class Cidade  implements java.io.Serializable {
     }
 
 	
-    public Cidade(int id, Estado estado, String nome, String cep) {
-        this.id = id;
+    public Cidade(Estado estado, String nome, String cep) {
         this.estado = estado;
         this.nome = nome;
         this.cep = cep;
     }
-    public Cidade(int id, Estado estado, String nome, String cep, Set bairros, Set funcionarios, Set empresas, Set pessoas) {
-       this.id = id;
+    public Cidade(Estado estado, String nome, String cep, Set empresas, Set pessoas) {
        this.estado = estado;
        this.nome = nome;
        this.cep = cep;
-       this.bairros = bairros;
-       this.funcionarios = funcionarios;
        this.empresas = empresas;
        this.pessoas = pessoas;
     }
    
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
     
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     public Estado getEstado() {
@@ -68,20 +62,6 @@ public class Cidade  implements java.io.Serializable {
     
     public void setCep(String cep) {
         this.cep = cep;
-    }
-    public Set getBairros() {
-        return this.bairros;
-    }
-    
-    public void setBairros(Set bairros) {
-        this.bairros = bairros;
-    }
-    public Set getFuncionarios() {
-        return this.funcionarios;
-    }
-    
-    public void setFuncionarios(Set funcionarios) {
-        this.funcionarios = funcionarios;
     }
     public Set getEmpresas() {
         return this.empresas;

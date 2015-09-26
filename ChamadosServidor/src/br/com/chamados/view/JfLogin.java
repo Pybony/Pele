@@ -9,7 +9,7 @@ import br.com.chamados.control.DAO;
 import br.com.chamados.genericos.Cookies;
 import br.com.chamados.model.Permissoes;
 import br.com.chamados.model.Usuario;
-import br.com.chamados.utils.HabilitaCampos;
+import br.com.chamados.genericos.campos.HabilitaCampos;
 import java.util.List;
 import javax.swing.JOptionPane;
 

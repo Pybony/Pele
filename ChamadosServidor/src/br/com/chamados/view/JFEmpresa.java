@@ -7,18 +7,21 @@ package br.com.chamados.view;
 
 import br.com.chamados.control.DAO;
 import br.com.chamados.control.GridEmpresa;
+import br.com.chamados.dao.EmpresaDao;
+import br.com.chamados.dao.EstadoDao;
 import br.com.chamados.genericos.AcoesPainel;
+import br.com.chamados.genericos.Campos;
 import br.com.chamados.genericos.Cookies;
-import br.com.chamados.model.Bairro;
 import br.com.chamados.model.Cidade;
 import br.com.chamados.model.Empresa;
 import br.com.chamados.model.Permissoes;
 import br.com.chamados.utils.CampoInteiro;
 import br.com.chamados.utils.CombosDAO;
-import br.com.chamados.utils.DesabilitaCampos;
-import br.com.chamados.utils.HabilitaCampos;
+import br.com.chamados.genericos.campos.DesabilitaCampos;
+import br.com.chamados.genericos.campos.HabilitaCampos;
 import br.com.chamados.utils.ItensCombo;
-import br.com.chamados.utils.LimparCampos;
+import br.com.chamados.genericos.campos.LimparCampos;
+import br.com.chamados.model.Estado;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -45,8 +48,8 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
         jpDefault.setBounds(10, 10, 450, 180);
         this.add(jpDefault);
         jpDefault.setAcoesCadastro(this);
-        new CombosDAO().popularEstado(jcEstado, 0);
-        new GridEmpresa().popularTabelaEmpresa(jTable1, null);
+        EstadoDao.preencherCombo(jcEstado);
+        EmpresaDao.popularTabela(jTable1, null);
 
 //        vaPara("0");
     }
@@ -278,8 +281,6 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
         try {
             Cidade cidade = new Cidade();
             cidade.setId(jcCidade.getSelectedIndex());
-            Bairro bairro = new Bairro();
-            bairro.setId(1);
             Empresa empresa = new Empresa();
             empresa.setNome(jtNome.getText());
             empresa.setCgc(jtCgc.getText());
@@ -287,10 +288,8 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
             empresa.setEmail(jtEmail.getText());
             empresa.setTelefone(jtTelefone.getText());
             empresa.setCidade(cidade);
-            empresa.setBairro(bairro);
-            DAO<Empresa> dao = new DAO<>();
-            if (HabilitaCampos.validar(jpEmpresa)) {
-                dao.save(empresa);
+            if (Campos.validar(jpEmpresa)) {
+                EmpresaDao.save(empresa);
                 JOptionPane.showMessageDialog(null, "Salvo com sucesso");
                 DesabilitaCampos.run(jpEmpresa);
                 LimparCampos.run(jpEmpresa);
@@ -312,7 +311,7 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
     }//GEN-LAST:event_jcEstadoActionPerformed
 
     private void jtEmpresaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtEmpresaMouseClicked
-        new GridEmpresa().popularTabelaEmpresa(jTable1, null);
+        EmpresaDao.popularTabela(jTable1, null);
 
     }//GEN-LAST:event_jtEmpresaMouseClicked
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -346,13 +345,13 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
     @Override
     public void pesquisar() {
         jtEmpresa.setSelectedIndex(1);
-        
+
     }
 
     @Override
     public void inserir() {
-        HabilitaCampos.run(jpEmpresa);
-        LimparCampos.run(jpEmpresa);
+        Campos.habilitar(jpEmpresa);
+        Campos.limpar(jpEmpresa);
         jbSalvar.setEnabled(true);
     }
 
