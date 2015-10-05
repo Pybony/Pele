@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.chamados.view;
+package br.com.chamados.view.empresa;
 
 import br.com.chamados.control.DAO;
 import br.com.chamados.control.GridEmpresa;
@@ -22,6 +22,7 @@ import br.com.chamados.genericos.campos.HabilitaCampos;
 import br.com.chamados.utils.ItensCombo;
 import br.com.chamados.genericos.campos.LimparCampos;
 import br.com.chamados.model.Estado;
+import br.com.chamados.view.JpDefault;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -40,7 +41,6 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
         initComponents();
         initMyComponents();
         this.setTitle("Empresas");
-
     }
 
     private void initMyComponents() {

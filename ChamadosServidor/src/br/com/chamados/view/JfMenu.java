@@ -5,6 +5,7 @@
  */
 package br.com.chamados.view;
 
+import br.com.chamados.view.empresa.JFEmpresa;
 import javax.swing.JFrame;
 
 /**
