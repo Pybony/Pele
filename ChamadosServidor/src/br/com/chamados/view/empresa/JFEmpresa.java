@@ -5,8 +5,6 @@
  */
 package br.com.chamados.view.empresa;
 
-import br.com.chamados.control.DAO;
-import br.com.chamados.control.GridEmpresa;
 import br.com.chamados.dao.EmpresaDao;
 import br.com.chamados.dao.EstadoDao;
 import br.com.chamados.genericos.AcoesPainel;
@@ -18,13 +16,11 @@ import br.com.chamados.model.Permissoes;
 import br.com.chamados.utils.CampoInteiro;
 import br.com.chamados.utils.CombosDAO;
 import br.com.chamados.genericos.campos.DesabilitaCampos;
-import br.com.chamados.genericos.campos.HabilitaCampos;
-import br.com.chamados.utils.ItensCombo;
 import br.com.chamados.genericos.campos.LimparCampos;
-import br.com.chamados.model.Estado;
 import br.com.chamados.view.JpDefault;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import org.hibernate.HibernateException;
 
@@ -85,7 +81,7 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jbSalvar.setText("Salvar");
         jbSalvar.setEnabled(false);
@@ -221,7 +217,7 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
 
         jtEmpresa.addTab("Empresa", jpEmpresa);
 
-        jTable1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jTable1.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -345,7 +341,8 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
     @Override
     public void pesquisar() {
         jtEmpresa.setSelectedIndex(1);
-
+        IfEmpresa internalEmp = new IfEmpresa();
+        internalEmp.setVisible(true);
     }
 
     @Override

@@ -29,8 +29,12 @@ public class EmpresaDao {
         return retorno;
     }
 
-    public static void popularTabela(JTable tabela, String criterio) {
+    public static void popularTabela(JTable tabela, Empresa criterio) {
 
+        String nomeC = criterio.getNome();
+        String cgcC = criterio.getCgc();
+        int cidadeC = criterio.getCidade().getId();
+        
         DAO<Empresa> dao = new DAO<>();
 
         // dados da tabela
@@ -63,6 +67,10 @@ public class EmpresaDao {
         }
 
         String sql = "SELECT c FROM Empresa c";
+        if(nomeC.length() > 0){
+            sql += " WHERE nome = " + nomeC;
+        }
+                
         List<Empresa> empresa = dao.query(sql);
 
         // efetua consulta de dados no banco e atribui no componente JTable
