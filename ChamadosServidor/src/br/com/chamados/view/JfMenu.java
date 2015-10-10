@@ -16,6 +16,7 @@ public class JfMenu extends javax.swing.JFrame {
 
     private static JfPais jfPais;
     private static JFEmpresa JFEmpresa;
+    private static JfPermissoes jfPermissoes;
 
     /**
      * Creates new form JfMenu
@@ -38,6 +39,10 @@ public class JfMenu extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuEmpresa = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,6 +70,24 @@ public class JfMenu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        jMenu3.setText("Permissão");
+
+        jMenuItem2.setText("Usuários");
+        jMenu3.add(jMenuItem2);
+
+        jMenuItem3.setText("Telas");
+        jMenu3.add(jMenuItem3);
+
+        jMenuItem4.setText("Permissões");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem4);
+
+        jMenuBar1.add(jMenu3);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -89,17 +112,28 @@ public class JfMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEmpresaActionPerformed
-        if(JFEmpresa == null){
+        if (JFEmpresa == null) {
             JFEmpresa = new JFEmpresa();
             JFEmpresa.setVisible(true);
         }
     }//GEN-LAST:event_jMenuEmpresaActionPerformed
 
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        if (jfPermissoes == null) {
+            jfPermissoes = new JfPermissoes();
+            jfPermissoes.setVisible(true);
+        }
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuEmpresa;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     // End of variables declaration//GEN-END:variables
 }
