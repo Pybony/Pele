@@ -6,8 +6,8 @@
 package br.com.chamados.dao;
 
 import br.com.chamados.control.DAO;
-import br.com.chamados.model.Nivel;
 import br.com.chamados.model.Tela;
+import java.math.BigInteger;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -20,16 +20,16 @@ import javax.swing.table.DefaultTableModel;
 public class TelaDao {
 
     public static void salvar(Tela tela) {
-        DAO<Tela> dao = new DAO<>();
+        DAO<Tela> dao = new DAO<Tela>();
         dao.save(tela);
     }
 
     public static String proximoId() {
         String retorno = "1";
         DAO<Tela> dao = new DAO<>();
-        Tela tela = dao.query("SELECT MAX(p) FROM Tela p").get(0);
-        if (tela != null) {
-            retorno = String.valueOf(tela.getId() + 1);
+        BigInteger id = (BigInteger) dao.querySQL("SELECT auto_increment FROM INFORMATION_SCHEMA.TABLES WHERE table_name = 'tela'");
+        if (id != null) {
+            retorno = String.valueOf(id);
         }
         return retorno;
     }
@@ -97,7 +97,7 @@ public class TelaDao {
             sql = "SELECT p FROM Tela p WHERE descricao >= '" + descricaoDe + "' AND descricao <= '" + descricaoAte + "'";
             List<Tela> lista = dao.query(sql);
             int i = 0;
-            for (Tela tela:  lista) {
+            for (Tela tela : lista) {
                 dadosTabela[i][0] = tela.getId();
                 dadosTabela[i][1] = tela.getDescricao();
                 i++;

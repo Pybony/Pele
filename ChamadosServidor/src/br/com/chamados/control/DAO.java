@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -39,10 +40,14 @@ public class DAO<T> {
         try {
             session.createSQLQuery("SET @username = " + Cookies.usuario.getId()).executeUpdate();
             transacion = session.beginTransaction();
+            session.flush();
+            session.clear();
             session.saveOrUpdate(object);
             transacion.commit();
+            JOptionPane.showMessageDialog(null, "Registro salvo com sucesso.");
             return true;
         } catch (HibernateException e) {
+            JOptionPane.showMessageDialog(null, "Não foi possível salvar o registro.");
             transacion.rollback();
             e.printStackTrace();
             logger.error(e.getMessage());
@@ -93,6 +98,12 @@ public class DAO<T> {
         return (List<T>) query.list();
     }
 
+    public Object querySQL(String sql) {
+        openSession();
+        SQLQuery query = session.createSQLQuery(sql);
+        return query.uniqueResult();
+    }
+
     public Object count(String sql) {
         openSession();
         Query query = session.createQuery(sql);
@@ -103,7 +114,7 @@ public class DAO<T> {
         if (session == null) {
             session = HibernateUtil.getSessionFactory().openSession();
         } else {
-            if(!session.isOpen()){
+            if (!session.isOpen()) {
                 session = HibernateUtil.getSessionFactory().openSession();
             }
         }

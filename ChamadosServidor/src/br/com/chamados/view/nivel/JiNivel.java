@@ -7,6 +7,7 @@ package br.com.chamados.view.nivel;
 
 import br.com.chamados.config.LogChamados;
 import br.com.chamados.dao.NivelDao;
+import br.com.chamados.dao.TelaDao;
 import br.com.chamados.genericos.AcoesPainel;
 import br.com.chamados.genericos.Cookies;
 import br.com.chamados.model.Nivel;
@@ -131,17 +132,19 @@ public class JiNivel extends JInternalFrame implements AcoesPainel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalvarActionPerformed
-        try {
-            nivel = new Nivel();
+        nivel = new Nivel();
+        if (jtId.equals(NivelDao.proximoId())) {
             nivel.setId(Integer.parseInt(jtId.getText()));
-            nivel.setDescricao(jtDescricao.getText());
-            NivelDao.salvar(nivel);
-            JOptionPane.showMessageDialog(null, "Salvo com sucesso");
+        }
+        nivel.setDescricao(jtDescricao.getText());
+        NivelDao.salvar(nivel);
+        if (!jtId.getText().equals(NivelDao.proximoId())) {
+            vaPara("0");
             jtDescricao.setEditable(false);
             jbSalvar.setEnabled(false);
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Erro ao salvar");
+        } else {
+            jtDescricao.setEditable(false);
+            jbSalvar.setEnabled(false);
         }
     }//GEN-LAST:event_jbSalvarActionPerformed
 

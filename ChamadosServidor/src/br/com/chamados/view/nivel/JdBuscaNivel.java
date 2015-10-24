@@ -36,6 +36,14 @@ public class JdBuscaNivel extends javax.swing.JDialog {
         jbCancelar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
+
         jLabel1.setText("Descrição");
 
         jtDescricaoDe.setText("a");
@@ -143,6 +151,7 @@ public class JdBuscaNivel extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
+        idRetorno = "0";
         dispose();
     }//GEN-LAST:event_jbCancelarActionPerformed
 
@@ -159,6 +168,10 @@ public class JdBuscaNivel extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Selecione uma linha.");
         }
     }//GEN-LAST:event_jbConfirmarActionPerformed
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        NivelDao.popularTabela(jtBusca, jtDescricaoDe.getText(), jtDescricaoAte.getText());
+    }//GEN-LAST:event_formWindowGainedFocus
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

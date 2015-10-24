@@ -17,7 +17,7 @@ public class JdBuscaTela extends javax.swing.JDialog {
     private String idRetorno;
 
     public JdBuscaTela() {
-        setTitle("JdBusca - Busca Nivel - v1.00.00");
+        setTitle("JdBusca - Busca Tela - v1.00.00");
         initComponents();
         setResizable(false);
         TelaDao.popularTabela(jtBusca, jtDescricaoDe.getText(), jtDescricaoAte.getText());
@@ -42,6 +42,13 @@ public class JdBuscaTela extends javax.swing.JDialog {
         jbCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
 
         jLabel1.setText("Descrição");
 
@@ -52,6 +59,11 @@ public class JdBuscaTela extends javax.swing.JDialog {
         jtDescricaoAte.setText("ZZZZZZZZZZZ");
 
         jbBuscar.setText("Buscar");
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarActionPerformed(evt);
+            }
+        });
 
         jtBusca.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -145,6 +157,7 @@ public class JdBuscaTela extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
+        idRetorno = "0";
         dispose();
     }//GEN-LAST:event_jbCancelarActionPerformed
 
@@ -157,6 +170,14 @@ public class JdBuscaTela extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Selecione uma linha.");
         }
     }//GEN-LAST:event_jbConfirmarActionPerformed
+
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+        TelaDao.popularTabela(jtBusca, jtDescricaoDe.getText(), jtDescricaoAte.getText());
+    }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        TelaDao.popularTabela(jtBusca, jtDescricaoDe.getText(), jtDescricaoAte.getText());
+    }//GEN-LAST:event_formWindowGainedFocus
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

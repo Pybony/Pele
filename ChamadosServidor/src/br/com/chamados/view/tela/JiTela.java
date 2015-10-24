@@ -132,17 +132,19 @@ public class JiTela extends JInternalFrame implements AcoesPainel {
     }//GEN-LAST:event_jbFecharActionPerformed
 
     private void jbSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalvarActionPerformed
-        try {
-            tela = new Tela();
+        tela = new Tela();
+        if (!jtId.getText().equals(TelaDao.proximoId())) {
             tela.setId(Integer.parseInt(jtId.getText()));
-            tela.setDescricao(jtDescricao.getText());
-            TelaDao.salvar(tela);
-            JOptionPane.showMessageDialog(null, "Salvo com sucesso");
+        }
+        tela.setDescricao(jtDescricao.getText());
+        TelaDao.salvar(tela);
+        if (!jtId.getText().equals(TelaDao.proximoId())) {
+            vaPara("0");
             jtDescricao.setEditable(false);
             jbSalvar.setEnabled(false);
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Erro ao salvar");
+        } else {
+            jtDescricao.setEditable(false);
+            jbSalvar.setEnabled(false);
         }
     }//GEN-LAST:event_jbSalvarActionPerformed
 
@@ -202,6 +204,7 @@ public class JiTela extends JInternalFrame implements AcoesPainel {
     public void alterar() {
         if (tela != null) {
             jtDescricao.setEditable(true);
+            jtDescricao.setEnabled(true);
             jbSalvar.setEnabled(true);
         }
     }
