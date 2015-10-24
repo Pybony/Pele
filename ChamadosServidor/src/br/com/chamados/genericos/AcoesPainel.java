@@ -13,7 +13,7 @@ import javax.swing.JButton;
  */
 public interface AcoesPainel {
 
-    void vaPara();
+    void vaPara(String vaPara);
 
     void pesquisar();
 

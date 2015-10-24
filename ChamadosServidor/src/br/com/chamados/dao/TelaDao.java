@@ -6,7 +6,6 @@
 package br.com.chamados.dao;
 
 import br.com.chamados.control.DAO;
-import br.com.chamados.model.Cidade;
 import br.com.chamados.model.Tela;
 import java.util.List;
 

@@ -10,6 +10,7 @@ import br.com.chamados.config.LogChamados;
 import br.com.chamados.genericos.Cookies;
 import java.io.Serializable;
 import java.util.List;
+import javax.swing.JOptionPane;
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -29,10 +30,11 @@ public class DAO<T> {
     private static Session session;
 
     public DAO() {
+        openSession();
     }
 
     public boolean save(Object object) {
-        session = HibernateUtil.getSessionFactory().openSession();
+        openSession();
         Transaction transacion = null;
         try {
             session.createSQLQuery("SET @username = " + Cookies.usuario.getId()).executeUpdate();
@@ -47,18 +49,22 @@ public class DAO<T> {
             return false;
         } finally {
             session.close();
-            logger.info("fechou sesão");
         }
     }
 
     public void delete(Object object) {
-        session = HibernateUtil.getSessionFactory().openSession();
+        openSession();
         Transaction transacion = null;
         try {
-            session.createSQLQuery("SET @username = " + Cookies.usuario.getId()).executeUpdate();
-            transacion = session.beginTransaction();
-            session.delete(object);
-            transacion.commit();
+            if (object != null) {
+                session.createSQLQuery("SET @username = " + Cookies.usuario.getId()).executeUpdate();
+                transacion = session.beginTransaction();
+                session.delete(object);
+                transacion.commit();
+                JOptionPane.showMessageDialog(null, "Registro excluido com sucesso.");
+            } else {
+                JOptionPane.showMessageDialog(null, "Registro não encontrado.");
+            }
         } catch (HibernateException e) {
             transacion.rollback();
             e.printStackTrace();
@@ -69,34 +75,37 @@ public class DAO<T> {
     }
 
     public T queryById(String campo, Serializable valor, Class clazz) {
-        session = HibernateUtil.getSessionFactory().openSession();
+        openSession();
         Criteria criteria = session.createCriteria(clazz);
         criteria.add(Restrictions.eq(campo, valor));
         return (T) criteria.uniqueResult();
     }
 
     public List<T> queryList(Class clazz) {
-        session = HibernateUtil.getSessionFactory().openSession();
+        openSession();
         Criteria criteria = session.createCriteria(clazz);
         return (List<T>) criteria.list();
     }
 
     public List<T> query(String sql) {
-        session = HibernateUtil.getSessionFactory().openSession();
+        openSession();
         Query query = session.createQuery(sql);
         return (List<T>) query.list();
     }
 
-    public static Session getSession() {
-        if (session == null) {
-            return session = HibernateUtil.getSessionFactory().openSession();
-        }
-        return session;
-    }
-
     public Object count(String sql) {
-        session = HibernateUtil.getSessionFactory().openSession();
+        openSession();
         Query query = session.createQuery(sql);
         return query.uniqueResult();
+    }
+
+    private void openSession() {
+        if (session == null) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        } else {
+            if(!session.isOpen()){
+                session = HibernateUtil.getSessionFactory().openSession();
+            }
+        }
     }
 }

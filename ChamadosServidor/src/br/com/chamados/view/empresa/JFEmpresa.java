@@ -365,16 +365,11 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
     @Override
     public void checkEnabled(JButton jbInserir, JButton jbAlterar, JButton jbDeletar) {
         for (Permissoes permissoes : Cookies.listaPermissoes) {
-            if (permissoes.getTela().getDescricao().equalsIgnoreCase("JfPais")) {
+            if (permissoes.getTela().getDescricao().equalsIgnoreCase(this.getClass().getSimpleName())) {
                 jbInserir.setEnabled(permissoes.getInserir());
                 jbAlterar.setEnabled(permissoes.getAlterar());
                 jbDeletar.setEnabled(permissoes.getDeletar());
             }
         }
-    }
-
-    @Override
-    public void vaPara() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

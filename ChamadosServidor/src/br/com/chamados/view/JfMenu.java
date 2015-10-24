@@ -5,7 +5,12 @@
  */
 package br.com.chamados.view;
 
+import br.com.chamados.genericos.Cookies;
+import br.com.chamados.view.pais.JfPais;
+import br.com.chamados.view.Permissoes.JfPermissoes;
 import br.com.chamados.view.empresa.JFEmpresa;
+import br.com.chamados.view.nivel.JfNivel;
+import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 
 /**
@@ -17,12 +22,15 @@ public class JfMenu extends javax.swing.JFrame {
     private static JfPais jfPais;
     private static JFEmpresa JFEmpresa;
     private static JfPermissoes jfPermissoes;
+    private static JfNivel jfNivel;
 
     /**
      * Creates new form JfMenu
      */
     public JfMenu() {
         initComponents();
+        setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
+        desktop.setSize(3000, 3000);
     }
 
     /**
@@ -34,17 +42,30 @@ public class JfMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        desktop = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuEmpresa = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        javax.swing.GroupLayout desktopLayout = new javax.swing.GroupLayout(desktop);
+        desktop.setLayout(desktopLayout);
+        desktopLayout.setHorizontalGroup(
+            desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 537, Short.MAX_VALUE)
+        );
+        desktopLayout.setVerticalGroup(
+            desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 490, Short.MAX_VALUE)
+        );
 
         jMenu1.setText("Locais");
 
@@ -67,6 +88,14 @@ public class JfMenu extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jMenuEmpresa);
+
+        jMenuItem5.setText("Nivel");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem5);
 
         jMenuBar1.add(jMenu2);
 
@@ -94,11 +123,11 @@ public class JfMenu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(desktop)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 93, Short.MAX_VALUE)
+            .addComponent(desktop)
         );
 
         pack();
@@ -125,7 +154,16 @@ public class JfMenu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        if (jfNivel == null) {
+            jfNivel = new JfNivel();
+            desktop.add(jfNivel);
+            jfNivel.setVisible(true);
+        }
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JDesktopPane desktop;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -135,5 +173,6 @@ public class JfMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     // End of variables declaration//GEN-END:variables
 }

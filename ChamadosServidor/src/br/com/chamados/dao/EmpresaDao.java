@@ -104,6 +104,7 @@ public class EmpresaDao {
                  }
                  */
             }
+            
 
             // alteracao no metodo que determina a coluna em que o objeto ImageIcon devera aparecer
             @Override

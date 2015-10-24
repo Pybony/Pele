@@ -6,9 +6,6 @@
 package br.com.chamados.view;
 
 import br.com.chamados.genericos.AcoesPainel;
-import br.com.chamados.genericos.Cookies;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 
 /**
  *
@@ -28,19 +25,6 @@ public class JpDefault extends javax.swing.JPanel {
 
     public JpDefault() {
         initComponents();
-
-        /*Icon deletar = new ImageIcon("./imagens/deletar.png");
-         Icon inserir = new ImageIcon("./imagens/inserir.png");
-         Icon alterar = new ImageIcon("./imagens/alterar.png");
-         Icon pesquisar = new ImageIcon("./imagens/pesquisar.png");
-         Icon salvar = new ImageIcon("./imagens/salvar.png");
-         Icon vapara = new ImageIcon("./imagens/vapara.png");
-
-         jbDeletar.setIcon(deletar);
-         jbInserir.setIcon(inserir);
-         jbAlterar.setIcon(alterar);
-         jbPesquisar.setIcon(pesquisar);
-         jbVaPara.setIcon(vapara);*/
         jbInserir.setEnabled(false);
         jbAlterar.setEnabled(false);
         jbDeletar.setEnabled(false);
@@ -145,7 +129,7 @@ public class JpDefault extends javax.swing.JPanel {
 
     private void jbVaParaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVaParaActionPerformed
         if (acoesPainel != null) {
-            acoesPainel.vaPara();
+            acoesPainel.vaPara("");
         }
     }//GEN-LAST:event_jbVaParaActionPerformed
 

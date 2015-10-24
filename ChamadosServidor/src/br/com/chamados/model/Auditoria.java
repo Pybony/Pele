@@ -1,5 +1,5 @@
 package br.com.chamados.model;
-// Generated 26/09/2015 15:38:57 by Hibernate Tools 4.3.1
+// Generated 11/10/2015 16:23:24 by Hibernate Tools 4.3.1
 
 
 
