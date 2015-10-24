@@ -8,7 +8,7 @@ package br.com.chamados.dao;
 import br.com.chamados.control.DAO;
 import br.com.chamados.model.Cidade;
 import br.com.chamados.model.Estado;
-import br.com.chamados.utils.ItensCombo;
+import br.com.chamados.utils.ItemCombo;
 import java.util.List;
 import javax.swing.JComboBox;
 
@@ -19,7 +19,7 @@ import javax.swing.JComboBox;
 public class CidadeDao {
 
     public static void preencherCombo(JComboBox combo, int idEstado) {
-        ItensCombo item = new ItensCombo();
+        ItemCombo item = new ItemCombo();
         item.setCodigo(0);
         item.setDescricao("Selecione");
         combo.addItem(item);
@@ -32,7 +32,7 @@ public class CidadeDao {
         if (!lCidade.isEmpty()) {
 
             for (int i = 0; i < lCidade.size(); i++) {
-                item = new ItensCombo();
+                item = new ItemCombo();
                 item.setCodigo(lCidade.get(i).getId());
                 item.setDescricao(lCidade.get(i).getNome());
                 combo.addItem(item);

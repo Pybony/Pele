@@ -1,8 +1,17 @@
 package br.com.chamados.utils;
 
-public class ItensCombo {
+public class ItemCombo {
+
     private int codigo;
     private String descricao;
+
+    public ItemCombo() {
+    }
+
+    public ItemCombo(int codigo, String descricao) {
+        this.codigo = codigo;
+        this.descricao = descricao;
+    }
 
     /**
      * @return the codigo
@@ -32,10 +41,9 @@ public class ItensCombo {
         this.descricao = descricao;
     }
 
-
     @Override
-    public String toString () {
+    public String toString() {
         return descricao;
     }
-    
+
 }

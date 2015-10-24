@@ -22,14 +22,14 @@ import org.apache.log4j.Logger;
  *
  * @author lksbr
  */
-public class JfNivel extends JInternalFrame implements AcoesPainel {
+public class JiNivel extends JInternalFrame implements AcoesPainel {
 
     private Logger logger = Logger.getLogger(LogChamados.class);
-    private JiBuscaNivel jiBuscaNivel;
+    private JdBuscaNivel jiBuscaNivel;
     private Nivel nivel;
 
-    public JfNivel() {
-        setTitle("JfNivel - Manutenção de Nivel - v1.00.00");
+    public JiNivel() {
+        setTitle("JiNivel - Manutenção de Nivel - v1.00.00");
         initComponents();
         initMyComponents();
     }
@@ -47,13 +47,12 @@ public class JfNivel extends JInternalFrame implements AcoesPainel {
     private void initComponents() {
 
         jbSalvar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jbFechar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jtId = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jtDescricao = new javax.swing.JTextField();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        jbCancelar = new javax.swing.JButton();
 
         jbSalvar.setText("Salvar");
         jbSalvar.setEnabled(false);
@@ -63,10 +62,10 @@ public class JfNivel extends JInternalFrame implements AcoesPainel {
             }
         });
 
-        jButton2.setText("Cancelar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jbFechar.setText("Fechar");
+        jbFechar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jbFecharActionPerformed(evt);
             }
         });
 
@@ -79,6 +78,13 @@ public class JfNivel extends JInternalFrame implements AcoesPainel {
 
         jtDescricao.setEditable(false);
         jtDescricao.setEnabled(false);
+
+        jbCancelar.setText("Cancelar");
+        jbCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -94,10 +100,12 @@ public class JfNivel extends JInternalFrame implements AcoesPainel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jtDescricao))
+                        .addComponent(jtDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 282, Short.MAX_VALUE)
-                        .addComponent(jButton2)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jbFechar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jbCancelar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jbSalvar)))
                 .addContainerGap())
@@ -114,7 +122,8 @@ public class JfNivel extends JInternalFrame implements AcoesPainel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbSalvar)
-                    .addComponent(jButton2))
+                    .addComponent(jbFechar)
+                    .addComponent(jbCancelar))
                 .addContainerGap())
         );
 
@@ -129,20 +138,30 @@ public class JfNivel extends JInternalFrame implements AcoesPainel {
             NivelDao.salvar(nivel);
             JOptionPane.showMessageDialog(null, "Salvo com sucesso");
             jtDescricao.setEditable(false);
+            jbSalvar.setEnabled(false);
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Erro ao salvar");
         }
     }//GEN-LAST:event_jbSalvarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void jbFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbFecharActionPerformed
+        hide();
+    }//GEN-LAST:event_jbFecharActionPerformed
+
+    private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
+        jtDescricao.setEditable(false);
+        jbSalvar.setEnabled(false);
+        if (jtId.getText().equals(NivelDao.proximoId())) {
+            vaPara("0");
+        }
+    }//GEN-LAST:event_jbCancelarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton jbCancelar;
+    private javax.swing.JButton jbFechar;
     private javax.swing.JButton jbSalvar;
     private javax.swing.JTextField jtDescricao;
     private javax.swing.JTextField jtId;
@@ -166,7 +185,7 @@ public class JfNivel extends JInternalFrame implements AcoesPainel {
     @Override
     public void pesquisar() {
         if (jiBuscaNivel == null) {
-            jiBuscaNivel = new JiBuscaNivel();
+            jiBuscaNivel = new JdBuscaNivel();
         }
         jiBuscaNivel.setModal(true);
         jiBuscaNivel.setVisible(true);

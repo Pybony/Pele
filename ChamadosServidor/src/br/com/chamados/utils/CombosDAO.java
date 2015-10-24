@@ -18,7 +18,7 @@ public class CombosDAO {
 
     public void popularEstado(JComboBox combo, int num) {
 
-        ItensCombo item = new ItensCombo();
+        ItemCombo item = new ItemCombo();
         item.setCodigo(0);
         item.setDescricao("Selecione");
         combo.addItem(item);
@@ -38,7 +38,7 @@ public class CombosDAO {
             if (!lEstado.isEmpty()) {
 
                 for (int i = 0; i < lEstado.size(); i++) {
-                    item = new ItensCombo();
+                    item = new ItemCombo();
                     item.setCodigo(lEstado.get(i).getId());
                     item.setDescricao(lEstado.get(i).getNome());
                     combo.addItem(item);
@@ -51,7 +51,7 @@ public class CombosDAO {
 
     public void popularCidade(JComboBox combo, int num) {
 
-        ItensCombo item = new ItensCombo();
+        ItemCombo item = new ItemCombo();
         item.setCodigo(0);
         item.setDescricao("Selecione");
         combo.addItem(item);
@@ -71,7 +71,7 @@ public class CombosDAO {
             if (!lCidade.isEmpty()) {
 
                 for (int i = 0; i < lCidade.size(); i++) {
-                    item = new ItensCombo();
+                    item = new ItemCombo();
                     item.setCodigo(lCidade.get(i).getId());
                     item.setDescricao(lCidade.get(i).getNome());
                     combo.addItem(item);
@@ -82,9 +82,9 @@ public class CombosDAO {
         }
     }
 
-    public void definirItemCombo(JComboBox combo, ItensCombo item) {
+    public void definirItemCombo(JComboBox combo, ItemCombo item) {
         for (int i = 0; i < combo.getItemCount(); i++) {
-            if (((ItensCombo) combo.getItemAt(i)).getCodigo() == (item.getCodigo())) {
+            if (((ItemCombo) combo.getItemAt(i)).getCodigo() == (item.getCodigo())) {
                 combo.setSelectedIndex(i);
                 return;
             }

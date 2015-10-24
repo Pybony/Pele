@@ -7,7 +7,7 @@ package br.com.chamados.dao;
 
 import br.com.chamados.control.DAO;
 import br.com.chamados.model.Estado;
-import br.com.chamados.utils.ItensCombo;
+import br.com.chamados.utils.ItemCombo;
 import java.util.List;
 import javax.swing.JComboBox;
 
@@ -18,7 +18,7 @@ import javax.swing.JComboBox;
 public class EstadoDao {
 
     public static void preencherCombo(JComboBox combo) {
-        ItensCombo item = new ItensCombo();
+        ItemCombo item = new ItemCombo();
         item.setCodigo(0);
         item.setDescricao("Selecione");
         combo.addItem(item);
@@ -31,7 +31,7 @@ public class EstadoDao {
         if (!lEstado.isEmpty()) {
 
             for (int i = 0; i < lEstado.size(); i++) {
-                item = new ItensCombo();
+                item = new ItemCombo();
                 item.setCodigo(lEstado.get(i).getId());
                 item.setDescricao(lEstado.get(i).getNome());
                 combo.addItem(item);

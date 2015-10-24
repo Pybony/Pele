@@ -7,13 +7,15 @@ import javax.swing.JOptionPane;
  *
  * @author lksbr
  */
-public class JiBuscaNivel extends javax.swing.JDialog {
+public class JdBuscaNivel extends javax.swing.JDialog {
 
     private String idRetorno;
 
-    public JiBuscaNivel() {
+    public JdBuscaNivel() {
+        setTitle("JdBusca - Busca Nivel - v1.00.00");
         initComponents();
         setResizable(false);
+        NivelDao.popularTabela(jtBusca, jtDescricaoDe.getText(), jtDescricaoAte.getText());
     }
 
     public String getIdRetorno() {
@@ -150,7 +152,7 @@ public class JiBuscaNivel extends javax.swing.JDialog {
 
     private void jbConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConfirmarActionPerformed
         int linha = jtBusca.getSelectedRow();
-        if (linha > 0) {
+        if (linha >= 0) {
             idRetorno = String.valueOf(jtBusca.getValueAt(linha, 0));
             dispose();
         } else {

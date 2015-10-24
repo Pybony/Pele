@@ -9,7 +9,9 @@ import br.com.chamados.genericos.Cookies;
 import br.com.chamados.view.pais.JfPais;
 import br.com.chamados.view.Permissoes.JfPermissoes;
 import br.com.chamados.view.empresa.JFEmpresa;
-import br.com.chamados.view.nivel.JfNivel;
+import br.com.chamados.view.funcao.JiFuncao;
+import br.com.chamados.view.nivel.JiNivel;
+import br.com.chamados.view.tela.JiTela;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 
@@ -22,7 +24,9 @@ public class JfMenu extends javax.swing.JFrame {
     private static JfPais jfPais;
     private static JFEmpresa JFEmpresa;
     private static JfPermissoes jfPermissoes;
-    private static JfNivel jfNivel;
+    private static JiNivel jiNivel;
+    private static JiFuncao jiFuncao;
+    private static JiTela jiTela;
 
     /**
      * Creates new form JfMenu
@@ -49,6 +53,8 @@ public class JfMenu extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenuEmpresa = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -96,6 +102,22 @@ public class JfMenu extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jMenuItem5);
+
+        jMenuItem6.setText("Função");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem6);
+
+        jMenuItem7.setText("Tela");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem7);
 
         jMenuBar1.add(jMenu2);
 
@@ -155,12 +177,34 @@ public class JfMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        if (jfNivel == null) {
-            jfNivel = new JfNivel();
-            desktop.add(jfNivel);
-            jfNivel.setVisible(true);
+        if (jiNivel == null) {
+            jiNivel = new JiNivel();
+            desktop.add(jiNivel);
+            jiNivel.setVisible(true);
+        } else {
+            jiNivel.setVisible(true);
         }
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        if (jiFuncao == null) {
+            jiFuncao = new JiFuncao();
+            desktop.add(jiFuncao);
+            jiFuncao.setVisible(true);
+        } else {
+            jiFuncao.setVisible(true);
+        }
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        if (jiTela == null) {
+            jiTela = new JiTela();
+            desktop.add(jiTela);
+            jiTela.setVisible(true);
+        } else {
+            jiTela.setVisible(true);
+        }
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JDesktopPane desktop;
@@ -174,5 +218,7 @@ public class JfMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
     // End of variables declaration//GEN-END:variables
 }
