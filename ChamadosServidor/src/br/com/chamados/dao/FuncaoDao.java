@@ -8,8 +8,6 @@ package br.com.chamados.dao;
 import br.com.chamados.control.DAO;
 import br.com.chamados.model.Funcao;
 import br.com.chamados.model.Nivel;
-import br.com.chamados.model.Permissoes;
-import br.com.chamados.model.Tela;
 import br.com.chamados.utils.ItemCombo;
 import java.math.BigInteger;
 import java.util.List;

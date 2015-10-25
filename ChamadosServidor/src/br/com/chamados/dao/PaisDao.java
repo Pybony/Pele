@@ -70,6 +70,7 @@ public class PaisDao {
         Object[] cabecalho = new Object[tabela.getColumnCount()];
         cabecalho[0] = "Id";
         cabecalho[1] = "Nome";
+        cabecalho[2] = "Sigla";
 
         DAO<Pais> dao = new DAO<>();
         String sql = "SELECT COUNT(*) FROM Pais WHERE nome >= '" + nomeDe + "' AND nome <= '" + nomeAte + "'";
@@ -85,6 +86,7 @@ public class PaisDao {
             for (Pais pais : lista) {
                 dadosTabela[i][0] = pais.getId();
                 dadosTabela[i][1] = pais.getNome();
+                dadosTabela[i][2] = pais.getSigla();
                 i++;
             }
         } catch (Exception e) {
@@ -99,9 +101,6 @@ public class PaisDao {
 
             @Override
             public Class getColumnClass(int column) {
-                if (column > 1) {
-                    return Boolean.class;
-                }
                 return Object.class;
             }
         });
