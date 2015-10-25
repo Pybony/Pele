@@ -8,6 +8,7 @@ package br.com.chamados.view;
 import br.com.chamados.genericos.Cookies;
 import br.com.chamados.view.pais.JiPais;
 import br.com.chamados.view.Permissoes.JfPermissoes;
+import br.com.chamados.view.cidade.JiCidade;
 import br.com.chamados.view.empresa.JFEmpresa;
 import br.com.chamados.view.estado.JiEstado;
 import br.com.chamados.view.funcao.JiFuncao;
@@ -31,6 +32,7 @@ public class JfMenu extends javax.swing.JFrame {
     private static JiTela jiTela;
     private static JiEstado jiEstado;
     private static JiSetor jiSetor;
+    private static JiCidade jiCidade;
 
     /**
      * Creates new form JfMenu
@@ -55,6 +57,7 @@ public class JfMenu extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem10 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuEmpresa = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -96,6 +99,14 @@ public class JfMenu extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItem8);
+
+        jMenuItem10.setText("Cidade");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem10);
 
         jMenuBar1.add(jMenu1);
 
@@ -251,6 +262,16 @@ public class JfMenu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        if (jiCidade == null) {
+            jiCidade = new JiCidade();
+            desktop.add(jiCidade);
+            jiCidade.setVisible(true);
+        } else {
+            jiCidade.setVisible(true);
+        }
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JDesktopPane desktop;
     private javax.swing.JMenu jMenu1;
@@ -259,6 +280,7 @@ public class JfMenu extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuEmpresa;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

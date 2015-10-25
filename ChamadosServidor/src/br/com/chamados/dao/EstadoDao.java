@@ -7,7 +7,6 @@ package br.com.chamados.dao;
 
 import br.com.chamados.control.DAO;
 import br.com.chamados.model.Estado;
-import br.com.chamados.model.Nivel;
 import br.com.chamados.utils.ItemCombo;
 import java.math.BigInteger;
 import java.util.List;
@@ -34,7 +33,7 @@ public class EstadoDao {
 
     public static String proximoId() {
         String retorno = "1";
-        DAO<Nivel> dao = new DAO<>();
+        DAO<Estado> dao = new DAO<>();
         BigInteger id = (BigInteger) dao.querySQL("SELECT auto_increment FROM INFORMATION_SCHEMA.TABLES WHERE table_name = 'estado'");
         if (id != null) {
             retorno = String.valueOf(id);
@@ -102,7 +101,7 @@ public class EstadoDao {
 
         DAO<Estado> dao = new DAO<>();
         String sql = "SELECT COUNT(*) FROM Estado e INNER JOIN e.pais WHERE e.nome BETWEEN '" + nomeDe + "' AND '" + nomeAte + "'"
-                    + "AND e.pais.nome BETWEEN '" + paisDe + "' AND '" + paisAte + "'";
+                + "AND e.pais.nome BETWEEN '" + paisDe + "' AND '" + paisAte + "'";
         // cria matriz de acordo com nº de registros da tabela
         try {
             Integer result = Integer.parseInt(dao.count(sql).toString());

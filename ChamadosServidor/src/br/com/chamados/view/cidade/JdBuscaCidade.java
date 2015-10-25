@@ -1,22 +1,22 @@
-package br.com.chamados.view.estado;
+package br.com.chamados.view.cidade;
 
+import br.com.chamados.dao.CidadeDao;
 import br.com.chamados.dao.EstadoDao;
-import br.com.chamados.dao.NivelDao;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author lksbr
  */
-public class JdBuscaEstado extends javax.swing.JDialog {
+public class JdBuscaCidade extends javax.swing.JDialog {
 
     private String idRetorno;
 
-    public JdBuscaEstado() {
+    public JdBuscaCidade() {
         setTitle("JdBuscaEstado - Busca Estado - v1.00.00");
         initComponents();
         setResizable(false);
-        EstadoDao.popularTabela(jtBusca, jtNomeDe.getText(), jtNomeAte.getText(), jtPaisDe.getText(), jtPaisAte.getText());
+        CidadeDao.popularTabela(jtBusca, jtNomeDe.getText(), jtNomeAte.getText(), jtEstadoDe.getText(), jtEstadoAte.getText());
     }
 
     public String getIdRetorno() {
@@ -32,12 +32,12 @@ public class JdBuscaEstado extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jtNomeAte = new javax.swing.JTextField();
         jbBuscar = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jtEstadoDe = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jtEstadoAte = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtBusca = new javax.swing.JTable();
-        jLabel3 = new javax.swing.JLabel();
-        jtPaisDe = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jtPaisAte = new javax.swing.JTextField();
         jbConfirmar = new javax.swing.JButton();
         jbCancelar = new javax.swing.JButton();
 
@@ -56,7 +56,7 @@ public class JdBuscaEstado extends javax.swing.JDialog {
 
         jLabel2.setText("Até");
 
-        jtNomeAte.setText("ZZZZZZZZZZZ");
+        jtNomeAte.setText("ZZZZZZZZZZZZ");
 
         jbBuscar.setText("Buscar");
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -65,24 +65,25 @@ public class JdBuscaEstado extends javax.swing.JDialog {
             }
         });
 
+        jLabel3.setText("Estado");
+
+        jtEstadoDe.setText("a");
+
+        jLabel4.setText("Até");
+
+        jtEstadoAte.setText("ZZZZZZZZZZZZ");
+
         jtBusca.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Id", "Nome", "Sigla", "Pais"
+                "Id", "Nome", "Cep", "Estado"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -95,14 +96,6 @@ public class JdBuscaEstado extends javax.swing.JDialog {
             jtBusca.getColumnModel().getColumn(2).setResizable(false);
             jtBusca.getColumnModel().getColumn(3).setResizable(false);
         }
-
-        jLabel3.setText("Pais");
-
-        jtPaisDe.setText("a");
-
-        jLabel4.setText("Até");
-
-        jtPaisAte.setText("ZZZZZZZZZZZZ");
 
         jbConfirmar.setText("Confirmar");
         jbConfirmar.addActionListener(new java.awt.event.ActionListener() {
@@ -124,34 +117,34 @@ public class JdBuscaEstado extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jtPaisDe, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jtPaisAte))
+                                .addComponent(jtEstadoDe, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jtNomeDe, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jtNomeAte, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jtNomeDe, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtNomeAte)
+                            .addComponent(jtEstadoAte))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jbBuscar))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jbCancelar)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(jbConfirmar))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(14, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,12 +156,12 @@ public class JdBuscaEstado extends javax.swing.JDialog {
                     .addComponent(jLabel2)
                     .addComponent(jtNomeAte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbBuscar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jtPaisDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtEstadoDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(jtPaisAte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtEstadoAte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -178,22 +171,16 @@ public class JdBuscaEstado extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jtNomeDe.getAccessibleContext().setAccessibleName("");
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-        EstadoDao.popularTabela(jtBusca, jtNomeDe.getText(), jtNomeAte.getText(), jtPaisDe.getText(), jtPaisAte.getText());
+        CidadeDao.popularTabela(jtBusca, jtNomeDe.getText(), jtNomeAte.getText(), jtEstadoDe.getText(), jtEstadoAte.getText());
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
-        EstadoDao.popularTabela(jtBusca, jtNomeDe.getText(), jtNomeAte.getText(), jtPaisDe.getText(), jtPaisAte.getText());
+        CidadeDao.popularTabela(jtBusca, jtNomeDe.getText(), jtNomeAte.getText(), jtEstadoDe.getText(), jtEstadoAte.getText());
     }//GEN-LAST:event_formWindowGainedFocus
-
-    private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
-        dispose();
-    }//GEN-LAST:event_jbCancelarActionPerformed
 
     private void jbConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConfirmarActionPerformed
         int linha = jtBusca.getSelectedRow();
@@ -205,6 +192,10 @@ public class JdBuscaEstado extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jbConfirmarActionPerformed
 
+    private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
+        dispose();
+    }//GEN-LAST:event_jbCancelarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -215,9 +206,9 @@ public class JdBuscaEstado extends javax.swing.JDialog {
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbConfirmar;
     private javax.swing.JTable jtBusca;
+    private javax.swing.JTextField jtEstadoAte;
+    private javax.swing.JTextField jtEstadoDe;
     private javax.swing.JTextField jtNomeAte;
     private javax.swing.JTextField jtNomeDe;
-    private javax.swing.JTextField jtPaisAte;
-    private javax.swing.JTextField jtPaisDe;
     // End of variables declaration//GEN-END:variables
 }
