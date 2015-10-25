@@ -6,7 +6,7 @@
 package br.com.chamados.view;
 
 import br.com.chamados.genericos.Cookies;
-import br.com.chamados.view.pais.JfPais;
+import br.com.chamados.view.pais.JiPais;
 import br.com.chamados.view.Permissoes.JfPermissoes;
 import br.com.chamados.view.empresa.JFEmpresa;
 import br.com.chamados.view.funcao.JiFuncao;
@@ -21,7 +21,7 @@ import javax.swing.JFrame;
  */
 public class JfMenu extends javax.swing.JFrame {
 
-    private static JfPais jfPais;
+    private static JiPais jiPais;
     private static JFEmpresa JFEmpresa;
     private static JfPermissoes jfPermissoes;
     private static JiNivel jiNivel;
@@ -156,9 +156,12 @@ public class JfMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        if (jfPais == null) {
-            jfPais = new JfPais();
-            jfPais.setVisible(true);
+        if (jiPais == null) {
+            jiPais = new JiPais();
+            desktop.add(jiPais);
+            jiPais.setVisible(true);
+        } else {
+            jiPais.setVisible(true);
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 

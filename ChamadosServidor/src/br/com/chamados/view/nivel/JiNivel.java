@@ -24,7 +24,7 @@ import org.apache.log4j.Logger;
 public class JiNivel extends JInternalFrame implements AcoesPainel {
 
     private Logger logger = Logger.getLogger(LogChamados.class);
-    private JdBuscaNivel jiBuscaNivel;
+    private JdBuscaNivel jdBuscaNivel;
     private Nivel nivel;
 
     public JiNivel() {
@@ -188,12 +188,12 @@ public class JiNivel extends JInternalFrame implements AcoesPainel {
 
     @Override
     public void pesquisar() {
-        if (jiBuscaNivel == null) {
-            jiBuscaNivel = new JdBuscaNivel();
+        if (jdBuscaNivel == null) {
+            jdBuscaNivel = new JdBuscaNivel();
         }
-        jiBuscaNivel.setModal(true);
-        jiBuscaNivel.setVisible(true);
-        vaPara(jiBuscaNivel.getIdRetorno());
+        jdBuscaNivel.setModal(true);
+        jdBuscaNivel.setVisible(true);
+        vaPara(jdBuscaNivel.getIdRetorno());
     }
 
     @Override
