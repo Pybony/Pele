@@ -24,6 +24,8 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="jbFechar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jbCancelar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jbSalvar" min="-2" max="-2" attributes="0"/>
@@ -66,6 +68,7 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jbSalvar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jbFechar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jbCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -78,13 +81,16 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Salvar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbSalvarActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jbCancelar">
+    <Component class="javax.swing.JButton" name="jbFechar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Cancelar"/>
+        <Property name="text" type="java.lang.String" value="Fechar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbCancelarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbFecharActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
@@ -121,6 +127,14 @@
         </Property>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jbCancelar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cancelar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbCancelarActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

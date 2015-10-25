@@ -139,10 +139,10 @@ public class JiTela extends JInternalFrame implements AcoesPainel {
         tela.setDescricao(jtDescricao.getText());
         TelaDao.salvar(tela);
         if (!jtId.getText().equals(TelaDao.proximoId())) {
-            vaPara("0");
             jtDescricao.setEditable(false);
             jbSalvar.setEnabled(false);
         } else {
+            vaPara("0");
             jtDescricao.setEditable(false);
             jbSalvar.setEnabled(false);
         }
@@ -170,6 +170,9 @@ public class JiTela extends JInternalFrame implements AcoesPainel {
     public void vaPara(String vaPara) {
         if (vaPara.equals("")) {
             vaPara = JOptionPane.showInputDialog("Vá para");
+            if (vaPara == null || vaPara.equals("")) {
+                vaPara = "0";
+            }
         }
         tela = TelaDao.vaPara(vaPara);
         if (tela != null) {

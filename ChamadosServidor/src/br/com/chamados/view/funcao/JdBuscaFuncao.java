@@ -1,21 +1,21 @@
-package br.com.chamados.view.nivel;
+package br.com.chamados.view.funcao;
 
-import br.com.chamados.dao.NivelDao;
+import br.com.chamados.dao.FuncaoDao;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author lksbr
  */
-public class JdBuscaNivel extends javax.swing.JDialog {
+public class JdBuscaFuncao extends javax.swing.JDialog {
 
     private String idRetorno;
 
-    public JdBuscaNivel() {
-        setTitle("JdBuscaNivel - Busca Nivel - v1.00.00");
+    public JdBuscaFuncao() {
+        setTitle("JdBuscaFuncao - Busca Função - v1.00.00");
         initComponents();
         setResizable(false);
-        NivelDao.popularTabela(jtBusca, jtDescricaoDe.getText(), jtDescricaoAte.getText());
+        FuncaoDao.popularTabela(jtBusca, jtDescricaoDe.getText(), jtDescricaoAte.getText(), jtNivelDe.getText(), jtNivelAte.getText());
     }
 
     public String getIdRetorno() {
@@ -30,12 +30,17 @@ public class JdBuscaNivel extends javax.swing.JDialog {
         jtDescricaoDe = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jtDescricaoAte = new javax.swing.JTextField();
+        jbBuscar = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jtNivelDe = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jtNivelAte = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtBusca = new javax.swing.JTable();
         jbConfirmar = new javax.swing.JButton();
         jbCancelar = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
                 formWindowGainedFocus(evt);
@@ -52,19 +57,34 @@ public class JdBuscaNivel extends javax.swing.JDialog {
 
         jtDescricaoAte.setText("ZZZZZZZZZZZZ");
 
+        jbBuscar.setText("Buscar");
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Nivel");
+
+        jtNivelDe.setText("a");
+
+        jLabel4.setText("Até");
+
+        jtNivelAte.setText("ZZZZZZZZZZZZ");
+
         jtBusca.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Id", "Descrição"
+                "Id", "Descrição", "Nivel"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -79,6 +99,7 @@ public class JdBuscaNivel extends javax.swing.JDialog {
         if (jtBusca.getColumnModel().getColumnCount() > 0) {
             jtBusca.getColumnModel().getColumn(0).setResizable(false);
             jtBusca.getColumnModel().getColumn(1).setResizable(false);
+            jtBusca.getColumnModel().getColumn(2).setResizable(false);
         }
 
         jbConfirmar.setText("Confirmar");
@@ -95,37 +116,38 @@ public class JdBuscaNivel extends javax.swing.JDialog {
             }
         });
 
-        jButton3.setText("Buscar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jtDescricaoDe, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jtDescricaoDe, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+                            .addComponent(jtNivelDe))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jtDescricaoAte, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jtDescricaoAte, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jtNivelAte)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jbCancelar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jbConfirmar)
+                        .addComponent(jbBuscar))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jbCancelar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jbConfirmar))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -137,9 +159,15 @@ public class JdBuscaNivel extends javax.swing.JDialog {
                     .addComponent(jtDescricaoDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(jtDescricaoAte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3))
+                    .addComponent(jbBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jtNivelDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(jtNivelAte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbConfirmar)
@@ -150,14 +178,13 @@ public class JdBuscaNivel extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
-        idRetorno = "0";
-        dispose();
-    }//GEN-LAST:event_jbCancelarActionPerformed
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+        FuncaoDao.popularTabela(jtBusca, jtDescricaoDe.getText(), jtDescricaoAte.getText(), jtNivelDe.getText(), jtNivelAte.getText());
+    }//GEN-LAST:event_jbBuscarActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        NivelDao.popularTabela(jtBusca, jtDescricaoDe.getText(), jtDescricaoAte.getText());
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        FuncaoDao.popularTabela(jtBusca, jtDescricaoDe.getText(), jtDescricaoAte.getText(), jtNivelDe.getText(), jtNivelAte.getText());
+    }//GEN-LAST:event_formWindowGainedFocus
 
     private void jbConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConfirmarActionPerformed
         int linha = jtBusca.getSelectedRow();
@@ -169,20 +196,24 @@ public class JdBuscaNivel extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jbConfirmarActionPerformed
 
-    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
-        NivelDao.popularTabela(jtBusca, jtDescricaoDe.getText(), jtDescricaoAte.getText());
-    }//GEN-LAST:event_formWindowGainedFocus
-
+    private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
+        idRetorno = "0";
+        dispose();
+    }//GEN-LAST:event_jbCancelarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbConfirmar;
     private javax.swing.JTable jtBusca;
     private javax.swing.JTextField jtDescricaoAte;
     private javax.swing.JTextField jtDescricaoDe;
+    private javax.swing.JTextField jtNivelAte;
+    private javax.swing.JTextField jtNivelDe;
     // End of variables declaration//GEN-END:variables
 }

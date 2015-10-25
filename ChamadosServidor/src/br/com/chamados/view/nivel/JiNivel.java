@@ -7,12 +7,10 @@ package br.com.chamados.view.nivel;
 
 import br.com.chamados.config.LogChamados;
 import br.com.chamados.dao.NivelDao;
-import br.com.chamados.dao.TelaDao;
 import br.com.chamados.genericos.AcoesPainel;
 import br.com.chamados.genericos.Cookies;
 import br.com.chamados.model.Nivel;
 import br.com.chamados.model.Permissoes;
-import br.com.chamados.view.JfMenu;
 import br.com.chamados.view.JpDefault;
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
@@ -133,16 +131,16 @@ public class JiNivel extends JInternalFrame implements AcoesPainel {
 
     private void jbSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalvarActionPerformed
         nivel = new Nivel();
-        if (jtId.equals(NivelDao.proximoId())) {
+        if (!jtId.getText().equals(NivelDao.proximoId())) {
             nivel.setId(Integer.parseInt(jtId.getText()));
         }
         nivel.setDescricao(jtDescricao.getText());
         NivelDao.salvar(nivel);
         if (!jtId.getText().equals(NivelDao.proximoId())) {
-            vaPara("0");
             jtDescricao.setEditable(false);
             jbSalvar.setEnabled(false);
         } else {
+            vaPara("0");
             jtDescricao.setEditable(false);
             jbSalvar.setEnabled(false);
         }
@@ -174,6 +172,9 @@ public class JiNivel extends JInternalFrame implements AcoesPainel {
     public void vaPara(String vaPara) {
         if (vaPara.equals("")) {
             vaPara = JOptionPane.showInputDialog("Vá para");
+            if (vaPara == null || vaPara.equals("")) {
+                vaPara = "0";
+            }
         }
         nivel = NivelDao.vaPara(vaPara);
         if (nivel != null) {
@@ -207,6 +208,7 @@ public class JiNivel extends JInternalFrame implements AcoesPainel {
     @Override
     public void alterar() {
         if (nivel != null) {
+            jtDescricao.setEnabled(true);
             jtDescricao.setEditable(true);
             jbSalvar.setEnabled(true);
         }

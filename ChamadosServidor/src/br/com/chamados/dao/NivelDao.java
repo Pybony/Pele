@@ -10,7 +10,10 @@ import br.com.chamados.model.Nivel;
 import br.com.chamados.model.Pais;
 import br.com.chamados.model.Permissoes;
 import br.com.chamados.model.Tela;
+import br.com.chamados.utils.ItemCombo;
+import java.math.BigInteger;
 import java.util.List;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -26,12 +29,24 @@ public class NivelDao {
         dao.save(nivel);
     }
 
+    public static Nivel getSelectedItemCombo(JComboBox combo) {
+        ItemCombo item = (ItemCombo) combo.getSelectedItem();
+        String id = String.valueOf(item.getCodigo());
+        Nivel nivel = vaPara(id);
+        return nivel;
+    }
+
+    public static void setSelectedItemCombo(JComboBox combo, Nivel nivel) {
+        ItemCombo item = new ItemCombo(nivel.getId(), nivel.getDescricao());
+        combo.getModel().setSelectedItem(item);
+    }
+
     public static String proximoId() {
         String retorno = "1";
         DAO<Nivel> dao = new DAO<>();
-        Nivel nivel = dao.query("SELECT MAX(p) FROM Nivel p").get(0);
-        if (nivel != null) {
-            retorno = String.valueOf(nivel.getId() + 1);
+        BigInteger id = (BigInteger) dao.querySQL("SELECT auto_increment FROM INFORMATION_SCHEMA.TABLES WHERE table_name = 'nivel'");
+        if (id != null) {
+            retorno = String.valueOf(id);
         }
         return retorno;
     }
