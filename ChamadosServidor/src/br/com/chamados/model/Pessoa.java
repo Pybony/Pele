@@ -2,7 +2,6 @@ package br.com.chamados.model;
 // Generated 11/10/2015 16:23:24 by Hibernate Tools 4.3.1
 
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,7 +15,7 @@ public class Pessoa  implements java.io.Serializable {
      private Cidade cidade;
      private String nome;
      private int idade;
-     private Date dataNascimento;
+     private String dataNascimento;
      private String email;
      private String telefone;
      private String cpf;
@@ -27,7 +26,7 @@ public class Pessoa  implements java.io.Serializable {
     }
 
 	
-    public Pessoa(Cidade cidade, String nome, int idade, Date dataNascimento, String email, String telefone, String cpf, String rg) {
+    public Pessoa(Cidade cidade, String nome, int idade, String dataNascimento, String email, String telefone, String cpf, String rg) {
         this.cidade = cidade;
         this.nome = nome;
         this.idade = idade;
@@ -37,7 +36,7 @@ public class Pessoa  implements java.io.Serializable {
         this.cpf = cpf;
         this.rg = rg;
     }
-    public Pessoa(Cidade cidade, String nome, int idade, Date dataNascimento, String email, String telefone, String cpf, String rg, Set funcionarios) {
+    public Pessoa(Cidade cidade, String nome, int idade, String dataNascimento, String email, String telefone, String cpf, String rg, Set funcionarios) {
        this.cidade = cidade;
        this.nome = nome;
        this.idade = idade;
@@ -77,11 +76,11 @@ public class Pessoa  implements java.io.Serializable {
     public void setIdade(int idade) {
         this.idade = idade;
     }
-    public Date getDataNascimento() {
+    public String getDataNascimento() {
         return this.dataNascimento;
     }
     
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(String dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
     public String getEmail() {

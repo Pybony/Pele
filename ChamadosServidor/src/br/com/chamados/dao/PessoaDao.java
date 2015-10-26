@@ -8,12 +8,10 @@ package br.com.chamados.dao;
 import br.com.chamados.config.LogChamados;
 import br.com.chamados.control.DAO;
 import br.com.chamados.model.Cidade;
-import br.com.chamados.model.Empresa;
-import br.com.chamados.utils.ItemCombo;
+import br.com.chamados.model.Pessoa;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -24,84 +22,62 @@ import org.apache.log4j.Logger;
  *
  * @author lksbr
  */
-public class EmpresaDao {
+public class PessoaDao {
 
     static Logger logger = Logger.getLogger(LogChamados.class);
 
-    public static boolean save(Empresa empresa) {
+    public static boolean save(Pessoa pessoa) {
         boolean retorno = true;
-        DAO<Empresa> dao = new DAO<>();
-        retorno = dao.save(empresa);
+        DAO<Pessoa> dao = new DAO<>();
+        retorno = dao.save(pessoa);
         return retorno;
     }
     
     public static String proximoId() {
         String retorno = "1";
-        DAO<Empresa> dao = new DAO<>();
-        BigInteger id = (BigInteger) dao.querySQL("SELECT auto_increment FROM INFORMATION_SCHEMA.TABLES WHERE table_name = 'empresa'");
+        DAO<Pessoa> dao = new DAO<>();
+        BigInteger id = (BigInteger) dao.querySQL("SELECT auto_increment FROM INFORMATION_SCHEMA.TABLES WHERE table_name = 'pessoa'");
         if (id != null) {
             retorno = String.valueOf(id);
         }
         return retorno;
     }
     
-    public static void deletar(Empresa empresa) {
-        DAO<Empresa> dao = new DAO<>();
-        dao.delete(empresa);
+    public static void deletar(Pessoa pessoa) {
+        DAO<Pessoa> dao = new DAO<>();
+        dao.delete(pessoa);
     }
     
-    public static void preencherCombo(JComboBox combo) {
-        ItemCombo item = new ItemCombo();
-        item.setCodigo(0);
-        item.setDescricao("Selecione");
-        combo.addItem(item);
-
-        String sql = "SELECT c FROM Empresa c";
-
-        DAO<Empresa> dao = new DAO<>();
-        List<Empresa> lEmpresa = dao.query(sql);
-
-        if (!lEmpresa.isEmpty()) {
-
-            for (int i = 0; i < lEmpresa.size(); i++) {
-                item = new ItemCombo();
-                item.setCodigo(lEmpresa.get(i).getId());
-                item.setDescricao(lEmpresa.get(i).getNome());
-                combo.addItem(item);
-            }
-        }
-    }
-    
-    public static Empresa vaPara(String id) {
-        Empresa empresa = new Empresa();
+    public static Pessoa vaPara(String id) {
+        Pessoa pessoa = new Pessoa();
         try {
             String sql = "";
             if (id.equals("0")) {
-                sql = "SELECT p FROM Empresa p WHERE id >= " + id + " ORDER BY id";
+                sql = "SELECT p FROM Pessoa p WHERE id >= " + id + " ORDER BY id";
             } else {
-                sql = "SELECT p FROM Empresa p WHERE id = " + id;
+                sql = "SELECT p FROM Pessoa p WHERE id = " + id;
             }
-            DAO<Empresa> dao = new DAO<>();
-            List<Empresa> lista = dao.query(sql);
+            DAO<Pessoa> dao = new DAO<>();
+            List<Pessoa> lista = dao.query(sql);
             if (lista.size() == 0) {
                 if (!id.equals("0")) {
                     JOptionPane.showMessageDialog(null, "Id não encontrado.");
                 }
-                empresa = null;
+                pessoa = null;
             } else {
-                empresa = lista.get(0);
+                pessoa = lista.get(0);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return empresa;
+        return pessoa;
     }
     
-    public static List<Empresa> obterEmpresa(Empresa criterio){
+    public static List<Pessoa> obterPessoa(Pessoa criterio){
         
-        DAO<Empresa> dao = new DAO<>();
+        DAO<Pessoa> dao = new DAO<>();
         
-        String sql = "SELECT c FROM Empresa c";
+        String sql = "SELECT c FROM Pessoa c";
         ArrayList<String> where = new ArrayList<>();
 
         if (criterio != null) {
@@ -114,8 +90,8 @@ public class EmpresaDao {
                 where.add(" nome = '" + criterio.getNome() + "'");
             }
 
-            if (criterio.getCgc() != null && !criterio.getCgc().equals("")) {
-                where.add(" cgc = '" + criterio.getCgc() + "'");
+            if (criterio.getCpf() != null && !criterio.getCpf().equals("")) {
+                where.add(" cgc = '" + criterio.getCpf()+ "'");
             }
 
             if (criterio.getCidade() instanceof Cidade && criterio.getCidade().getId() 
@@ -142,15 +118,15 @@ public class EmpresaDao {
             sql += " WHERE " + mount;
         }
         System.out.println(sql);
-        List<Empresa> empresa = dao.query(sql);
+        List<Pessoa> pessoa = dao.query(sql);
         
-        return empresa;
+        return pessoa;
     }
 
-    public static void popularTabela(JTable tabela, Empresa criterio) {
+    public static void popularTabela(JTable tabela, Pessoa criterio) {
 
-        DAO<Empresa> dao = new DAO<>();
-        List<Empresa> empresa;
+        DAO<Pessoa> dao = new DAO<>();
+        List<Pessoa> pessoa;
 
         // dados da tabela
         Object[][] dadosTabela = null;
@@ -164,13 +140,13 @@ public class EmpresaDao {
         Object[] cabecalho = new Object[5];
         cabecalho[0] = "Id";
         cabecalho[1] = "Nome";
-        cabecalho[2] = "CGC";
+        cabecalho[2] = "CPF";
         cabecalho[3] = "Email";
         cabecalho[4] = "Telefone";
 
         // cria matriz de acordo com nº de registros da tabela
         try {
-            String sql = "SELECT COUNT(*) FROM Empresa";
+            String sql = "SELECT COUNT(*) FROM Pessoa";
             Integer result = Integer.parseInt(dao.count(sql).toString());
 
             System.out.println(result);
@@ -178,21 +154,21 @@ public class EmpresaDao {
             dadosTabela = new Object[result][5];
 
         } catch (Exception e) {
-            System.out.println("Erro ao consultar qtde empresas: " + e);
+            System.out.println("Erro ao consultar qtde pessoas: " + e);
         }
 
-        empresa = obterEmpresa(criterio);
+        pessoa = obterPessoa(criterio);
 
         // efetua consulta de dados no banco e atribui no componente JTable
         try {
-            for (int i = 0; i < empresa.size(); i++) {
+            for (int i = 0; i < pessoa.size(); i++) {
 
-                System.out.println(empresa.get(i).getId());
-                dadosTabela[i][0] = empresa.get(i).getId();
-                dadosTabela[i][1] = empresa.get(i).getNome();
-                dadosTabela[i][2] = empresa.get(i).getCgc();
-                dadosTabela[i][3] = empresa.get(i).getEmail();
-                dadosTabela[i][4] = empresa.get(i).getTelefone();
+                System.out.println(pessoa.get(i).getId());
+                dadosTabela[i][0] = pessoa.get(i).getId();
+                dadosTabela[i][1] = pessoa.get(i).getNome();
+                dadosTabela[i][2] = pessoa.get(i).getCpf();
+                dadosTabela[i][3] = pessoa.get(i).getEmail();
+                dadosTabela[i][4] = pessoa.get(i).getTelefone();
             }
 
         } catch (Exception e) {

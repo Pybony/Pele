@@ -13,6 +13,7 @@ import br.com.chamados.view.empresa.JFEmpresa;
 import br.com.chamados.view.estado.JiEstado;
 import br.com.chamados.view.funcao.JiFuncao;
 import br.com.chamados.view.nivel.JiNivel;
+import br.com.chamados.view.pessoa.JFPessoa;
 import br.com.chamados.view.setor.JiSetor;
 import br.com.chamados.view.tela.JiTela;
 import javax.swing.JDesktopPane;
@@ -26,6 +27,7 @@ public class JfMenu extends javax.swing.JFrame {
 
     private static JiPais jiPais;
     private static JFEmpresa JFEmpresa;
+    private static JFPessoa JFPessoa;
     private static JfPermissoes jfPermissoes;
     private static JiNivel jiNivel;
     private static JiFuncao jiFuncao;
@@ -60,6 +62,7 @@ public class JfMenu extends javax.swing.JFrame {
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuEmpresa = new javax.swing.JMenuItem();
+        jMenuPessoa = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
@@ -119,6 +122,14 @@ public class JfMenu extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jMenuEmpresa);
+
+        jMenuPessoa.setText("Pessoa");
+        jMenuPessoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuPessoaActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuPessoa);
 
         jMenuItem5.setText("Nivel");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
@@ -275,6 +286,16 @@ public class JfMenu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
+    private void jMenuPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuPessoaActionPerformed
+        if (JFPessoa == null) {
+            JFPessoa = new JFPessoa();
+            desktop.add(JFPessoa);
+            JFPessoa.setVisible(true);
+        } else {
+            JFPessoa.setVisible(true);
+        }
+    }//GEN-LAST:event_jMenuPessoaActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JDesktopPane desktop;
     private javax.swing.JMenu jMenu1;
@@ -292,5 +313,6 @@ public class JfMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JMenuItem jMenuPessoa;
     // End of variables declaration//GEN-END:variables
 }
