@@ -21,9 +21,12 @@ import br.com.chamados.utils.CampoInteiro;
 import br.com.chamados.utils.CombosDAO;
 import br.com.chamados.genericos.campos.DesabilitaCampos;
 import br.com.chamados.genericos.campos.LimparCampos;
+import br.com.chamados.utils.CampoCPF;
 import br.com.chamados.utils.ItemCombo;
 import br.com.chamados.view.JpDefault;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
@@ -57,9 +60,6 @@ public class JFPessoa extends JInternalFrame implements AcoesPainel {
         this.add(jpDefault);
         jpDefault.setAcoesCadastro(this);
         EstadoDao.preencherCombo(jcEstado);
-        EmpresaDao.preencherCombo(jcEmpresas);
-//        PessoaDao.popularTabela(jTable1, null);
-
 //        vaPara("0");
         try {
             new MaskFormatter("##/##/####").install(jftDataNasc);
@@ -92,16 +92,12 @@ public class JFPessoa extends JInternalFrame implements AcoesPainel {
         jcEstado = new javax.swing.JComboBox();
         jlBairroEmpresa = new javax.swing.JLabel();
         jcCidade = new javax.swing.JComboBox();
-        jlEmailEmpresa1 = new javax.swing.JLabel();
-        jtEndereco = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jtCampo = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jcEmpresas = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
-        jtRg = new javax.swing.JTextField();
+        jtRg = new CampoInteiro();
         jLabel4 = new javax.swing.JLabel();
-        jtCpf = new javax.swing.JTextField();
+        jtCpf = new CampoCPF();
         jLabel5 = new javax.swing.JLabel();
         jftDataNasc = new javax.swing.JFormattedTextField();
         jbCancelar = new javax.swing.JButton();
@@ -148,16 +144,9 @@ public class JFPessoa extends JInternalFrame implements AcoesPainel {
         jcCidade.setEnabled(false);
         jcCidade.setName("Cidade"); // NOI18N
 
-        jlEmailEmpresa1.setText("Endereço");
-
-        jtEndereco.setEnabled(false);
-        jtEndereco.setName("Endereço"); // NOI18N
-
         jLabel1.setText("Id");
 
         jtCampo.setEditable(false);
-
-        jLabel2.setText("Empresa");
 
         jLabel3.setText("CPF");
 
@@ -170,42 +159,34 @@ public class JFPessoa extends JInternalFrame implements AcoesPainel {
         jpPessoaLayout.setHorizontalGroup(
             jpPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpPessoaLayout.createSequentialGroup()
-                .addGap(38, 38, 38)
                 .addGroup(jpPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpPessoaLayout.createSequentialGroup()
-                        .addComponent(jlNomeEmpresa)
-                        .addGap(18, 18, 18)
-                        .addComponent(jtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(38, 38, 38)
+                        .addGroup(jpPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpPessoaLayout.createSequentialGroup()
+                                .addComponent(jlNomeEmpresa)
+                                .addGap(18, 18, 18)
+                                .addComponent(jtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jpPessoaLayout.createSequentialGroup()
+                                .addGroup(jpPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jlCgc))
+                                .addGap(18, 18, 18)
+                                .addGroup(jpPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtIdade, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jpPessoaLayout.createSequentialGroup()
-                        .addGroup(jpPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(jlCgc))
+                        .addGroup(jpPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpPessoaLayout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addGroup(jpPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jlEmailEmpresa)
+                                    .addComponent(jlTelefoneEmpresa)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpPessoaLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jlCidadeEmpresa)))
                         .addGap(18, 18, 18)
                         .addGroup(jpPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtIdade, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(jpPessoaLayout.createSequentialGroup()
-                .addGroup(jpPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpPessoaLayout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addGroup(jpPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
-                        .addGroup(jpPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jcEmpresas, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jpPessoaLayout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(jpPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jlCidadeEmpresa)
-                            .addComponent(jlEmailEmpresa1)
-                            .addComponent(jlEmailEmpresa)
-                            .addComponent(jlTelefoneEmpresa))
-                        .addGap(18, 18, 18)
-                        .addGroup(jpPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jpPessoaLayout.createSequentialGroup()
@@ -220,20 +201,21 @@ public class JFPessoa extends JInternalFrame implements AcoesPainel {
                                 .addGroup(jpPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jtRg)
                                     .addComponent(jcCidade, 0, 175, Short.MAX_VALUE)
-                                    .addComponent(jftDataNasc))))))
-                .addContainerGap(144, Short.MAX_VALUE))
+                                    .addComponent(jftDataNasc)))))
+                    .addGroup(jpPessoaLayout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jtCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpPessoaLayout.setVerticalGroup(
             jpPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpPessoaLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(55, 55, 55)
                 .addGroup(jpPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jtCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jpPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jcEmpresas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jpPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlNomeEmpresa)
@@ -244,52 +226,38 @@ public class JFPessoa extends JInternalFrame implements AcoesPainel {
                     .addComponent(jlCgc)
                     .addComponent(jLabel5)
                     .addComponent(jftDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jpPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jtRg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
                 .addGroup(jpPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpPessoaLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jpPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jtRg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jpPessoaLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel3)))
-                .addGroup(jpPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpPessoaLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jlCidadeEmpresa)
-                        .addGap(23, 23, 23)
-                        .addGroup(jpPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jlEmailEmpresa1)
-                            .addComponent(jtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jpPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jlEmailEmpresa)
-                            .addComponent(jtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jpPessoaLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jpPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jpPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jcCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jlBairroEmpresa))
-                            .addComponent(jcEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(87, 87, 87)))
+                    .addGroup(jpPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jcCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jlBairroEmpresa))
+                    .addGroup(jpPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jcEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jlCidadeEmpresa)))
+                .addGap(18, 18, 18)
+                .addGroup(jpPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlEmailEmpresa)
+                    .addComponent(jtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jpPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlTelefoneEmpresa)
                     .addComponent(jtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(62, 62, 62))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
 
         jtNome.getAccessibleContext().setAccessibleName("Nome");
         jtEmail.getAccessibleContext().setAccessibleName("E-mail");
         jtTelefone.getAccessibleContext().setAccessibleName("Telefone");
         jtTelefone.getAccessibleContext().setAccessibleDescription("");
-        jtIdade.getAccessibleContext().setAccessibleName("CGC");
+        jtIdade.getAccessibleContext().setAccessibleName("");
         jcEstado.getAccessibleContext().setAccessibleName("Estado");
         jcCidade.getAccessibleContext().setAccessibleName("Cidade");
-        jtEndereco.getAccessibleContext().setAccessibleName("Endereço");
-        jtEndereco.getAccessibleContext().setAccessibleDescription("");
 
         jtEmpresa.addTab("Pessoa", jpPessoa);
 
@@ -327,7 +295,7 @@ public class JFPessoa extends JInternalFrame implements AcoesPainel {
             JdEmpresasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JdEmpresasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jtEmpresa)
+                .addComponent(jtEmpresa, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(JdEmpresasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbCancelar)
@@ -346,8 +314,8 @@ public class JFPessoa extends JInternalFrame implements AcoesPainel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(50, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 70, Short.MAX_VALUE)
                 .addComponent(JdEmpresas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -368,7 +336,14 @@ public class JFPessoa extends JInternalFrame implements AcoesPainel {
             pessoa.setRg(jtRg.getText());
             pessoa.setEmail(jtEmail.getText());
             pessoa.setTelefone(jtTelefone.getText());
-            //pessoa.setDataNascimento(jftDataNasc.getText());
+            String data = jftDataNasc.getText();
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                Date d = format.parse(data);
+                pessoa.setDataNascimento(d);
+            } catch (ParseException ex) {
+                java.util.logging.Logger.getLogger(JFPessoa.class.getName()).log(Level.SEVERE, null, ex);
+            }
             pessoa.setCidade(cidade);
             if (Campos.validar(jpPessoa)) {
                 PessoaDao.save(pessoa);
@@ -403,21 +378,18 @@ public class JFPessoa extends JInternalFrame implements AcoesPainel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane JdEmpresas;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbSalvar;
     private javax.swing.JComboBox jcCidade;
-    private javax.swing.JComboBox jcEmpresas;
     private javax.swing.JComboBox jcEstado;
     private javax.swing.JFormattedTextField jftDataNasc;
     private javax.swing.JLabel jlBairroEmpresa;
     private javax.swing.JLabel jlCgc;
     private javax.swing.JLabel jlCidadeEmpresa;
     private javax.swing.JLabel jlEmailEmpresa;
-    private javax.swing.JLabel jlEmailEmpresa1;
     private javax.swing.JLabel jlNomeEmpresa;
     private javax.swing.JLabel jlTelefoneEmpresa;
     private javax.swing.JPanel jpPessoa;
@@ -425,7 +397,6 @@ public class JFPessoa extends JInternalFrame implements AcoesPainel {
     private javax.swing.JTextField jtCpf;
     private javax.swing.JTextField jtEmail;
     private javax.swing.JTabbedPane jtEmpresa;
-    private javax.swing.JTextField jtEndereco;
     private javax.swing.JTextField jtIdade;
     private javax.swing.JTextField jtNome;
     private javax.swing.JTextField jtRg;
@@ -450,6 +421,10 @@ public class JFPessoa extends JInternalFrame implements AcoesPainel {
             jtRg.setText(pessoa.getRg());
             jtEmail.setText(pessoa.getEmail());
 
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            Date y = pessoa.getDataNascimento();
+            jftDataNasc.setText(format.format(y));
+
             ItemCombo uf = new ItemCombo();
             Cidade cidade = CidadeDao.getEstadoId(pessoa.getCidade().getId());
             uf.setCodigo(cidade.getEstado().getId());
@@ -460,9 +435,6 @@ public class JFPessoa extends JInternalFrame implements AcoesPainel {
             c.setCodigo(cidade.getId());
             new CombosDAO().definirItemCombo(jcCidade, c);
 
-//            ItemCombo empresaC = new ItemCombo();
-//            empresaC.setCodigo(pessoa);
-//            new CombosDAO().definirItemCombo(jcEstado, uf);
         } else {
             Campos.limpar(jpPessoa);
             Campos.desabilitar(jpPessoa);
@@ -525,6 +497,10 @@ public class JFPessoa extends JInternalFrame implements AcoesPainel {
         jtCpf.setText(pessoa.getCpf());
         jtRg.setText(pessoa.getRg());
         jtEmail.setText(pessoa.getEmail());
+
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        Date y = pessoa.getDataNascimento();
+        jftDataNasc.setText(format.format(y));
 
         ItemCombo uf = new ItemCombo();
         Cidade cidade = CidadeDao.getEstadoId(pessoa.getCidade().getId());
