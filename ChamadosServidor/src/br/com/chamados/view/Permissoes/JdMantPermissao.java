@@ -33,8 +33,7 @@ public class JdMantPermissao extends javax.swing.JDialog {
         this.permissoes = permissoes;
         if (permissoes != null) {
             jtUsuarioId.setText(String.valueOf(permissoes.getUsuario().getId()));
-            Funcionario funcionario = FuncionarioDao.getFucionario(permissoes.getUsuario().getFuncionarios());
-            jtUsuarioNome.setText(funcionario.getPessoa().getNome());
+            jtUsuarioNome.setText(permissoes.getUsuario().getFuncionario().getPessoa().getNome());
             jtTelaId.setText(String.valueOf(permissoes.getTela().getId()));
             jtTelaDescricao.setText(permissoes.getTela().getDescricao());
             jcInserir.setSelected(permissoes.getInserir());
@@ -232,8 +231,7 @@ public class JdMantPermissao extends javax.swing.JDialog {
         jdBuscaUsuario.setVisible(true);
         Usuario usuario = UsuarioDao.vaPara(jdBuscaUsuario.getIdRetorno());
         jtUsuarioId.setText(String.valueOf(usuario.getId()));
-        Funcionario funcionario = FuncionarioDao.getFucionario(usuario.getFuncionarios());
-        jtUsuarioNome.setText(funcionario.getPessoa().getNome());
+        jtUsuarioNome.setText(usuario.getFuncionario().getPessoa().getNome());
     }//GEN-LAST:event_jbBuscarUsuarioActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

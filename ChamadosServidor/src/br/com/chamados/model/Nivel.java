@@ -1,5 +1,5 @@
 package br.com.chamados.model;
-// Generated 11/10/2015 16:23:24 by Hibernate Tools 4.3.1
+// Generated 26/10/2015 20:18:40 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -11,28 +11,23 @@ import java.util.Set;
 public class Nivel  implements java.io.Serializable {
 
 
-     private int id;
+     private Integer id;
      private String descricao;
      private Set funcaos = new HashSet(0);
 
     public Nivel() {
     }
 
-	
-    public Nivel(int id) {
-        this.id = id;
-    }
-    public Nivel(int id, String descricao, Set funcaos) {
-       this.id = id;
+    public Nivel(String descricao, Set funcaos) {
        this.descricao = descricao;
        this.funcaos = funcaos;
     }
    
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
     
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     public String getDescricao() {

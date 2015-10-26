@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 11/10/2015 16:23:25 by Hibernate Tools 4.3.1 -->
+<!-- Generated 26/10/2015 20:18:43 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="br.com.chamados.model.Permissoes" table="permissoes" catalog="chamados" optimistic-lock="version">
         <id name="id" type="java.lang.Integer">

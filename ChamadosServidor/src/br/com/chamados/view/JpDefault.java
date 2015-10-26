@@ -150,6 +150,7 @@ public class JpDefault extends javax.swing.JPanel {
             acoesPainel.deletar();
         }
     }//GEN-LAST:event_jbDeletarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jbAlterar;
     private javax.swing.JButton jbDeletar;

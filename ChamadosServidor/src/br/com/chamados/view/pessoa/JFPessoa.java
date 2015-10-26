@@ -61,7 +61,6 @@ public class JFPessoa extends JInternalFrame implements AcoesPainel {
 //        PessoaDao.popularTabela(jTable1, null);
 
 //        vaPara("0");
-        
         try {
             new MaskFormatter("##/##/####").install(jftDataNasc);
         } catch (ParseException ex) {
@@ -369,7 +368,7 @@ public class JFPessoa extends JInternalFrame implements AcoesPainel {
             pessoa.setRg(jtRg.getText());
             pessoa.setEmail(jtEmail.getText());
             pessoa.setTelefone(jtTelefone.getText());
-            pessoa.setDataNascimento(jftDataNasc.getText());
+            //pessoa.setDataNascimento(jftDataNasc.getText());
             pessoa.setCidade(cidade);
             if (Campos.validar(jpPessoa)) {
                 PessoaDao.save(pessoa);

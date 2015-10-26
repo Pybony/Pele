@@ -19,17 +19,17 @@ import javax.swing.table.DefaultTableModel;
  * @author lksbr
  */
 public class PermissoesDao {
-    
+
     public static void salvar(Permissoes permissoes) {
         DAO<Permissoes> dao = new DAO<>();
         dao.save(permissoes);
     }
-    
+
     public static void deletar(Permissoes permissoes) {
         DAO<Permissoes> dao = new DAO<>();
         dao.delete(permissoes);
     }
-    
+
     public static Permissoes vaPara(String idTela, String idUsuario) {
         Permissoes permissoes = new Permissoes();
         try {
@@ -51,7 +51,7 @@ public class PermissoesDao {
         }
         return permissoes;
     }
-    
+
     public static void popularTabela(JTable tabela, Tela criterio) {
         // dados da tabela
         Object[][] dadosTabela = null;
@@ -64,7 +64,7 @@ public class PermissoesDao {
         cabecalho[3] = "Alterar";
         cabecalho[4] = "Excluir";
         cabecalho[5] = "Consultar";
-        
+
         DAO<Permissoes> dao = new DAO<>();
         String sql = "SELECT COUNT(*) FROM Permissoes WHERE tela_id = " + criterio.getId();
         // cria matriz de acordo com nº de registros da tabela
@@ -78,8 +78,7 @@ public class PermissoesDao {
             int i = 0;
             for (Permissoes permissoes : lista) {
                 dadosTabela[i][0] = permissoes.getUsuario().getId();
-                Funcionario funcionario = FuncionarioDao.getFucionario(permissoes.getUsuario().getFuncionarios());
-                dadosTabela[i][1] = funcionario.getPessoa().getNome();
+                dadosTabela[i][1] = permissoes.getUsuario().getFuncionario().getPessoa().getNome();
                 dadosTabela[i][2] = permissoes.getInserir();
                 dadosTabela[i][3] = permissoes.getAlterar();
                 dadosTabela[i][4] = permissoes.getDeletar();
@@ -89,13 +88,13 @@ public class PermissoesDao {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         tabela.setModel(new DefaultTableModel(dadosTabela, cabecalho) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
-            
+
             @Override
             public Class getColumnClass(int column) {
                 if (column > 1) {

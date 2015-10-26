@@ -5,13 +5,6 @@
  */
 package br.com.chamados.view;
 
-import br.com.chamados.dao.PermissoesDao;
-import br.com.chamados.model.Funcionario;
-import br.com.chamados.model.Permissoes;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
-
 /**
  *
  * @author Jonas C. Rosa

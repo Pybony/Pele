@@ -1,5 +1,5 @@
 package br.com.chamados.model;
-// Generated 11/10/2015 16:23:24 by Hibernate Tools 4.3.1
+// Generated 26/10/2015 20:18:40 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -12,26 +12,27 @@ public class Usuario  implements java.io.Serializable {
 
 
      private Integer id;
+     private Funcionario funcionario;
      private String login;
      private String senha;
      private Set permissoeses = new HashSet(0);
      private Set auditorias = new HashSet(0);
-     private Set funcionarios = new HashSet(0);
 
     public Usuario() {
     }
 
 	
-    public Usuario(String login, String senha) {
+    public Usuario(Funcionario funcionario, String login, String senha) {
+        this.funcionario = funcionario;
         this.login = login;
         this.senha = senha;
     }
-    public Usuario(String login, String senha, Set permissoeses, Set auditorias, Set funcionarios) {
+    public Usuario(Funcionario funcionario, String login, String senha, Set permissoeses, Set auditorias) {
+       this.funcionario = funcionario;
        this.login = login;
        this.senha = senha;
        this.permissoeses = permissoeses;
        this.auditorias = auditorias;
-       this.funcionarios = funcionarios;
     }
    
     public Integer getId() {
@@ -40,6 +41,13 @@ public class Usuario  implements java.io.Serializable {
     
     public void setId(Integer id) {
         this.id = id;
+    }
+    public Funcionario getFuncionario() {
+        return this.funcionario;
+    }
+    
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
     }
     public String getLogin() {
         return this.login;
@@ -68,13 +76,6 @@ public class Usuario  implements java.io.Serializable {
     
     public void setAuditorias(Set auditorias) {
         this.auditorias = auditorias;
-    }
-    public Set getFuncionarios() {
-        return this.funcionarios;
-    }
-    
-    public void setFuncionarios(Set funcionarios) {
-        this.funcionarios = funcionarios;
     }
 
 

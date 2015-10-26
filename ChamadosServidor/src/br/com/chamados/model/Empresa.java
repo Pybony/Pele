@@ -1,5 +1,5 @@
 package br.com.chamados.model;
-// Generated 11/10/2015 16:23:24 by Hibernate Tools 4.3.1
+// Generated 26/10/2015 20:18:40 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -11,7 +11,7 @@ import java.util.Set;
 public class Empresa  implements java.io.Serializable {
 
 
-     private int id;
+     private Integer id;
      private Cidade cidade;
      private String nome;
      private String cgc;
@@ -25,8 +25,7 @@ public class Empresa  implements java.io.Serializable {
     }
 
 	
-    public Empresa(int id, Cidade cidade, String nome, String cgc, String endereco, String telefone, String email) {
-        this.id = id;
+    public Empresa(Cidade cidade, String nome, String cgc, String endereco, String telefone, String email) {
         this.cidade = cidade;
         this.nome = nome;
         this.cgc = cgc;
@@ -34,8 +33,7 @@ public class Empresa  implements java.io.Serializable {
         this.telefone = telefone;
         this.email = email;
     }
-    public Empresa(int id, Cidade cidade, String nome, String cgc, String endereco, String telefone, String email, Set funcionarios, Set chamados) {
-       this.id = id;
+    public Empresa(Cidade cidade, String nome, String cgc, String endereco, String telefone, String email, Set funcionarios, Set chamados) {
        this.cidade = cidade;
        this.nome = nome;
        this.cgc = cgc;
@@ -46,11 +44,11 @@ public class Empresa  implements java.io.Serializable {
        this.chamados = chamados;
     }
    
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
     
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     public Cidade getCidade() {
