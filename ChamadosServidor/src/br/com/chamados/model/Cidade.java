@@ -1,5 +1,5 @@
 package br.com.chamados.model;
-// Generated 26/10/2015 20:18:40 by Hibernate Tools 4.3.1
+// Generated 26/10/2015 20:54:38 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -15,6 +15,7 @@ public class Cidade  implements java.io.Serializable {
      private Estado estado;
      private String nome;
      private String cep;
+     private Set funcionarios = new HashSet(0);
      private Set empresas = new HashSet(0);
      private Set pessoas = new HashSet(0);
 
@@ -27,10 +28,11 @@ public class Cidade  implements java.io.Serializable {
         this.nome = nome;
         this.cep = cep;
     }
-    public Cidade(Estado estado, String nome, String cep, Set empresas, Set pessoas) {
+    public Cidade(Estado estado, String nome, String cep, Set funcionarios, Set empresas, Set pessoas) {
        this.estado = estado;
        this.nome = nome;
        this.cep = cep;
+       this.funcionarios = funcionarios;
        this.empresas = empresas;
        this.pessoas = pessoas;
     }
@@ -62,6 +64,13 @@ public class Cidade  implements java.io.Serializable {
     
     public void setCep(String cep) {
         this.cep = cep;
+    }
+    public Set getFuncionarios() {
+        return this.funcionarios;
+    }
+    
+    public void setFuncionarios(Set funcionarios) {
+        this.funcionarios = funcionarios;
     }
     public Set getEmpresas() {
         return this.empresas;

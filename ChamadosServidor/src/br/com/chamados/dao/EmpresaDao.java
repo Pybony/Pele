@@ -65,8 +65,8 @@ public class EmpresaDao {
 
             for (int i = 0; i < lEmpresa.size(); i++) {
                 item = new ItemCombo();
-                item.setCodigo(lEmpresa.get(i).getId());
-                item.setDescricao(lEmpresa.get(i).getNome());
+                item.setCodigo((lEmpresa.get(i)).getId());
+                item.setDescricao((lEmpresa.get(i)).getNome());
                 combo.addItem(item);
             }
         }

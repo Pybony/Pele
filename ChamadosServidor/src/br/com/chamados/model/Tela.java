@@ -1,5 +1,5 @@
 package br.com.chamados.model;
-// Generated 26/10/2015 20:18:40 by Hibernate Tools 4.3.1
+// Generated 26/10/2015 20:54:38 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -11,23 +11,28 @@ import java.util.Set;
 public class Tela  implements java.io.Serializable {
 
 
-     private Integer id;
+     private int id;
      private String descricao;
      private Set permissoeses = new HashSet(0);
 
     public Tela() {
     }
 
-    public Tela(String descricao, Set permissoeses) {
+	
+    public Tela(int id) {
+        this.id = id;
+    }
+    public Tela(int id, String descricao, Set permissoeses) {
+       this.id = id;
        this.descricao = descricao;
        this.permissoeses = permissoeses;
     }
    
-    public Integer getId() {
+    public int getId() {
         return this.id;
     }
     
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
     public String getDescricao() {

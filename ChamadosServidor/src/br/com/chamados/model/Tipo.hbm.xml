@@ -3,22 +3,19 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 26/10/2015 20:54:38 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="br.com.chamados.model.CategoriaDois" table="categoria_dois" catalog="chamados" optimistic-lock="version">
+    <class name="br.com.chamados.model.Tipo" table="tipo" catalog="chamados" optimistic-lock="version">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
         </id>
-        <many-to-one name="categoriaUm" class="br.com.chamados.model.CategoriaUm" fetch="select">
-            <column name="categoria_um_id" not-null="true" />
-        </many-to-one>
         <property name="descricao" type="string">
             <column name="descricao" length="45" />
         </property>
-        <set name="categoriaTreses" table="categoria_tres" inverse="true" lazy="true" fetch="select">
+        <set name="chamados" table="chamado" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="categoria_dois_id" not-null="true" />
+                <column name="tipo_id" not-null="true" />
             </key>
-            <one-to-many class="br.com.chamados.model.CategoriaTres" />
+            <one-to-many class="br.com.chamados.model.Chamado" />
         </set>
     </class>
 </hibernate-mapping>
