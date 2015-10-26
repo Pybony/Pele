@@ -29,5 +29,6 @@
     <mapping resource="br/com/chamados/model/Funcionario.hbm.xml"/>
     <mapping resource="br/com/chamados/model/Origem.hbm.xml"/>
     <mapping resource="br/com/chamados/model/Pessoa.hbm.xml"/>
+    <mapping resource="br/com/chamados/model/Tipo.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

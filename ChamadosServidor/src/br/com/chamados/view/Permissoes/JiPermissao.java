@@ -20,18 +20,18 @@ import org.apache.log4j.Logger;
  * @author lksbr
  */
 public class JiPermissao extends JInternalFrame implements AcoesPainel {
-    
+
     private Logger logger = Logger.getLogger(LogChamados.class);
     private JdBuscaTela jdBuscaTela;
     private Permissoes permissoes;
     private JdMantPermissao jdMantPermissao;
-    
+
     public JiPermissao() {
         setTitle("JiPermissao - Manutenção de Permissão - v1.00.00");
         initComponents();
         initMyComponents();
     }
-    
+
     private void initMyComponents() {
         JpDefault jpDefault = new JpDefault();
         jpDefault.setBounds(10, 10, 450, 180);
@@ -39,7 +39,7 @@ public class JiPermissao extends JInternalFrame implements AcoesPainel {
         jpDefault.setAcoesCadastro(this);
         vaPara("0");
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -162,7 +162,7 @@ public class JiPermissao extends JInternalFrame implements AcoesPainel {
         jtTelaDescricao.setText(tela.getDescricao());
         PermissoesDao.popularTabela(jtUsuarios, tela);
     }
-    
+
     @Override
     public void pesquisar() {
         if (jdBuscaTela == null) {
@@ -174,7 +174,7 @@ public class JiPermissao extends JInternalFrame implements AcoesPainel {
         jtTelaId.setText(String.valueOf(tela.getId()));
         jtTelaDescricao.setText(tela.getDescricao());
     }
-    
+
     @Override
     public void inserir() {
         if (jdMantPermissao == null) {
@@ -185,7 +185,7 @@ public class JiPermissao extends JInternalFrame implements AcoesPainel {
         jdMantPermissao.setVisible(true);
         vaPara(jdMantPermissao.getIdRetorno());
     }
-    
+
     @Override
     public void alterar() {
         if (jtUsuarios.getSelectedRow() >= 0) {
@@ -202,7 +202,7 @@ public class JiPermissao extends JInternalFrame implements AcoesPainel {
             JOptionPane.showMessageDialog(null, "Selecione uma linha.");
         }
     }
-    
+
     @Override
     public void deletar() {
         if (jtUsuarios.getSelectedRow() >= 0) {
@@ -221,7 +221,7 @@ public class JiPermissao extends JInternalFrame implements AcoesPainel {
             JOptionPane.showMessageDialog(null, "Selecione uma linha.");
         }
     }
-    
+
     @Override
     public void checkEnabled(JButton jbInserir, JButton jbAlterar, JButton jbDeletar
     ) {

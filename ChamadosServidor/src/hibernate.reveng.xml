@@ -24,4 +24,5 @@
     <table-filter match-name="acompanhamento"/>
     <table-filter match-name="permissoes"/>
     <table-filter match-name="categoria_um"/>
+    <table-filter match-name="tipo"/>
 </hibernate-reverse-engineering>
