@@ -1,5 +1,5 @@
 package br.com.chamados.model;
-// Generated 26/10/2015 20:18:40 by Hibernate Tools 4.3.1
+// Generated 26/10/2015 20:54:38 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -21,6 +21,7 @@ public class Pessoa  implements java.io.Serializable {
      private String telefone;
      private String cpf;
      private String rg;
+     private Set chamados = new HashSet(0);
      private Set funcionarios = new HashSet(0);
 
     public Pessoa() {
@@ -37,7 +38,7 @@ public class Pessoa  implements java.io.Serializable {
         this.cpf = cpf;
         this.rg = rg;
     }
-    public Pessoa(Cidade cidade, String nome, int idade, Date dataNascimento, String email, String telefone, String cpf, String rg, Set funcionarios) {
+    public Pessoa(Cidade cidade, String nome, int idade, Date dataNascimento, String email, String telefone, String cpf, String rg, Set chamados, Set funcionarios) {
        this.cidade = cidade;
        this.nome = nome;
        this.idade = idade;
@@ -46,6 +47,7 @@ public class Pessoa  implements java.io.Serializable {
        this.telefone = telefone;
        this.cpf = cpf;
        this.rg = rg;
+       this.chamados = chamados;
        this.funcionarios = funcionarios;
     }
    
@@ -111,6 +113,13 @@ public class Pessoa  implements java.io.Serializable {
     
     public void setRg(String rg) {
         this.rg = rg;
+    }
+    public Set getChamados() {
+        return this.chamados;
+    }
+    
+    public void setChamados(Set chamados) {
+        this.chamados = chamados;
     }
     public Set getFuncionarios() {
         return this.funcionarios;

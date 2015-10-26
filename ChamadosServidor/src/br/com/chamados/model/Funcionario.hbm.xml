@@ -1,13 +1,16 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 26/10/2015 20:18:43 by Hibernate Tools 4.3.1 -->
+<!-- Generated 26/10/2015 20:54:38 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="br.com.chamados.model.Funcionario" table="funcionario" catalog="chamados" optimistic-lock="version">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
         </id>
+        <many-to-one name="cidade" class="br.com.chamados.model.Cidade" fetch="select">
+            <column name="cidade_id" not-null="true" />
+        </many-to-one>
         <many-to-one name="empresa" class="br.com.chamados.model.Empresa" fetch="select">
             <column name="empresa_id" not-null="true" />
         </many-to-one>
@@ -32,21 +35,9 @@
             </key>
             <one-to-many class="br.com.chamados.model.Usuario" />
         </set>
-        <set name="chamadosForFuncionarioAberturaId" table="chamado" inverse="true" lazy="true" fetch="select">
+        <set name="chamados" table="chamado" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="funcionario_abertura_id" not-null="true" />
-            </key>
-            <one-to-many class="br.com.chamados.model.Chamado" />
-        </set>
-        <set name="chamadosForFuncionarioAtendenteId" table="chamado" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="funcionario_atendente_id" />
-            </key>
-            <one-to-many class="br.com.chamados.model.Chamado" />
-        </set>
-        <set name="chamadosForFuncionarioSolicitanteId" table="chamado" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="funcionario_solicitante_id" not-null="true" />
+                <column name="funcionario_id" />
             </key>
             <one-to-many class="br.com.chamados.model.Chamado" />
         </set>

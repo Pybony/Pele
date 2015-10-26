@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 26/10/2015 20:18:43 by Hibernate Tools 4.3.1 -->
+<!-- Generated 26/10/2015 20:54:38 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="br.com.chamados.model.Chamado" table="chamado" catalog="chamados" optimistic-lock="version">
         <id name="id" type="java.lang.Integer">
@@ -17,17 +17,14 @@
         <many-to-one name="empresa" class="br.com.chamados.model.Empresa" fetch="select">
             <column name="empresa_id" />
         </many-to-one>
-        <many-to-one name="funcionarioByFuncionarioAberturaId" class="br.com.chamados.model.Funcionario" fetch="select">
-            <column name="funcionario_abertura_id" not-null="true" />
-        </many-to-one>
-        <many-to-one name="funcionarioByFuncionarioAtendenteId" class="br.com.chamados.model.Funcionario" fetch="select">
-            <column name="funcionario_atendente_id" />
-        </many-to-one>
-        <many-to-one name="funcionarioByFuncionarioSolicitanteId" class="br.com.chamados.model.Funcionario" fetch="select">
-            <column name="funcionario_solicitante_id" not-null="true" />
+        <many-to-one name="funcionario" class="br.com.chamados.model.Funcionario" fetch="select">
+            <column name="funcionario_id" />
         </many-to-one>
         <many-to-one name="origem" class="br.com.chamados.model.Origem" fetch="select">
             <column name="origem_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="pessoa" class="br.com.chamados.model.Pessoa" fetch="select">
+            <column name="pessoa_id" />
         </many-to-one>
         <many-to-one name="prioridade" class="br.com.chamados.model.Prioridade" fetch="select">
             <column name="prioridade_id" not-null="true" />
@@ -35,8 +32,11 @@
         <many-to-one name="situacao" class="br.com.chamados.model.Situacao" fetch="select">
             <column name="situacao_id" not-null="true" />
         </many-to-one>
-        <property name="tipoId" type="int">
+        <many-to-one name="tipo" class="br.com.chamados.model.Tipo" fetch="select">
             <column name="tipo_id" not-null="true" />
+        </many-to-one>
+        <property name="idAbertura" type="int">
+            <column name="id_abertura" not-null="true" />
         </property>
         <property name="titulo" type="string">
             <column name="titulo" length="45" not-null="true" />
@@ -53,17 +53,17 @@
         <property name="dataPrevista" type="timestamp">
             <column name="data_prevista" length="0" />
         </property>
-        <set name="interacaos" table="interacao" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="chamado_id" not-null="true" />
-            </key>
-            <one-to-many class="br.com.chamados.model.Interacao" />
-        </set>
         <set name="chamados" table="chamado" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="id_chamado_principal" />
             </key>
             <one-to-many class="br.com.chamados.model.Chamado" />
+        </set>
+        <set name="interacaos" table="interacao" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="chamado_id" not-null="true" />
+            </key>
+            <one-to-many class="br.com.chamados.model.Interacao" />
         </set>
     </class>
 </hibernate-mapping>
