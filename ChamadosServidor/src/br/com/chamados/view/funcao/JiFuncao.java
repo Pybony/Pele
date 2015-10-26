@@ -151,7 +151,7 @@ public class JiFuncao extends JInternalFrame implements AcoesPainel {
     }//GEN-LAST:event_jbFecharActionPerformed
 
     private void jbSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalvarActionPerformed
-        funcao = new Funcao ();
+        funcao = new Funcao();
         if (!jtId.getText().equals(FuncaoDao.proximoId())) {
             funcao.setId(Integer.parseInt(jtId.getText()));
         }

@@ -44,7 +44,7 @@ public class FuncaoDao {
 
     public static void popularCombo(JComboBox combo) {
         String sql = "SELECT p FROM Nivel p";
-        DAO<Nivel> dao = new DAO<Nivel>();
+        DAO<Nivel> dao = new DAO<>();
         List<Nivel> lista = dao.query(sql);
         if (!lista.isEmpty()) {
             for (Nivel nivel : lista) {
