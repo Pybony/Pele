@@ -10,6 +10,7 @@ import br.com.chamados.genericos.Cookies;
 import br.com.chamados.model.Permissoes;
 import br.com.chamados.model.Usuario;
 import br.com.chamados.genericos.campos.HabilitaCampos;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -48,10 +49,20 @@ public class JfLogin extends javax.swing.JFrame {
         jLabel1.setText("Login");
 
         jtLogin.setName("Login"); // NOI18N
+        jtLogin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtLoginKeyPressed(evt);
+            }
+        });
 
         jLabel2.setText("Senha");
 
         jpSenha.setName("Senha"); // NOI18N
+        jpSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jpSenhaKeyPressed(evt);
+            }
+        });
 
         jbCancelar.setText("Cancelar");
         jbCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -148,6 +159,18 @@ public class JfLogin extends javax.swing.JFrame {
     private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
         dispose();
     }//GEN-LAST:event_jbCancelarActionPerformed
+
+    private void jtLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtLoginKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            jbLogarActionPerformed(null);
+        }
+    }//GEN-LAST:event_jtLoginKeyPressed
+
+    private void jpSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jpSenhaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            jbLogarActionPerformed(null);
+        }
+    }//GEN-LAST:event_jpSenhaKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
