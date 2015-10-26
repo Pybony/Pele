@@ -7,7 +7,9 @@ package br.com.chamados.dao;
 
 import br.com.chamados.config.LogChamados;
 import br.com.chamados.control.DAO;
+import br.com.chamados.model.Cidade;
 import br.com.chamados.model.Empresa;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -31,10 +33,6 @@ public class EmpresaDao {
 
     public static void popularTabela(JTable tabela, Empresa criterio) {
 
-        String nomeC = criterio.getNome();
-        String cgcC = criterio.getCgc();
-        int cidadeC = criterio.getCidade().getId();
-        
         DAO<Empresa> dao = new DAO<>();
 
         // dados da tabela
@@ -67,10 +65,40 @@ public class EmpresaDao {
         }
 
         String sql = "SELECT c FROM Empresa c";
-        if(nomeC.length() > 0){
-            sql += " WHERE nome = " + nomeC;
+        ArrayList<String> where = new ArrayList<>();
+
+        if (criterio != null) {
+            if (!criterio.getNome().equals("") && criterio.getNome() != null) {
+                where.add(" nome = '" + criterio.getNome() + "'");
+            }
+
+            if (!criterio.getCgc().equals("") && criterio.getCgc() != null) {
+                where.add(" cgc = '" + criterio.getCgc() + "'");
+            }
+
+            if (criterio.getCidade() instanceof Cidade && criterio.getCidade().getId() != null) {
+                where.add(" cidade_id = " + criterio.getCidade().getId());
+            }
         }
-                
+
+        int size = where.size();
+        int count = 0;
+        String mount = "";
+
+        for (String instrucao : where) {
+            if (count == (size - 1)) {
+                mount += instrucao;
+            } else {
+                mount += instrucao + " AND ";
+            }
+            count++;
+        }
+
+        if (!mount.equals("")) {
+
+            sql += " WHERE " + mount;
+        }
+
         List<Empresa> empresa = dao.query(sql);
 
         // efetua consulta de dados no banco e atribui no componente JTable
@@ -104,7 +132,6 @@ public class EmpresaDao {
                  }
                  */
             }
-            
 
             // alteracao no metodo que determina a coluna em que o objeto ImageIcon devera aparecer
             @Override
