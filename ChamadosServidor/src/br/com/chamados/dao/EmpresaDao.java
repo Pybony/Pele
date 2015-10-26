@@ -30,10 +30,60 @@ public class EmpresaDao {
         retorno = dao.save(empresa);
         return retorno;
     }
+    
+    public static List<Empresa> obterEmpresa(Empresa criterio){
+        
+        DAO<Empresa> dao = new DAO<>();
+        
+        String sql = "SELECT c FROM Empresa c";
+        ArrayList<String> where = new ArrayList<>();
+
+        if (criterio != null) {
+            
+            if (criterio.getId() != 0) {
+                where.add(" id = " + criterio.getId());
+            }
+            
+            if (criterio.getNome() != null) {
+                where.add(" nome = '" + criterio.getNome() + "'");
+            }
+
+            if (criterio.getCgc() != null) {
+                where.add(" cgc = '" + criterio.getCgc() + "'");
+            }
+
+            if (criterio.getCidade() instanceof Cidade && criterio.getCidade().getId() != null) {
+                where.add(" cidade_id = " + criterio.getCidade().getId());
+            }
+        }
+
+        int size = where.size();
+        int count = 0;
+        String mount = "";
+
+        for (String instrucao : where) {
+            if (count == (size - 1)) {
+                mount += instrucao;
+            } else {
+                mount += instrucao + " AND ";
+            }
+            count++;
+        }
+
+        if (!mount.equals("")) {
+
+            sql += " WHERE " + mount;
+        }
+        System.out.println(sql);
+        List<Empresa> empresa = dao.query(sql);
+        
+        return empresa;
+    }
 
     public static void popularTabela(JTable tabela, Empresa criterio) {
 
         DAO<Empresa> dao = new DAO<>();
+        List<Empresa> empresa;
 
         // dados da tabela
         Object[][] dadosTabela = null;
@@ -64,42 +114,7 @@ public class EmpresaDao {
             System.out.println("Erro ao consultar qtde empresas: " + e);
         }
 
-        String sql = "SELECT c FROM Empresa c";
-        ArrayList<String> where = new ArrayList<>();
-
-        if (criterio != null) {
-            if (!criterio.getNome().equals("") && criterio.getNome() != null) {
-                where.add(" nome = '" + criterio.getNome() + "'");
-            }
-
-            if (!criterio.getCgc().equals("") && criterio.getCgc() != null) {
-                where.add(" cgc = '" + criterio.getCgc() + "'");
-            }
-
-            if (criterio.getCidade() instanceof Cidade && criterio.getCidade().getId() != null) {
-                where.add(" cidade_id = " + criterio.getCidade().getId());
-            }
-        }
-
-        int size = where.size();
-        int count = 0;
-        String mount = "";
-
-        for (String instrucao : where) {
-            if (count == (size - 1)) {
-                mount += instrucao;
-            } else {
-                mount += instrucao + " AND ";
-            }
-            count++;
-        }
-
-        if (!mount.equals("")) {
-
-            sql += " WHERE " + mount;
-        }
-
-        List<Empresa> empresa = dao.query(sql);
+        empresa = obterEmpresa(criterio);
 
         // efetua consulta de dados no banco e atribui no componente JTable
         try {

@@ -5,6 +5,7 @@
  */
 package br.com.chamados.view.empresa;
 
+import br.com.chamados.config.LogChamados;
 import br.com.chamados.dao.EmpresaDao;
 import br.com.chamados.dao.EstadoDao;
 import br.com.chamados.genericos.AcoesPainel;
@@ -19,20 +20,25 @@ import br.com.chamados.genericos.campos.DesabilitaCampos;
 import br.com.chamados.genericos.campos.LimparCampos;
 import br.com.chamados.view.JpDefault;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
+import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 
 /**
  *
  * @author Jonas C. Rosa
  */
-public class JFEmpresa extends JFrame implements AcoesPainel {
+public class JFEmpresa extends JInternalFrame implements AcoesPainel {
 
     /**
      * Creates new form JFEmpresa
      */
+    
+    private Logger logger = Logger.getLogger(LogChamados.class);
+    private IfEmpresa iFEmpresa;
+    private Empresa empresa;
+    
     public JFEmpresa() {
         initComponents();
         initMyComponents();
@@ -45,7 +51,7 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
         this.add(jpDefault);
         jpDefault.setAcoesCadastro(this);
         EstadoDao.preencherCombo(jcEstado);
-        EmpresaDao.popularTabela(jTable1, null);
+//        EmpresaDao.popularTabela(jTable1, null);
 
 //        vaPara("0");
     }
@@ -59,8 +65,7 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jbSalvar = new javax.swing.JButton();
-        jbCancelar = new javax.swing.JButton();
+        JdEmpresas = new javax.swing.JDesktopPane();
         jtEmpresa = new javax.swing.JTabbedPane();
         jpEmpresa = new javax.swing.JPanel();
         jtNome = new javax.swing.JTextField();
@@ -77,21 +82,10 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
         jcCidade = new javax.swing.JComboBox();
         jlEmailEmpresa1 = new javax.swing.JLabel();
         jtEndereco = new javax.swing.JTextField();
-        jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jbCancelar = new javax.swing.JButton();
+        jbSalvar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        jbSalvar.setText("Salvar");
-        jbSalvar.setEnabled(false);
-        jbSalvar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbSalvarActionPerformed(evt);
-            }
-        });
-
-        jbCancelar.setText("Cancelar");
 
         jtEmpresa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -131,7 +125,6 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
 
         jlBairroEmpresa.setText("Cidade");
 
-        jcCidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jcCidade.setEnabled(false);
         jcCidade.setName("Cidade"); // NOI18N
 
@@ -152,13 +145,10 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jpEmpresaLayout.createSequentialGroup()
-                        .addGap(15, 15, 15)
+                        .addGap(27, 27, 27)
                         .addGroup(jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jlCidadeEmpresa)
-                            .addComponent(jlCgc)
-                            .addComponent(jlEmailEmpresa1)
-                            .addComponent(jlEmailEmpresa)
-                            .addComponent(jlTelefoneEmpresa))
+                            .addComponent(jlCgc))
                         .addGap(18, 18, 18)
                         .addGroup(jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jpEmpresaLayout.createSequentialGroup()
@@ -167,10 +157,20 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
                                 .addComponent(jlBairroEmpresa)
                                 .addGap(18, 18, 18)
                                 .addComponent(jcCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtCgc, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jtCgc, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 121, Short.MAX_VALUE)))
+                .addGap(71, 71, 71))
+            .addGroup(jpEmpresaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jlEmailEmpresa1)
+                    .addComponent(jlEmailEmpresa)
+                    .addComponent(jlTelefoneEmpresa))
+                .addGap(18, 18, 18)
+                .addGroup(jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpEmpresaLayout.setVerticalGroup(
@@ -190,7 +190,7 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
                     .addComponent(jcEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlBairroEmpresa)
                     .addComponent(jcCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlEmailEmpresa1))
@@ -202,7 +202,7 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
                 .addGroup(jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlTelefoneEmpresa))
-                .addGap(20, 20, 20))
+                .addContainerGap(141, Short.MAX_VALUE))
         );
 
         jtNome.getAccessibleContext().setAccessibleName("Nome");
@@ -217,57 +217,64 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
 
         jtEmpresa.addTab("Empresa", jpEmpresa);
 
-        jTable1.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
+        jbCancelar.setText("Cancelar");
+        jbCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCancelarActionPerformed(evt);
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 510, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+        jbSalvar.setText("Salvar");
+        jbSalvar.setEnabled(false);
+        jbSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalvarActionPerformed(evt);
+            }
+        });
 
-        jtEmpresa.addTab("Busca", jPanel1);
+        javax.swing.GroupLayout JdEmpresasLayout = new javax.swing.GroupLayout(JdEmpresas);
+        JdEmpresas.setLayout(JdEmpresasLayout);
+        JdEmpresasLayout.setHorizontalGroup(
+            JdEmpresasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JdEmpresasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(JdEmpresasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jtEmpresa)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JdEmpresasLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jbCancelar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbSalvar)))
+                .addContainerGap())
+        );
+        JdEmpresasLayout.setVerticalGroup(
+            JdEmpresasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JdEmpresasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jtEmpresa)
+                .addGap(18, 18, 18)
+                .addGroup(JdEmpresasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbCancelar)
+                    .addComponent(jbSalvar))
+                .addGap(21, 21, 21))
+        );
+        JdEmpresas.setLayer(jtEmpresa, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        JdEmpresas.setLayer(jbCancelar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        JdEmpresas.setLayer(jbSalvar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jtEmpresa, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jbCancelar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbSalvar)
-                .addGap(11, 11, 11))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(JdEmpresas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(77, 77, 77)
-                .addComponent(jtEmpresa)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbCancelar)
-                    .addComponent(jbSalvar))
-                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(94, Short.MAX_VALUE)
+                .addComponent(JdEmpresas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -307,13 +314,16 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
     }//GEN-LAST:event_jcEstadoActionPerformed
 
     private void jtEmpresaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtEmpresaMouseClicked
-        EmpresaDao.popularTabela(jTable1, null);
+//        EmpresaDao.popularTabela(jTable1, null);
 
     }//GEN-LAST:event_jtEmpresaMouseClicked
+
+    private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
+        hide();
+    }//GEN-LAST:event_jbCancelarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JDesktopPane JdEmpresas;
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbSalvar;
     private javax.swing.JComboBox jcCidade;
@@ -340,9 +350,11 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
 
     @Override
     public void pesquisar() {
-        jtEmpresa.setSelectedIndex(1);
-        IfEmpresa internalEmp = new IfEmpresa();
-        internalEmp.setVisible(true);
+        if (iFEmpresa == null) {
+            iFEmpresa = new IfEmpresa(this);
+        }
+        iFEmpresa.setModal(true);
+        iFEmpresa.setVisible(true);
     }
 
     @Override
@@ -371,5 +383,20 @@ public class JFEmpresa extends JFrame implements AcoesPainel {
                 jbDeletar.setEnabled(permissoes.getDeletar());
             }
         }
+    }
+    
+    public void setFormEmpresa(Empresa empresa){
+        this.empresa = empresa;
+        jtNome.setText(empresa.getNome());
+        jtCgc.setText(empresa.getCgc());
+        jtTelefone.setText(empresa.getTelefone());
+        jtEndereco.setText(empresa.getEndereco());
+        jtEmail.setText(empresa.getEmail());
+        Campos.habilitar(jpEmpresa);
+        jbSalvar.setEnabled(true);
+    }
+    
+    public Empresa obterFromEmpresa(){
+        return this.empresa;
     }
 }

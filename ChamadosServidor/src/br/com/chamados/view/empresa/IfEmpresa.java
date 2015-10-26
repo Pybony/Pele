@@ -5,25 +5,39 @@
  */
 package br.com.chamados.view.empresa;
 
+import br.com.chamados.config.LogChamados;
 import br.com.chamados.dao.EmpresaDao;
 import br.com.chamados.dao.EstadoDao;
 import br.com.chamados.model.Cidade;
 import br.com.chamados.model.Empresa;
 import br.com.chamados.utils.CombosDAO;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author buiu73
  */
-public class IfEmpresa extends javax.swing.JFrame {
+public class IfEmpresa extends javax.swing.JDialog {
 
     /**
      * Creates new form IfEmpresa
      */
+    private Logger logger = Logger.getLogger(LogChamados.class);
+    private int empresaId;
+    private Empresa empresa;
+    private JFEmpresa telaEmpresa;
+    
     public IfEmpresa() {
         initComponents();
         EmpresaDao.popularTabela(JtBusca, null);
         EstadoDao.preencherCombo(JcbBEstado);
+    }
+    
+    public IfEmpresa(JFEmpresa telaEmpresa) {
+        initComponents();
+        EmpresaDao.popularTabela(JtBusca, null);
+        EstadoDao.preencherCombo(JcbBEstado);
+        this.telaEmpresa = telaEmpresa;
     }
 
     /**
@@ -63,6 +77,11 @@ public class IfEmpresa extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        JtBusca.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JtBuscaMouseClicked(evt);
+            }
+        });
         JspBusca.setViewportView(JtBusca);
 
         jLabel1.setText("Nome:");
@@ -71,7 +90,6 @@ public class IfEmpresa extends javax.swing.JFrame {
 
         jLabel3.setText("Estado:");
 
-        JcbBEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         JcbBEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JcbBEstadoActionPerformed(evt);
@@ -79,8 +97,6 @@ public class IfEmpresa extends javax.swing.JFrame {
         });
 
         jLabel4.setText("Cidade:");
-
-        JcbBCidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         JbBuscar.setText("Buscar");
         JbBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -117,12 +133,10 @@ public class IfEmpresa extends javax.swing.JFrame {
                                 .addComponent(jLabel4)
                                 .addGap(18, 18, 18)
                                 .addComponent(JcbBCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(JpBuscaLayout.createSequentialGroup()
-                                .addGroup(JpBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(JtfBcgc, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
-                                    .addComponent(JtfBNome))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(18, 18, 18)
+                            .addGroup(JpBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(JtfBcgc, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
+                                .addComponent(JtfBNome)))
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(JbBuscar)
                         .addGap(53, 53, 53)))
                 .addContainerGap())
@@ -180,8 +194,8 @@ public class IfEmpresa extends javax.swing.JFrame {
     }//GEN-LAST:event_JbCancelarActionPerformed
 
     private void JcbBEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JcbBEstadoActionPerformed
-       JcbBCidade.removeAllItems();
-       if (JcbBEstado.getSelectedIndex() > 0) {
+        JcbBCidade.removeAllItems();
+        if (JcbBEstado.getSelectedIndex() > 0) {
             new CombosDAO().popularCidade(JcbBCidade,
                     JcbBEstado.getSelectedIndex());
             JcbBCidade.setEnabled(true);
@@ -189,13 +203,31 @@ public class IfEmpresa extends javax.swing.JFrame {
     }//GEN-LAST:event_JcbBEstadoActionPerformed
 
     private void JbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JbBuscarActionPerformed
-       Empresa empresa = new Empresa();
-       empresa.setNome(JtfBNome.getText());
-       empresa.setCgc(JtfBcgc.getText());
-       Cidade cidade = new Cidade();
-       cidade.setId(JcbBCidade.getSelectedIndex());
-       empresa.setCidade(cidade);
+        Empresa empresa = new Empresa();
+        empresa.setNome(JtfBNome.getText());
+        empresa.setCgc(JtfBcgc.getText());
+        Cidade cidade = new Cidade();
+        cidade.setId(JcbBCidade.getSelectedIndex());
+        empresa.setCidade(cidade);
     }//GEN-LAST:event_JbBuscarActionPerformed
+
+    private void JtBuscaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JtBuscaMouseClicked
+        if (evt.getClickCount() == 2) {
+            selecionarEmpresa();
+            this.setVisible(false);
+        }
+    }//GEN-LAST:event_JtBuscaMouseClicked
+    
+    private void selecionarEmpresa() {
+
+        empresaId = (int) JtBusca.getValueAt(JtBusca.getSelectedRow(), 0);
+        Empresa empresaB = new Empresa();
+        empresaB.setId(empresaId);
+        
+        empresa = EmpresaDao.obterEmpresa(empresaB).get(0);
+        
+        this.telaEmpresa.setFormEmpresa(empresa);
+    }
 
     /**
      * @param args the command line arguments

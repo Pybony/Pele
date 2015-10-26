@@ -201,6 +201,9 @@ public class JfMenu extends javax.swing.JFrame {
     private void jMenuEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuEmpresaActionPerformed
         if (JFEmpresa == null) {
             JFEmpresa = new JFEmpresa();
+            desktop.add(JFEmpresa);
+            JFEmpresa.setVisible(true);
+        } else {
             JFEmpresa.setVisible(true);
         }
     }//GEN-LAST:event_jMenuEmpresaActionPerformed
