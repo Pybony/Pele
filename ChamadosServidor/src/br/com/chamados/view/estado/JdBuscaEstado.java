@@ -192,6 +192,7 @@ public class JdBuscaEstado extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowGainedFocus
 
     private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
+        idRetorno = "0";
         dispose();
     }//GEN-LAST:event_jbCancelarActionPerformed
 

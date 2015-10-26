@@ -20,15 +20,5 @@ public class Main {
 
     public static void main(String args[]) {
         new JfLogin().setVisible(true);
-
-        //mapear banco por classes e não xml
-        
-        Permissoes permissoes = PermissoesDao.getTela(1);
-        System.out.println("Permissao = " + permissoes.getId());
-        System.out.println("Iterator = " +  permissoes.getUsuario().getFuncionarios());
-        for (Iterator iterator = permissoes.getUsuario().getFuncionarios().iterator(); permissoes.getUsuario().getFuncionarios().iterator().hasNext();) {
-            Funcionario next = (Funcionario) iterator.next();
-            System.out.println("Funcionario = " + next.getId());
-        }
     }
 }

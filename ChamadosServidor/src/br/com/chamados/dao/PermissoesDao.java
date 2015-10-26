@@ -6,35 +6,52 @@
 package br.com.chamados.dao;
 
 import br.com.chamados.control.DAO;
-import br.com.chamados.model.Empresa;
-import br.com.chamados.model.Pais;
+import br.com.chamados.model.Funcionario;
 import br.com.chamados.model.Permissoes;
 import br.com.chamados.model.Tela;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 
 /**
  *
  * @author lksbr
  */
 public class PermissoesDao {
-
-    public static Permissoes getTela(int id) {
-        Permissoes permissoes = new Permissoes();
-        String sql = "SELECT p FROM Permissoes p WHERE id = " + id;
-
-        try {
-            DAO<Permissoes> dao = new DAO<Permissoes>();
-            permissoes = dao.query(sql).get(0);
-            return permissoes;
-        } catch (Exception e) {
-            return null;
-        }
+    
+    public static void salvar(Permissoes permissoes) {
+        DAO<Permissoes> dao = new DAO<>();
+        dao.save(permissoes);
     }
-
+    
+    public static void deletar(Permissoes permissoes) {
+        DAO<Permissoes> dao = new DAO<>();
+        dao.delete(permissoes);
+    }
+    
+    public static Permissoes vaPara(String idTela, String idUsuario) {
+        Permissoes permissoes = new Permissoes();
+        try {
+            String sql = "";
+            if (idTela.equals("0") || idUsuario.equals("0")) {
+                sql = "SELECT p FROM Permissoes p WHERE tela_id >= " + idTela + " AND usuario_id >= " + idUsuario + " ORDER BY id";
+            } else {
+                sql = "SELECT p FROM Permissoes p WHERE tela_id = " + idTela + " AND usuario_id = " + idUsuario;
+            }
+            DAO<Permissoes> dao = new DAO<>();
+            List<Permissoes> lista = dao.query(sql);
+            if (lista.size() == 0) {
+                JOptionPane.showMessageDialog(null, "Id não encontrado.");
+            } else {
+                permissoes = lista.get(0);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return permissoes;
+    }
+    
     public static void popularTabela(JTable tabela, Tela criterio) {
         // dados da tabela
         Object[][] dadosTabela = null;
@@ -47,7 +64,7 @@ public class PermissoesDao {
         cabecalho[3] = "Alterar";
         cabecalho[4] = "Excluir";
         cabecalho[5] = "Consultar";
-
+        
         DAO<Permissoes> dao = new DAO<>();
         String sql = "SELECT COUNT(*) FROM Permissoes WHERE tela_id = " + criterio.getId();
         // cria matriz de acordo com nº de registros da tabela
@@ -61,8 +78,9 @@ public class PermissoesDao {
             int i = 0;
             for (Permissoes permissoes : lista) {
                 dadosTabela[i][0] = permissoes.getUsuario().getId();
-                dadosTabela[i][1] = "Teste";
-                dadosTabela[i][2] = new Boolean(permissoes.getInserir());
+                Funcionario funcionario = FuncionarioDao.getFucionario(permissoes.getUsuario().getFuncionarios());
+                dadosTabela[i][1] = funcionario.getPessoa().getNome();
+                dadosTabela[i][2] = permissoes.getInserir();
                 dadosTabela[i][3] = permissoes.getAlterar();
                 dadosTabela[i][4] = permissoes.getDeletar();
                 dadosTabela[i][5] = permissoes.getConsultar();
@@ -71,13 +89,13 @@ public class PermissoesDao {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        
         tabela.setModel(new DefaultTableModel(dadosTabela, cabecalho) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
-
+            
             @Override
             public Class getColumnClass(int column) {
                 if (column > 1) {
@@ -86,27 +104,5 @@ public class PermissoesDao {
                 return Object.class;
             }
         });
-    }
-
-    public static Permissoes vaPara(String id) {
-        Permissoes permissoes = new Permissoes();
-        try {
-            String sql = "";
-            if (id.equals("0")) {
-                sql = "SELECT p FROM Permissoes p WHERE id >= " + id + " ORDER BY id";
-            } else {
-                sql = "SELECT p FROM Permissoes p WHERE id = " + id;
-            }
-            DAO<Permissoes> dao = new DAO<>();
-            List<Permissoes> lista = dao.query(sql);
-            if (lista.size() == 0) {
-                JOptionPane.showMessageDialog(null, "Id não encontrado.");
-            } else {
-                permissoes = lista.get(0);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return permissoes;
     }
 }

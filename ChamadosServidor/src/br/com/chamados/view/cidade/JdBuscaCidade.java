@@ -193,6 +193,7 @@ public class JdBuscaCidade extends javax.swing.JDialog {
     }//GEN-LAST:event_jbConfirmarActionPerformed
 
     private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
+        idRetorno = "0";
         dispose();
     }//GEN-LAST:event_jbCancelarActionPerformed
 
