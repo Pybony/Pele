@@ -11,6 +11,8 @@ import br.com.chamados.dao.EstadoDao;
 import br.com.chamados.model.Cidade;
 import br.com.chamados.model.Empresa;
 import br.com.chamados.utils.CombosDAO;
+import br.com.chamados.utils.ItemCombo;
+import javax.swing.JTable;
 import org.apache.log4j.Logger;
 
 /**
@@ -207,8 +209,9 @@ public class IfEmpresa extends javax.swing.JDialog {
         empresa.setNome(JtfBNome.getText());
         empresa.setCgc(JtfBcgc.getText());
         Cidade cidade = new Cidade();
-        cidade.setId(JcbBCidade.getSelectedIndex());
+        cidade.setId(((ItemCombo)JcbBCidade.getSelectedItem()).getCodigo());
         empresa.setCidade(cidade);
+        EmpresaDao.popularTabela(JtBusca, empresa);
     }//GEN-LAST:event_JbBuscarActionPerformed
 
     private void JtBuscaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JtBuscaMouseClicked
@@ -262,6 +265,10 @@ public class IfEmpresa extends javax.swing.JDialog {
                 new IfEmpresa().setVisible(true);
             }
         });
+    }
+    
+    public JTable getTabela(){
+        return JtBusca;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

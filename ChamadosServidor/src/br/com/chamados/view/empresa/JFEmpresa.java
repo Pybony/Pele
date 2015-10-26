@@ -6,6 +6,7 @@
 package br.com.chamados.view.empresa;
 
 import br.com.chamados.config.LogChamados;
+import br.com.chamados.dao.CidadeDao;
 import br.com.chamados.dao.EmpresaDao;
 import br.com.chamados.dao.EstadoDao;
 import br.com.chamados.genericos.AcoesPainel;
@@ -18,6 +19,7 @@ import br.com.chamados.utils.CampoInteiro;
 import br.com.chamados.utils.CombosDAO;
 import br.com.chamados.genericos.campos.DesabilitaCampos;
 import br.com.chamados.genericos.campos.LimparCampos;
+import br.com.chamados.utils.ItemCombo;
 import br.com.chamados.view.JpDefault;
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
@@ -34,11 +36,10 @@ public class JFEmpresa extends JInternalFrame implements AcoesPainel {
     /**
      * Creates new form JFEmpresa
      */
-    
     private Logger logger = Logger.getLogger(LogChamados.class);
     private IfEmpresa iFEmpresa;
     private Empresa empresa;
-    
+
     public JFEmpresa() {
         initComponents();
         initMyComponents();
@@ -82,10 +83,10 @@ public class JFEmpresa extends JInternalFrame implements AcoesPainel {
         jcCidade = new javax.swing.JComboBox();
         jlEmailEmpresa1 = new javax.swing.JLabel();
         jtEndereco = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jtCampo = new javax.swing.JTextField();
         jbCancelar = new javax.swing.JButton();
         jbSalvar = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jtEmpresa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -133,17 +134,16 @@ public class JFEmpresa extends JInternalFrame implements AcoesPainel {
         jtEndereco.setEnabled(false);
         jtEndereco.setName("Endereço"); // NOI18N
 
+        jLabel1.setText("Id");
+
+        jtCampo.setEditable(false);
+
         javax.swing.GroupLayout jpEmpresaLayout = new javax.swing.GroupLayout(jpEmpresa);
         jpEmpresa.setLayout(jpEmpresaLayout);
         jpEmpresaLayout.setHorizontalGroup(
             jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpEmpresaLayout.createSequentialGroup()
                 .addGroup(jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpEmpresaLayout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(jlNomeEmpresa)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jpEmpresaLayout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addGroup(jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -153,30 +153,46 @@ public class JFEmpresa extends JInternalFrame implements AcoesPainel {
                         .addGroup(jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jpEmpresaLayout.createSequentialGroup()
                                 .addComponent(jcEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(21, 21, 21)
+                                .addGap(33, 33, 33)
                                 .addComponent(jlBairroEmpresa)
                                 .addGap(18, 18, 18)
                                 .addComponent(jcCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jtCgc, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 121, Short.MAX_VALUE)))
-                .addGap(71, 71, 71))
-            .addGroup(jpEmpresaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jlEmailEmpresa1)
-                    .addComponent(jlEmailEmpresa)
-                    .addComponent(jlTelefoneEmpresa))
-                .addGap(18, 18, 18)
-                .addGroup(jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtCgc, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jpEmpresaLayout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jlNomeEmpresa)
+                            .addComponent(jLabel1))
+                        .addGap(18, 18, 18)
+                        .addGroup(jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jpEmpresaLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jpEmpresaLayout.createSequentialGroup()
+                                .addGroup(jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jlEmailEmpresa1)
+                                    .addComponent(jlEmailEmpresa)
+                                    .addComponent(jlTelefoneEmpresa))
+                                .addGroup(jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jpEmpresaLayout.createSequentialGroup()
+                                        .addGap(23, 23, 23)
+                                        .addComponent(jtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpEmpresaLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpEmpresaLayout.setVerticalGroup(
             jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpEmpresaLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(30, 30, 30)
+                .addGroup(jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jtCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlNomeEmpresa)
                     .addComponent(jtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -202,7 +218,7 @@ public class JFEmpresa extends JInternalFrame implements AcoesPainel {
                 .addGroup(jpEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlTelefoneEmpresa))
-                .addContainerGap(141, Short.MAX_VALUE))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
 
         jtNome.getAccessibleContext().setAccessibleName("Nome");
@@ -273,7 +289,7 @@ public class JFEmpresa extends JInternalFrame implements AcoesPainel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(94, Short.MAX_VALUE)
+                .addContainerGap(95, Short.MAX_VALUE)
                 .addComponent(JdEmpresas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -283,8 +299,11 @@ public class JFEmpresa extends JInternalFrame implements AcoesPainel {
     private void jbSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalvarActionPerformed
         try {
             Cidade cidade = new Cidade();
-            cidade.setId(jcCidade.getSelectedIndex());
+            cidade.setId(((ItemCombo) jcCidade.getSelectedItem()).getCodigo());
             Empresa empresa = new Empresa();
+            if (!jtCampo.getText().equals(EmpresaDao.proximoId())) {
+                empresa.setId(Integer.parseInt(jtCampo.getText()));
+            }
             empresa.setNome(jtNome.getText());
             empresa.setCgc(jtCgc.getText());
             empresa.setEndereco(jtEndereco.getText());
@@ -293,7 +312,6 @@ public class JFEmpresa extends JInternalFrame implements AcoesPainel {
             empresa.setCidade(cidade);
             if (Campos.validar(jpEmpresa)) {
                 EmpresaDao.save(empresa);
-                JOptionPane.showMessageDialog(null, "Salvo com sucesso");
                 DesabilitaCampos.run(jpEmpresa);
                 LimparCampos.run(jpEmpresa);
             }
@@ -324,6 +342,7 @@ public class JFEmpresa extends JInternalFrame implements AcoesPainel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane JdEmpresas;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbSalvar;
     private javax.swing.JComboBox jcCidade;
@@ -336,6 +355,7 @@ public class JFEmpresa extends JInternalFrame implements AcoesPainel {
     private javax.swing.JLabel jlNomeEmpresa;
     private javax.swing.JLabel jlTelefoneEmpresa;
     private javax.swing.JPanel jpEmpresa;
+    private javax.swing.JTextField jtCampo;
     private javax.swing.JTextField jtCgc;
     private javax.swing.JTextField jtEmail;
     private javax.swing.JTabbedPane jtEmpresa;
@@ -344,8 +364,37 @@ public class JFEmpresa extends JInternalFrame implements AcoesPainel {
     private javax.swing.JTextField jtTelefone;
     // End of variables declaration//GEN-END:variables
 
-    public void vaPara(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void vaPara(String vaPara) {
+        if (vaPara.equals("")) {
+            vaPara = JOptionPane.showInputDialog("Vá para");
+            if (vaPara == null || vaPara.equals("")) {
+                vaPara = "0";
+            }
+        }
+        empresa = EmpresaDao.vaPara(vaPara);
+        if (empresa != null) {
+
+            jtCampo.setText(String.valueOf(empresa.getId()));
+            jtNome.setText(empresa.getNome());
+            jtCgc.setText(empresa.getCgc());
+            jtTelefone.setText(empresa.getTelefone());
+            jtEndereco.setText(empresa.getEndereco());
+            jtEmail.setText(empresa.getEmail());
+
+            ItemCombo uf = new ItemCombo();
+            Cidade cidade = CidadeDao.getEstadoId(empresa.getCidade().getId());
+            uf.setCodigo(cidade.getEstado().getId());
+            new CombosDAO().definirItemCombo(jcEstado, uf);
+
+            jcCidade.setEnabled(true);
+            ItemCombo c = new ItemCombo();
+            c.setCodigo(cidade.getId());
+            new CombosDAO().definirItemCombo(jcCidade, c);
+
+        } else {
+            Campos.limpar(jpEmpresa);
+            Campos.desabilitar(jpEmpresa);
+        }
     }
 
     @Override
@@ -353,25 +402,34 @@ public class JFEmpresa extends JInternalFrame implements AcoesPainel {
         if (iFEmpresa == null) {
             iFEmpresa = new IfEmpresa(this);
         }
+        EmpresaDao.popularTabela(iFEmpresa.getTabela(), null);
         iFEmpresa.setModal(true);
         iFEmpresa.setVisible(true);
+        jbSalvar.setEnabled(true);
     }
 
     @Override
     public void inserir() {
         Campos.habilitar(jpEmpresa);
         Campos.limpar(jpEmpresa);
+        jtCampo.setText(EmpresaDao.proximoId());
+        jtCampo.setEditable(false);
         jbSalvar.setEnabled(true);
     }
 
     @Override
     public void alterar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void deletar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int opcao = JOptionPane.showConfirmDialog(null, "Confirma exclução do registro?", "Deletar Registro", JOptionPane.YES_NO_OPTION);
+        if (opcao == 0) {
+            EmpresaDao.deletar(empresa);
+            Campos.limpar(jpEmpresa);
+            Campos.desabilitar(jpEmpresa);
+        }
     }
 
     @Override
@@ -384,19 +442,31 @@ public class JFEmpresa extends JInternalFrame implements AcoesPainel {
             }
         }
     }
-    
-    public void setFormEmpresa(Empresa empresa){
+
+    public void setFormEmpresa(Empresa empresa) {
         this.empresa = empresa;
+        jtCampo.setText(String.valueOf(empresa.getId()));
         jtNome.setText(empresa.getNome());
         jtCgc.setText(empresa.getCgc());
         jtTelefone.setText(empresa.getTelefone());
         jtEndereco.setText(empresa.getEndereco());
         jtEmail.setText(empresa.getEmail());
+
+        ItemCombo uf = new ItemCombo();
+        Cidade cidade = CidadeDao.getEstadoId(empresa.getCidade().getId());
+        uf.setCodigo(cidade.getEstado().getId());
+        new CombosDAO().definirItemCombo(jcEstado, uf);
+
+        jcCidade.setEnabled(true);
+        ItemCombo c = new ItemCombo();
+        c.setCodigo(cidade.getId());
+        new CombosDAO().definirItemCombo(jcCidade, c);
+
         Campos.habilitar(jpEmpresa);
         jbSalvar.setEnabled(true);
     }
-    
-    public Empresa obterFromEmpresa(){
+
+    public Empresa obterFromEmpresa() {
         return this.empresa;
     }
 }

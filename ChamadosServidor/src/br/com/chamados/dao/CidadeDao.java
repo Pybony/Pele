@@ -67,6 +67,14 @@ public class CidadeDao {
         return cidade;
     }
 
+    public static Cidade getEstadoId(int cidadeId) {
+        DAO<Cidade> dao = new DAO<>();
+        String sql = "SELECT c FROM Cidade c WHERE id = " + cidadeId;
+        System.out.println("UUUUUUUUU " + sql);
+        List<Cidade> cidade = dao.query(sql);
+        return cidade.get(0);
+    }
+
     public static void preencherCombo(JComboBox combo, int idEstado) {
         ItemCombo item = new ItemCombo();
         item.setCodigo(0);

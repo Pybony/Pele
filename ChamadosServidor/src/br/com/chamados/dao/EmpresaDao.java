@@ -9,8 +9,10 @@ import br.com.chamados.config.LogChamados;
 import br.com.chamados.control.DAO;
 import br.com.chamados.model.Cidade;
 import br.com.chamados.model.Empresa;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -31,6 +33,46 @@ public class EmpresaDao {
         return retorno;
     }
     
+    public static String proximoId() {
+        String retorno = "1";
+        DAO<Empresa> dao = new DAO<>();
+        BigInteger id = (BigInteger) dao.querySQL("SELECT auto_increment FROM INFORMATION_SCHEMA.TABLES WHERE table_name = 'empresa'");
+        if (id != null) {
+            retorno = String.valueOf(id);
+        }
+        return retorno;
+    }
+    
+    public static void deletar(Empresa empresa) {
+        DAO<Empresa> dao = new DAO<>();
+        dao.delete(empresa);
+    }
+    
+    public static Empresa vaPara(String id) {
+        Empresa empresa = new Empresa();
+        try {
+            String sql = "";
+            if (id.equals("0")) {
+                sql = "SELECT p FROM Empresa p WHERE id >= " + id + " ORDER BY id";
+            } else {
+                sql = "SELECT p FROM Empresa p WHERE id = " + id;
+            }
+            DAO<Empresa> dao = new DAO<>();
+            List<Empresa> lista = dao.query(sql);
+            if (lista.size() == 0) {
+                if (!id.equals("0")) {
+                    JOptionPane.showMessageDialog(null, "Id não encontrado.");
+                }
+                empresa = null;
+            } else {
+                empresa = lista.get(0);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return empresa;
+    }
+    
     public static List<Empresa> obterEmpresa(Empresa criterio){
         
         DAO<Empresa> dao = new DAO<>();
@@ -44,15 +86,16 @@ public class EmpresaDao {
                 where.add(" id = " + criterio.getId());
             }
             
-            if (criterio.getNome() != null) {
+            if (criterio.getNome() != null && !criterio.getNome().equals("")) {
                 where.add(" nome = '" + criterio.getNome() + "'");
             }
 
-            if (criterio.getCgc() != null) {
+            if (criterio.getCgc() != null && !criterio.getCgc().equals("")) {
                 where.add(" cgc = '" + criterio.getCgc() + "'");
             }
 
-            if (criterio.getCidade() instanceof Cidade && criterio.getCidade().getId() != null) {
+            if (criterio.getCidade() instanceof Cidade && criterio.getCidade().getId() 
+                    != null && criterio.getCidade().getId() > 0) {
                 where.add(" cidade_id = " + criterio.getCidade().getId());
             }
         }
