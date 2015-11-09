@@ -1,5 +1,5 @@
 package br.com.chamados.model;
-// Generated 26/10/2015 20:54:38 by Hibernate Tools 4.3.1
+// Generated 01/11/2015 20:44:12 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -13,7 +13,6 @@ public class Funcionario  implements java.io.Serializable {
 
 
      private Integer id;
-     private Cidade cidade;
      private Empresa empresa;
      private Funcao funcao;
      private Pessoa pessoa;
@@ -21,22 +20,22 @@ public class Funcionario  implements java.io.Serializable {
      private Date dataAdmicao;
      private Date dataDesligamento;
      private Set usuarios = new HashSet(0);
-     private Set chamados = new HashSet(0);
+     private Set chamadosForFuncionarioAberturaId = new HashSet(0);
+     private Set chamadosForFuncionarioAtendenteId = new HashSet(0);
+     private Set chamadosForFuncionarioSolicitanteId = new HashSet(0);
 
     public Funcionario() {
     }
 
 	
-    public Funcionario(Cidade cidade, Empresa empresa, Funcao funcao, Pessoa pessoa, Setor setor, Date dataAdmicao) {
-        this.cidade = cidade;
+    public Funcionario(Empresa empresa, Funcao funcao, Pessoa pessoa, Setor setor, Date dataAdmicao) {
         this.empresa = empresa;
         this.funcao = funcao;
         this.pessoa = pessoa;
         this.setor = setor;
         this.dataAdmicao = dataAdmicao;
     }
-    public Funcionario(Cidade cidade, Empresa empresa, Funcao funcao, Pessoa pessoa, Setor setor, Date dataAdmicao, Date dataDesligamento, Set usuarios, Set chamados) {
-       this.cidade = cidade;
+    public Funcionario(Empresa empresa, Funcao funcao, Pessoa pessoa, Setor setor, Date dataAdmicao, Date dataDesligamento, Set usuarios, Set chamadosForFuncionarioAberturaId, Set chamadosForFuncionarioAtendenteId, Set chamadosForFuncionarioSolicitanteId) {
        this.empresa = empresa;
        this.funcao = funcao;
        this.pessoa = pessoa;
@@ -44,7 +43,9 @@ public class Funcionario  implements java.io.Serializable {
        this.dataAdmicao = dataAdmicao;
        this.dataDesligamento = dataDesligamento;
        this.usuarios = usuarios;
-       this.chamados = chamados;
+       this.chamadosForFuncionarioAberturaId = chamadosForFuncionarioAberturaId;
+       this.chamadosForFuncionarioAtendenteId = chamadosForFuncionarioAtendenteId;
+       this.chamadosForFuncionarioSolicitanteId = chamadosForFuncionarioSolicitanteId;
     }
    
     public Integer getId() {
@@ -53,13 +54,6 @@ public class Funcionario  implements java.io.Serializable {
     
     public void setId(Integer id) {
         this.id = id;
-    }
-    public Cidade getCidade() {
-        return this.cidade;
-    }
-    
-    public void setCidade(Cidade cidade) {
-        this.cidade = cidade;
     }
     public Empresa getEmpresa() {
         return this.empresa;
@@ -110,12 +104,26 @@ public class Funcionario  implements java.io.Serializable {
     public void setUsuarios(Set usuarios) {
         this.usuarios = usuarios;
     }
-    public Set getChamados() {
-        return this.chamados;
+    public Set getChamadosForFuncionarioAberturaId() {
+        return this.chamadosForFuncionarioAberturaId;
     }
     
-    public void setChamados(Set chamados) {
-        this.chamados = chamados;
+    public void setChamadosForFuncionarioAberturaId(Set chamadosForFuncionarioAberturaId) {
+        this.chamadosForFuncionarioAberturaId = chamadosForFuncionarioAberturaId;
+    }
+    public Set getChamadosForFuncionarioAtendenteId() {
+        return this.chamadosForFuncionarioAtendenteId;
+    }
+    
+    public void setChamadosForFuncionarioAtendenteId(Set chamadosForFuncionarioAtendenteId) {
+        this.chamadosForFuncionarioAtendenteId = chamadosForFuncionarioAtendenteId;
+    }
+    public Set getChamadosForFuncionarioSolicitanteId() {
+        return this.chamadosForFuncionarioSolicitanteId;
+    }
+    
+    public void setChamadosForFuncionarioSolicitanteId(Set chamadosForFuncionarioSolicitanteId) {
+        this.chamadosForFuncionarioSolicitanteId = chamadosForFuncionarioSolicitanteId;
     }
 
 

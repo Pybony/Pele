@@ -1,7 +1,6 @@
 package br.com.chamados.view.estado;
 
 import br.com.chamados.dao.EstadoDao;
-import br.com.chamados.dao.NivelDao;
 import javax.swing.JOptionPane;
 
 /**
@@ -86,6 +85,11 @@ public class JdBuscaEstado extends javax.swing.JDialog {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        jtBusca.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtBuscaMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(jtBusca);
@@ -205,6 +209,14 @@ public class JdBuscaEstado extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Selecione uma linha.");
         }
     }//GEN-LAST:event_jbConfirmarActionPerformed
+
+    private void jtBuscaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtBuscaMouseClicked
+        if (evt.getClickCount() == 2) {
+            int linha = jtBusca.getSelectedRow();
+            idRetorno = String.valueOf(jtBusca.getValueAt(linha, 0));
+            dispose();
+        }
+    }//GEN-LAST:event_jtBuscaMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

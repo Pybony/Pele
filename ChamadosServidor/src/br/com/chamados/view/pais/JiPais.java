@@ -3,10 +3,13 @@ package br.com.chamados.view.pais;
 import br.com.chamados.config.LogChamados;
 import br.com.chamados.dao.PaisDao;
 import br.com.chamados.genericos.AcoesPainel;
+import br.com.chamados.genericos.Campos;
 import br.com.chamados.genericos.Cookies;
+import br.com.chamados.genericos.Util;
 import br.com.chamados.model.Pais;
 import br.com.chamados.model.Permissoes;
 import br.com.chamados.view.JpDefault;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
@@ -19,6 +22,7 @@ import org.apache.log4j.Logger;
 public class JiPais extends JInternalFrame implements AcoesPainel {
 
     private Logger logger = Logger.getLogger(LogChamados.class);
+    private JpDefault jpDefault;
     private JdBuscaPais jdBuscaPais;
     private Pais pais;
 
@@ -29,45 +33,29 @@ public class JiPais extends JInternalFrame implements AcoesPainel {
     }
 
     private void initMyComponents() {
-        JpDefault jpDefault = new JpDefault();
-        jpDefault.setBounds(10, 10, 450, 180);
-        this.add(jpDefault);
-        jpDefault.setAcoesCadastro(this);
-        vaPara("0");
+        jpDefault = new JpDefault();
+        jpDefault.setBounds(JpDefault.X, JpDefault.Y, JpDefault.WIDTH, JpDefault.HEIGHT);
+        this.setSize(JpDefault.WIDTH + 30, JpDefault.HEIGHT + 150);
+        jpPais.setBorder(BorderFactory.createEmptyBorder(70, 40, 0, 0));
+        jpPais.add(jpDefault);
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jtNome = new javax.swing.JTextField();
-        jbFechar = new javax.swing.JButton();
-        jbSalvar = new javax.swing.JButton();
+        jpPais = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jtId = new javax.swing.JTextField();
-        jbCancelar = new javax.swing.JButton();
-        jtSigla = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jtNome = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        jtSigla = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setText("Nome");
-
-        jtNome.setEditable(false);
-
-        jbFechar.setText("Fechar");
-        jbFechar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbFecharActionPerformed(evt);
-            }
-        });
-
-        jbSalvar.setText("Salvar");
-        jbSalvar.setEnabled(false);
-        jbSalvar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbSalvarActionPerformed(evt);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
             }
         });
 
@@ -75,108 +63,79 @@ public class JiPais extends JInternalFrame implements AcoesPainel {
 
         jtId.setEditable(false);
 
-        jbCancelar.setText("Cancelar");
-        jbCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbCancelarActionPerformed(evt);
-            }
-        });
+        jLabel1.setText("Nome");
+
+        jtNome.setEditable(false);
+
+        jLabel3.setText("Sigla");
 
         jtSigla.setEditable(false);
         jtSigla.setEnabled(false);
 
-        jLabel3.setText("Sigla");
+        javax.swing.GroupLayout jpPaisLayout = new javax.swing.GroupLayout(jpPais);
+        jpPais.setLayout(jpPaisLayout);
+        jpPaisLayout.setHorizontalGroup(
+            jpPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpPaisLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpPaisLayout.createSequentialGroup()
+                        .addComponent(jtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jtSigla, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpPaisLayout.createSequentialGroup()
+                        .addComponent(jtId, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jpPaisLayout.setVerticalGroup(
+            jpPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpPaisLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jpPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jtSigla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jtId, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 129, Short.MAX_VALUE)
-                        .addComponent(jbFechar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jbCancelar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtNome)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel3)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jtSigla)
-                    .addComponent(jbSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+            .addComponent(jpPais, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(74, 74, 74)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtSigla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbFechar)
-                    .addComponent(jbSalvar)
-                    .addComponent(jbCancelar))
-                .addGap(0, 12, Short.MAX_VALUE))
+            .addComponent(jpPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalvarActionPerformed
-        pais = new Pais();
-        if (!jtId.getText().equals(PaisDao.proximoId())) {
-            pais.setId(Integer.parseInt(jtId.getText()));
-        }
-        pais.setNome(jtNome.getText());
-        pais.setSigla(jtSigla.getText());
-        PaisDao.salvar(pais);
-        if (!jtId.getText().equals(PaisDao.proximoId())) {
-            jtNome.setEditable(false);
-            jtSigla.setEditable(false);
-            jbSalvar.setEnabled(false);
-        } else {
-            vaPara("0");
-            jtNome.setEditable(false);
-            jtSigla.setEditable(false);
-            jbSalvar.setEnabled(false);
-        }
-    }//GEN-LAST:event_jbSalvarActionPerformed
-
-    private void jbFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbFecharActionPerformed
-        hide();
-    }//GEN-LAST:event_jbFecharActionPerformed
-
-    private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
-        jtNome.setEditable(false);
-        jtSigla.setEditable(false);
-        jbSalvar.setEnabled(false);
-        if (jtId.getText().equals(PaisDao.proximoId())) {
-            vaPara("0");
-        }
-    }//GEN-LAST:event_jbCancelarActionPerformed
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        Util.centralizar(this);
+        jpDefault.setAcoesCadastro(this);
+        vaPara("0");
+    }//GEN-LAST:event_formComponentShown
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JButton jbCancelar;
-    private javax.swing.JButton jbFechar;
-    private javax.swing.JButton jbSalvar;
+    private javax.swing.JPanel jpPais;
     private javax.swing.JTextField jtId;
     private javax.swing.JTextField jtNome;
     private javax.swing.JTextField jtSigla;
@@ -221,7 +180,6 @@ public class JiPais extends JInternalFrame implements AcoesPainel {
         jtSigla.setText("");
         jtSigla.setEnabled(true);
         jtSigla.setEditable(true);
-        jbSalvar.setEnabled(true);
     }
 
     @Override
@@ -231,7 +189,6 @@ public class JiPais extends JInternalFrame implements AcoesPainel {
             jtNome.setEditable(true);
             jtSigla.setEnabled(true);
             jtSigla.setEditable(true);
-            jbSalvar.setEnabled(true);
         }
     }
 
@@ -246,12 +203,43 @@ public class JiPais extends JInternalFrame implements AcoesPainel {
 
     @Override
     public void checkEnabled(JButton jbInserir, JButton jbAlterar, JButton jbDeletar) {
-        for (Permissoes permissoes : Cookies.listaPermissoes) {
-            if (permissoes.getTela().getDescricao().equalsIgnoreCase(this.getClass().getSimpleName())) {
-                jbInserir.setEnabled(permissoes.getInserir());
-                jbAlterar.setEnabled(permissoes.getAlterar());
-                jbDeletar.setEnabled(permissoes.getDeletar());
-            }
+        Permissoes permissoes = Cookies.getPermissao(this.getClass().getSimpleName());
+        jbInserir.setEnabled(permissoes.getInserir());
+        jbAlterar.setEnabled(permissoes.getAlterar());
+        jbDeletar.setEnabled(permissoes.getDeletar());
+    }
+
+    @Override
+    public void salvar() {
+        pais = new Pais();
+        if (!jtId.getText().equals(PaisDao.proximoId())) {
+            pais.setId(Integer.parseInt(jtId.getText()));
         }
+        pais.setNome(jtNome.getText());
+        pais.setSigla(jtSigla.getText());
+        PaisDao.salvar(pais);
+        if (!jtId.getText().equals(PaisDao.proximoId())) {
+            vaPara(jtId.getText());
+        } else {
+            vaPara("0");
+        }
+        Campos.desabilitar(jpPais);
+    }
+
+    @Override
+    public void cancelar() {
+        if (jtId.getText().equals(PaisDao.proximoId())) {
+            vaPara("0");
+        } else {
+            vaPara(jtId.getText());
+        }
+        Campos.desabilitar(jpPais);
+    }
+
+    @Override
+    public void fechar() {
+        hide();
+        vaPara("0");
+        Campos.desabilitar(jpPais);
     }
 }

@@ -76,6 +76,11 @@ public class JdBuscaUsuario extends javax.swing.JDialog {
                 return types [columnIndex];
             }
         });
+        jtBusca.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtBuscaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtBusca);
 
         jbConfirmar.setText("Confirmar");
@@ -161,6 +166,14 @@ public class JdBuscaUsuario extends javax.swing.JDialog {
         idRetorno = "0";
         dispose();
     }//GEN-LAST:event_jbCancelarActionPerformed
+
+    private void jtBuscaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtBuscaMouseClicked
+        if (evt.getClickCount() == 2) {
+            int linha = jtBusca.getSelectedRow();
+            idRetorno = String.valueOf(jtBusca.getValueAt(linha, 0));
+            dispose();
+        }
+    }//GEN-LAST:event_jtBuscaMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

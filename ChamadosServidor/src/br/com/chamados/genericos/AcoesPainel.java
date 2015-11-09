@@ -22,6 +22,12 @@ public interface AcoesPainel {
     void alterar();
 
     void deletar();
+    
+    void salvar();
+    
+    void cancelar();
+    
+    void fechar();
 
     void checkEnabled(JButton jbInserir, JButton jbAlterar, JButton jbDeletar);
 

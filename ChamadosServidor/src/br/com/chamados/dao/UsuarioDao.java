@@ -1,9 +1,6 @@
 package br.com.chamados.dao;
 
 import br.com.chamados.control.DAO;
-import br.com.chamados.model.Funcionario;
-import br.com.chamados.model.Permissoes;
-import br.com.chamados.model.Tela;
 import br.com.chamados.model.Usuario;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -20,7 +17,8 @@ public class UsuarioDao {
         Usuario usuario = new Usuario();
         try {
             String sql = "";
-            if (id.equals("0")) {
+            if (id.equals("0") || id.equals("")) {
+                id = "0";
                 sql = "SELECT p FROM Usuario p WHERE id >= " + id + " ORDER BY id";
             } else {
                 sql = "SELECT p FROM Usuario p WHERE id = " + id;

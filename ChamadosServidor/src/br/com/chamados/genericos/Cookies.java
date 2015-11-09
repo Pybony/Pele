@@ -14,8 +14,25 @@ import java.util.List;
  * @author lksbr
  */
 public class Cookies {
-
+    
     public static List<Permissoes> listaPermissoes;
     public static Usuario usuario;
-
+    
+    public static Permissoes getPermissao(String simpleName) {
+        Permissoes permissao = null;
+        for (Permissoes permissoes : Cookies.listaPermissoes) {
+            if (permissoes.getTela().getDescricao().equalsIgnoreCase(simpleName)) {
+                permissao = permissoes;
+            }
+        }
+        if (permissao == null) {
+            permissao = new Permissoes();
+            permissao.setInserir(false);
+            permissao.setAlterar(false);
+            permissao.setConsultar(false);
+            permissao.setDeletar(false);
+        }
+        return permissao;
+    }
+    
 }

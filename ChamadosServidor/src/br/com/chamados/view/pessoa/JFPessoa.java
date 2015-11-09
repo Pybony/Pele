@@ -519,4 +519,19 @@ public class JFPessoa extends JInternalFrame implements AcoesPainel {
     public Pessoa obterFromPessoa() {
         return this.pessoa;
     }
+
+    @Override
+    public void salvar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void cancelar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void fechar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

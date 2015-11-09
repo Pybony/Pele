@@ -13,6 +13,7 @@ import java.awt.Component;
 import java.awt.Container;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
@@ -35,7 +36,37 @@ public class Campos {
     }
 
     public static void desabilitar(Container container) {
-        DesabilitaCampos.run(container);
+        //DesabilitaCampos.run(container);
+        enabled(container, false);
+    }
+
+    private static void enabled(Container container, boolean enabled) {
+        Component c[] = container.getComponents();
+        for (int i = 0; i < c.length; i++) {
+            if (c[i] instanceof JFormattedTextField) {
+                JFormattedTextField field = (JFormattedTextField) c[i];
+                try {
+                    field.setEnabled(enabled);
+                    field.setEditable(enabled);
+                } catch (Exception e) {
+                    field.setEnabled(enabled);
+                    field.setEditable(enabled);
+                }
+            } else if (c[i] instanceof JTextField) {
+                JTextField field = (JTextField) c[i];
+                field.setEnabled(enabled);
+                field.setEditable(enabled);
+            }  else if (c[i] instanceof JComboBox) {
+                JComboBox cb = (JComboBox) c[i];
+                cb.setEnabled(enabled);
+            } else if (c[i] instanceof JCheckBox) {
+                JCheckBox ckb = (JCheckBox) c[i];
+                ckb.setEnabled(enabled);
+            } else if (c[i] instanceof JButton){
+                JButton jb = (JButton) c[i];
+                jb.setEnabled(enabled);
+            }
+        }
     }
 
     public static void limpar(Container container) {

@@ -7,9 +7,6 @@ package br.com.chamados.dao;
 
 import br.com.chamados.control.DAO;
 import br.com.chamados.model.Nivel;
-import br.com.chamados.model.Pais;
-import br.com.chamados.model.Permissoes;
-import br.com.chamados.model.Tela;
 import br.com.chamados.utils.ItemCombo;
 import java.math.BigInteger;
 import java.util.List;
@@ -29,16 +26,9 @@ public class NivelDao {
         dao.save(nivel);
     }
 
-    public static Nivel getSelectedItemCombo(JComboBox combo) {
-        ItemCombo item = (ItemCombo) combo.getSelectedItem();
-        String id = String.valueOf(item.getCodigo());
-        Nivel nivel = vaPara(id);
-        return nivel;
-    }
-
-    public static void setSelectedItemCombo(JComboBox combo, Nivel nivel) {
-        ItemCombo item = new ItemCombo(nivel.getId(), nivel.getDescricao());
-        combo.getModel().setSelectedItem(item);
+    public static void deletar(Nivel nivel) {
+        DAO<Nivel> dao = new DAO<>();
+        dao.delete(nivel);
     }
 
     public static String proximoId() {
@@ -49,11 +39,6 @@ public class NivelDao {
             retorno = String.valueOf(id);
         }
         return retorno;
-    }
-
-    public static void deletar(Nivel nivel) {
-        DAO<Nivel> dao = new DAO<>();
-        dao.delete(nivel);
     }
 
     public static Nivel vaPara(String id) {
@@ -125,4 +110,17 @@ public class NivelDao {
             }
         });
     }
+
+    public static Nivel getSelectedItemCombo(JComboBox combo) {
+        ItemCombo item = (ItemCombo) combo.getSelectedItem();
+        String id = String.valueOf(item.getCodigo());
+        Nivel nivel = vaPara(id);
+        return nivel;
+    }
+
+    public static void setSelectedItemCombo(JComboBox combo, Nivel nivel) {
+        ItemCombo item = new ItemCombo(nivel.getId(), nivel.getDescricao());
+        combo.getModel().setSelectedItem(item);
+    }
+
 }

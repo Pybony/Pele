@@ -1,5 +1,5 @@
 package br.com.chamados.model;
-// Generated 26/10/2015 20:54:38 by Hibernate Tools 4.3.1
+// Generated 01/11/2015 20:44:12 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -13,16 +13,16 @@ public class CategoriaUm  implements java.io.Serializable {
 
      private Integer id;
      private String descricao;
-     private Set chamados = new HashSet(0);
      private Set categoriaDoises = new HashSet(0);
+     private Set chamados = new HashSet(0);
 
     public CategoriaUm() {
     }
 
-    public CategoriaUm(String descricao, Set chamados, Set categoriaDoises) {
+    public CategoriaUm(String descricao, Set categoriaDoises, Set chamados) {
        this.descricao = descricao;
-       this.chamados = chamados;
        this.categoriaDoises = categoriaDoises;
+       this.chamados = chamados;
     }
    
     public Integer getId() {
@@ -39,19 +39,19 @@ public class CategoriaUm  implements java.io.Serializable {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    public Set getChamados() {
-        return this.chamados;
-    }
-    
-    public void setChamados(Set chamados) {
-        this.chamados = chamados;
-    }
     public Set getCategoriaDoises() {
         return this.categoriaDoises;
     }
     
     public void setCategoriaDoises(Set categoriaDoises) {
         this.categoriaDoises = categoriaDoises;
+    }
+    public Set getChamados() {
+        return this.chamados;
+    }
+    
+    public void setChamados(Set chamados) {
+        this.chamados = chamados;
     }
 
 

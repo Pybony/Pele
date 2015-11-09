@@ -73,7 +73,7 @@ public class PermissoesDao {
             dadosTabela = new Object[result][tabela.getColumnCount()];
 
             // efetua consulta de dados no banco e atribui no componente JTable
-            sql = "SELECT p FROM Permissoes p WHERE tela_id = " + criterio.getId();
+            sql = "SELECT p FROM Permissoes p INNER JOIN p.usuario u INNER JOIN u.funcionario f INNER JOIN f.pessoa pe WHERE tela_id = " + criterio.getId();
             List<Permissoes> lista = dao.query(sql);
             int i = 0;
             for (Permissoes permissoes : lista) {

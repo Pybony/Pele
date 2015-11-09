@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 26/10/2015 20:54:38 by Hibernate Tools 4.3.1 -->
+<!-- Generated 01/11/2015 20:44:12 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="br.com.chamados.model.Estado" table="estado" catalog="chamados" optimistic-lock="version">
         <id name="id" type="java.lang.Integer">
@@ -11,11 +11,11 @@
         <many-to-one name="pais" class="br.com.chamados.model.Pais" fetch="select">
             <column name="pais_id" not-null="true" />
         </many-to-one>
-        <property name="sigla" type="string">
-            <column name="sigla" length="45" not-null="true" />
-        </property>
         <property name="nome" type="string">
             <column name="nome" length="45" not-null="true" />
+        </property>
+        <property name="sigla" type="string">
+            <column name="sigla" length="45" not-null="true" />
         </property>
         <set name="cidades" table="cidade" inverse="true" lazy="true" fetch="select">
             <key>

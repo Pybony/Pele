@@ -14,21 +14,20 @@ import br.com.chamados.genericos.AcoesPainel;
 public class JpDefault extends javax.swing.JPanel {
 
     private AcoesPainel acoesPainel;
+    public static int X = 20;
+    public static int Y = 20;
+    public static int WIDTH = 750;
+    public static int HEIGHT = 50;
 
     /**
      * Creates new form JpDefault
      */
     public JpDefault(AcoesPainel acoesPainel) {
-        this();
         this.acoesPainel = acoesPainel;
     }
 
     public JpDefault() {
         initComponents();
-        jbInserir.setEnabled(false);
-        jbAlterar.setEnabled(false);
-        jbDeletar.setEnabled(false);
-
     }
 
     public AcoesPainel getAcoesPainel() {
@@ -38,6 +37,48 @@ public class JpDefault extends javax.swing.JPanel {
     public void setAcoesCadastro(AcoesPainel acoesPainel) {
         this.acoesPainel = acoesPainel;
         acoesPainel.checkEnabled(jbInserir, jbAlterar, jbDeletar);
+        jbSalvar.setEnabled(false);
+        jbCancelar.setEnabled(false);
+    }
+
+    public void setVisibleJbInserir(boolean visible) {
+        jbInserir.setVisible(visible);
+    }
+
+    public void setVisibleJbAlterar(boolean visible) {
+        jbAlterar.setVisible(visible);
+    }
+
+    public void setVisibleJbDeletar(boolean visible) {
+        jbDeletar.setVisible(visible);
+    }
+
+    public void setVisibleJbSalvar(boolean visible) {
+        jbSalvar.setVisible(visible);
+    }
+
+    public void setVisibleJbCancelar(boolean visible) {
+        jbCancelar.setVisible(visible);
+    }
+
+    public void setEnabledJbInserir(boolean enabled) {
+        jbInserir.setEnabled(enabled);
+    }
+
+    public void setEnabledJbAlterar(boolean enabled) {
+        jbAlterar.setEnabled(enabled);
+    }
+
+    public void setEnabledJbDeletar(boolean enabled) {
+        jbDeletar.setEnabled(enabled);
+    }
+
+    public void setEnabledJbSalvar(boolean enabled) {
+        jbSalvar.setEnabled(enabled);
+    }
+
+    public void setEnabledJbCancelar(boolean enabled) {
+        jbCancelar.setEnabled(enabled);
     }
 
     /**
@@ -54,6 +95,9 @@ public class JpDefault extends javax.swing.JPanel {
         jbInserir = new javax.swing.JButton();
         jbAlterar = new javax.swing.JButton();
         jbDeletar = new javax.swing.JButton();
+        jbSalvar = new javax.swing.JButton();
+        jbCancelar = new javax.swing.JButton();
+        jbFechar = new javax.swing.JButton();
 
         jbPesquisar.setText("Pesquisar");
         jbPesquisar.addActionListener(new java.awt.event.ActionListener() {
@@ -90,6 +134,27 @@ public class JpDefault extends javax.swing.JPanel {
             }
         });
 
+        jbSalvar.setText("Salvar");
+        jbSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalvarActionPerformed(evt);
+            }
+        });
+
+        jbCancelar.setText("Cancelar");
+        jbCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCancelarActionPerformed(evt);
+            }
+        });
+
+        jbFechar.setText("Fechar");
+        jbFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbFecharActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -105,6 +170,12 @@ public class JpDefault extends javax.swing.JPanel {
                 .addComponent(jbAlterar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jbDeletar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jbSalvar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jbCancelar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jbFechar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -116,7 +187,10 @@ public class JpDefault extends javax.swing.JPanel {
                     .addComponent(jbAlterar)
                     .addComponent(jbInserir)
                     .addComponent(jbPesquisar)
-                    .addComponent(jbVaPara))
+                    .addComponent(jbVaPara)
+                    .addComponent(jbSalvar)
+                    .addComponent(jbCancelar)
+                    .addComponent(jbFechar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -136,12 +210,20 @@ public class JpDefault extends javax.swing.JPanel {
     private void jbInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInserirActionPerformed
         if (acoesPainel != null) {
             acoesPainel.inserir();
+            jbSalvar.setEnabled(true);
+            jbCancelar.setEnabled(true);
+            jbAlterar.setEnabled(false);
+            jbDeletar.setEnabled(false);
         }
     }//GEN-LAST:event_jbInserirActionPerformed
 
     private void jbAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlterarActionPerformed
         if (acoesPainel != null) {
             acoesPainel.alterar();
+            jbSalvar.setEnabled(true);
+            jbCancelar.setEnabled(true);
+            jbInserir.setEnabled(false);
+            jbDeletar.setEnabled(false);
         }
     }//GEN-LAST:event_jbAlterarActionPerformed
 
@@ -151,11 +233,47 @@ public class JpDefault extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jbDeletarActionPerformed
 
+    private void jbSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalvarActionPerformed
+        if (acoesPainel != null) {
+            acoesPainel.salvar();
+            jbSalvar.setEnabled(false);
+            jbCancelar.setEnabled(false);
+            jbInserir.setEnabled(true);
+            jbAlterar.setEnabled(true);
+            jbDeletar.setEnabled(true);
+        }
+    }//GEN-LAST:event_jbSalvarActionPerformed
+
+    private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
+        if (acoesPainel != null) {
+            acoesPainel.cancelar();
+            jbSalvar.setEnabled(false);
+            jbCancelar.setEnabled(false);
+            jbInserir.setEnabled(true);
+            jbAlterar.setEnabled(true);
+            jbDeletar.setEnabled(true);
+        }
+    }//GEN-LAST:event_jbCancelarActionPerformed
+
+    private void jbFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbFecharActionPerformed
+        if (acoesPainel != null) {
+            acoesPainel.fechar();
+            jbInserir.setEnabled(true);
+            jbAlterar.setEnabled(true);
+            jbDeletar.setEnabled(true);
+            jbSalvar.setEnabled(false);
+            jbCancelar.setEnabled(false);
+        }
+    }//GEN-LAST:event_jbFecharActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jbAlterar;
+    private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbDeletar;
+    private javax.swing.JButton jbFechar;
     private javax.swing.JButton jbInserir;
     private javax.swing.JButton jbPesquisar;
+    private javax.swing.JButton jbSalvar;
     private javax.swing.JButton jbVaPara;
     // End of variables declaration//GEN-END:variables
 }
