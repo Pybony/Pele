@@ -1,5 +1,5 @@
 package br.com.chamados.model;
-// Generated 01/11/2015 20:44:12 by Hibernate Tools 4.3.1
+// Generated 29/11/2015 11:17:34 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -16,13 +16,13 @@ public class Chamado  implements java.io.Serializable {
      private CategoriaUm categoriaUm;
      private Chamado chamado;
      private Empresa empresa;
-     private Funcionario funcionarioByFuncionarioAberturaId;
-     private Funcionario funcionarioByFuncionarioAtendenteId;
-     private Funcionario funcionarioByFuncionarioSolicitanteId;
+     private Funcionario funcionario;
      private Origem origem;
+     private Pessoa pessoa;
      private Prioridade prioridade;
      private Situacao situacao;
-     private int tipoId;
+     private Tipo tipo;
+     private int idAbertura;
      private String titulo;
      private String descricao;
      private Date dataAbertura;
@@ -35,27 +35,26 @@ public class Chamado  implements java.io.Serializable {
     }
 
 	
-    public Chamado(CategoriaUm categoriaUm, Funcionario funcionarioByFuncionarioAberturaId, Funcionario funcionarioByFuncionarioSolicitanteId, Origem origem, Prioridade prioridade, Situacao situacao, int tipoId, String titulo) {
+    public Chamado(CategoriaUm categoriaUm, Origem origem, Prioridade prioridade, Situacao situacao, Tipo tipo, int idAbertura, String titulo) {
         this.categoriaUm = categoriaUm;
-        this.funcionarioByFuncionarioAberturaId = funcionarioByFuncionarioAberturaId;
-        this.funcionarioByFuncionarioSolicitanteId = funcionarioByFuncionarioSolicitanteId;
         this.origem = origem;
         this.prioridade = prioridade;
         this.situacao = situacao;
-        this.tipoId = tipoId;
+        this.tipo = tipo;
+        this.idAbertura = idAbertura;
         this.titulo = titulo;
     }
-    public Chamado(CategoriaUm categoriaUm, Chamado chamado, Empresa empresa, Funcionario funcionarioByFuncionarioAberturaId, Funcionario funcionarioByFuncionarioAtendenteId, Funcionario funcionarioByFuncionarioSolicitanteId, Origem origem, Prioridade prioridade, Situacao situacao, int tipoId, String titulo, String descricao, Date dataAbertura, Date dataFechamento, Date dataPrevista, Set interacaos, Set chamados) {
+    public Chamado(CategoriaUm categoriaUm, Chamado chamado, Empresa empresa, Funcionario funcionario, Origem origem, Pessoa pessoa, Prioridade prioridade, Situacao situacao, Tipo tipo, int idAbertura, String titulo, String descricao, Date dataAbertura, Date dataFechamento, Date dataPrevista, Set interacaos, Set chamados) {
        this.categoriaUm = categoriaUm;
        this.chamado = chamado;
        this.empresa = empresa;
-       this.funcionarioByFuncionarioAberturaId = funcionarioByFuncionarioAberturaId;
-       this.funcionarioByFuncionarioAtendenteId = funcionarioByFuncionarioAtendenteId;
-       this.funcionarioByFuncionarioSolicitanteId = funcionarioByFuncionarioSolicitanteId;
+       this.funcionario = funcionario;
        this.origem = origem;
+       this.pessoa = pessoa;
        this.prioridade = prioridade;
        this.situacao = situacao;
-       this.tipoId = tipoId;
+       this.tipo = tipo;
+       this.idAbertura = idAbertura;
        this.titulo = titulo;
        this.descricao = descricao;
        this.dataAbertura = dataAbertura;
@@ -93,26 +92,12 @@ public class Chamado  implements java.io.Serializable {
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
     }
-    public Funcionario getFuncionarioByFuncionarioAberturaId() {
-        return this.funcionarioByFuncionarioAberturaId;
+    public Funcionario getFuncionario() {
+        return this.funcionario;
     }
     
-    public void setFuncionarioByFuncionarioAberturaId(Funcionario funcionarioByFuncionarioAberturaId) {
-        this.funcionarioByFuncionarioAberturaId = funcionarioByFuncionarioAberturaId;
-    }
-    public Funcionario getFuncionarioByFuncionarioAtendenteId() {
-        return this.funcionarioByFuncionarioAtendenteId;
-    }
-    
-    public void setFuncionarioByFuncionarioAtendenteId(Funcionario funcionarioByFuncionarioAtendenteId) {
-        this.funcionarioByFuncionarioAtendenteId = funcionarioByFuncionarioAtendenteId;
-    }
-    public Funcionario getFuncionarioByFuncionarioSolicitanteId() {
-        return this.funcionarioByFuncionarioSolicitanteId;
-    }
-    
-    public void setFuncionarioByFuncionarioSolicitanteId(Funcionario funcionarioByFuncionarioSolicitanteId) {
-        this.funcionarioByFuncionarioSolicitanteId = funcionarioByFuncionarioSolicitanteId;
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
     }
     public Origem getOrigem() {
         return this.origem;
@@ -120,6 +105,13 @@ public class Chamado  implements java.io.Serializable {
     
     public void setOrigem(Origem origem) {
         this.origem = origem;
+    }
+    public Pessoa getPessoa() {
+        return this.pessoa;
+    }
+    
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
     public Prioridade getPrioridade() {
         return this.prioridade;
@@ -135,12 +127,19 @@ public class Chamado  implements java.io.Serializable {
     public void setSituacao(Situacao situacao) {
         this.situacao = situacao;
     }
-    public int getTipoId() {
-        return this.tipoId;
+    public Tipo getTipo() {
+        return this.tipo;
     }
     
-    public void setTipoId(int tipoId) {
-        this.tipoId = tipoId;
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
+    }
+    public int getIdAbertura() {
+        return this.idAbertura;
+    }
+    
+    public void setIdAbertura(int idAbertura) {
+        this.idAbertura = idAbertura;
     }
     public String getTitulo() {
         return this.titulo;

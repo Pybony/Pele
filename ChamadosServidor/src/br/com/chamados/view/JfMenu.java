@@ -7,6 +7,7 @@ package br.com.chamados.view;
 
 import br.com.chamados.genericos.Cookies;
 import br.com.chamados.view.categoria_um.JiCategoriaUm;
+import br.com.chamados.view.chamado.JiChamado;
 import br.com.chamados.view.pais.JiPais;
 import br.com.chamados.view.permissoes.JiPermissao;
 import br.com.chamados.view.cidade.JiCidade;
@@ -45,7 +46,8 @@ public class JfMenu extends javax.swing.JFrame {
     private static JiSituacao jiSituacao;
     private static JiPrioridade jiPrioridade;
     private static JiOrigem jiOrigem;
-    private static JiCategoriaUm jiCategoriaUm;
+    private static JiCategoriaUm JiCategoriaUm;
+    private static JiChamado JiChamado;
 
     /**
      * Creates new form JfMenu
@@ -84,6 +86,7 @@ public class JfMenu extends javax.swing.JFrame {
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenuItem14 = new javax.swing.JMenuItem();
+        jMenuItem15 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
 
@@ -225,6 +228,14 @@ public class JfMenu extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jMenuItem14);
+
+        jMenuItem15.setText("jMenuItem15");
+        jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem15ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem15);
 
         jMenuBar1.add(jMenu2);
 
@@ -434,15 +445,29 @@ public class JfMenu extends javax.swing.JFrame {
         if (!Cookies.getPermissao(JiCategoriaUm.class.getSimpleName()).getConsultar()) {
             JOptionPane.showMessageDialog(null, "Você não possui permissão de acesso para este programa. Por favor fale com o administrador.");
         } else {
-            if (jiCategoriaUm == null) {
-                jiCategoriaUm = new JiCategoriaUm();
-                desktop.add(jiCategoriaUm);
-                jiCategoriaUm.setVisible(true);
+            if (JiCategoriaUm == null) {
+                JiCategoriaUm = new JiCategoriaUm();
+                desktop.add(JiCategoriaUm);
+                JiCategoriaUm.setVisible(true);
             } else {
-                jiCategoriaUm.setVisible(true);
+                JiCategoriaUm.setVisible(true);
             }
         }
     }//GEN-LAST:event_jMenuItem14ActionPerformed
+
+    private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
+        if (!Cookies.getPermissao(JiChamado.class.getSimpleName()).getConsultar()) {
+            JOptionPane.showMessageDialog(null, "Você não possui permissão de acesso para este programa. Por favor fale com o administrador.");
+        } else {
+            if (JiChamado == null) {
+                JiChamado = new JiChamado();
+                desktop.add(JiChamado);
+                JiChamado.setVisible(true);
+            } else {
+                JiChamado.setVisible(true);
+            }
+        }
+    }//GEN-LAST:event_jMenuItem15ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JDesktopPane desktop;
@@ -457,6 +482,7 @@ public class JfMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
+    private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

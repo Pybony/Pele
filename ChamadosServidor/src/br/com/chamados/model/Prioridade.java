@@ -1,5 +1,5 @@
 package br.com.chamados.model;
-// Generated 01/11/2015 20:44:12 by Hibernate Tools 4.3.1
+// Generated 29/11/2015 11:17:34 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -44,6 +44,10 @@ public class Prioridade  implements java.io.Serializable {
     public void setChamados(Set chamados) {
         this.chamados = chamados;
     }
+    public String getNome() {
+        return getDescricao();
+    }
+
 
 
 

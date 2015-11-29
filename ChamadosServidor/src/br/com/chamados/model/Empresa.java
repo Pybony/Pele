@@ -1,5 +1,5 @@
 package br.com.chamados.model;
-// Generated 01/11/2015 20:44:12 by Hibernate Tools 4.3.1
+// Generated 29/11/2015 11:17:34 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -11,21 +11,23 @@ import java.util.Set;
 public class Empresa  implements java.io.Serializable {
 
 
-     private Integer id;
+     private int id;
      private Cidade cidade;
      private String nome;
      private String cgc;
      private String endereco;
      private String telefone;
      private String email;
-     private Set funcionarios = new HashSet(0);
+     private Set pessoas = new HashSet(0);
      private Set chamados = new HashSet(0);
+     private Set funcionarios = new HashSet(0);
 
     public Empresa() {
     }
 
 	
-    public Empresa(Cidade cidade, String nome, String cgc, String endereco, String telefone, String email) {
+    public Empresa(int id, Cidade cidade, String nome, String cgc, String endereco, String telefone, String email) {
+        this.id = id;
         this.cidade = cidade;
         this.nome = nome;
         this.cgc = cgc;
@@ -33,22 +35,24 @@ public class Empresa  implements java.io.Serializable {
         this.telefone = telefone;
         this.email = email;
     }
-    public Empresa(Cidade cidade, String nome, String cgc, String endereco, String telefone, String email, Set funcionarios, Set chamados) {
+    public Empresa(int id, Cidade cidade, String nome, String cgc, String endereco, String telefone, String email, Set pessoas, Set chamados, Set funcionarios) {
+       this.id = id;
        this.cidade = cidade;
        this.nome = nome;
        this.cgc = cgc;
        this.endereco = endereco;
        this.telefone = telefone;
        this.email = email;
-       this.funcionarios = funcionarios;
+       this.pessoas = pessoas;
        this.chamados = chamados;
+       this.funcionarios = funcionarios;
     }
    
-    public Integer getId() {
+    public int getId() {
         return this.id;
     }
     
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
     public Cidade getCidade() {
@@ -93,12 +97,12 @@ public class Empresa  implements java.io.Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
-    public Set getFuncionarios() {
-        return this.funcionarios;
+    public Set getPessoas() {
+        return this.pessoas;
     }
     
-    public void setFuncionarios(Set funcionarios) {
-        this.funcionarios = funcionarios;
+    public void setPessoas(Set pessoas) {
+        this.pessoas = pessoas;
     }
     public Set getChamados() {
         return this.chamados;
@@ -106,6 +110,13 @@ public class Empresa  implements java.io.Serializable {
     
     public void setChamados(Set chamados) {
         this.chamados = chamados;
+    }
+    public Set getFuncionarios() {
+        return this.funcionarios;
+    }
+    
+    public void setFuncionarios(Set funcionarios) {
+        this.funcionarios = funcionarios;
     }
 
 

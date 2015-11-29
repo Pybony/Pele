@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 01/11/2015 20:44:12 by Hibernate Tools 4.3.1 -->
+<!-- Generated 29/11/2015 11:17:34 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="br.com.chamados.model.Empresa" table="empresa" catalog="chamados" optimistic-lock="version">
-        <id name="id" type="java.lang.Integer">
+        <id name="id" type="int">
             <column name="id" />
-            <generator class="identity" />
+            <generator class="assigned" />
         </id>
         <many-to-one name="cidade" class="br.com.chamados.model.Cidade" fetch="select">
             <column name="cidade_id" not-null="true" />
@@ -26,17 +26,23 @@
         <property name="email" type="string">
             <column name="email" length="45" not-null="true" />
         </property>
-        <set name="funcionarios" table="funcionario" inverse="true" lazy="true" fetch="select">
+        <set name="pessoas" table="pessoa" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="empresa_id" not-null="true" />
             </key>
-            <one-to-many class="br.com.chamados.model.Funcionario" />
+            <one-to-many class="br.com.chamados.model.Pessoa" />
         </set>
         <set name="chamados" table="chamado" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="empresa_id" />
             </key>
             <one-to-many class="br.com.chamados.model.Chamado" />
+        </set>
+        <set name="funcionarios" table="funcionario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="empresa_id" not-null="true" />
+            </key>
+            <one-to-many class="br.com.chamados.model.Funcionario" />
         </set>
     </class>
 </hibernate-mapping>

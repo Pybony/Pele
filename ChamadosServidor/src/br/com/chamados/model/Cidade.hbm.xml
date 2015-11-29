@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 01/11/2015 20:44:12 by Hibernate Tools 4.3.1 -->
+<!-- Generated 29/11/2015 11:17:34 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="br.com.chamados.model.Cidade" table="cidade" catalog="chamados" optimistic-lock="version">
         <id name="id" type="java.lang.Integer">
@@ -17,6 +17,18 @@
         <property name="cep" type="string">
             <column name="cep" length="45" not-null="true" />
         </property>
+        <set name="bairros" table="bairro" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="cidade_id" not-null="true" />
+            </key>
+            <one-to-many class="br.com.chamados.model.Bairro" />
+        </set>
+        <set name="funcionarios" table="funcionario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="cidade_id" not-null="true" />
+            </key>
+            <one-to-many class="br.com.chamados.model.Funcionario" />
+        </set>
         <set name="empresas" table="empresa" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="cidade_id" not-null="true" />
