@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 29/11/2015 11:17:34 by Hibernate Tools 4.3.1 -->
+<!-- Generated 10/12/2015 21:08:12 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="br.com.chamados.model.Prioridade" table="prioridade" catalog="chamados" optimistic-lock="version">
+    <class name="br.com.chamados.model.Prioridade" table="prioridade" catalog="chamados2" optimistic-lock="version">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
@@ -13,7 +13,7 @@
         </property>
         <set name="chamados" table="chamado" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="prioridade_id" not-null="true" />
+                <column name="prioridade_id" />
             </key>
             <one-to-many class="br.com.chamados.model.Chamado" />
         </set>

@@ -1,5 +1,5 @@
 package br.com.chamados.model;
-// Generated 29/11/2015 11:17:34 by Hibernate Tools 4.3.1
+// Generated 10/12/2015 21:08:11 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;

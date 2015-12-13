@@ -46,7 +46,7 @@ public class CombosDAO {
                 for (int i = 0; i < lCategoria.size(); i++) {
                     item = new ItemCombo();
                     item.setCodigo(lCategoria.get(i).getId());
-                    item.setDescricao(lCategoria.get(i).getNome());
+                    item.setDescricao(lCategoria.get(i).getDescricao());
                     combo.addItem(item);
                 }
             }
@@ -78,7 +78,7 @@ public class CombosDAO {
                 for (int i = 0; i < lOrigem.size(); i++) {
                     item = new ItemCombo();
                     item.setCodigo(lOrigem.get(i).getId());
-                    item.setDescricao(lOrigem.get(i).getNome());
+                    item.setDescricao(lOrigem.get(i).getDescricao());
                     combo.addItem(item);
                 }
             }
@@ -145,7 +145,7 @@ public class CombosDAO {
                 for (int i = 0; i < lPrioridade.size(); i++) {
                     item = new ItemCombo();
                     item.setCodigo(lPrioridade.get(i).getId());
-                    item.setDescricao(lPrioridade.get(i).getNome());
+                    item.setDescricao(lPrioridade.get(i).getDescricao());
                     combo.addItem(item);
                 }
             }
@@ -177,8 +177,9 @@ public class CombosDAO {
 
                 for (int i = 0; i < lSituacao.size(); i++) {
                     item = new ItemCombo();
+                    System.out.println(lSituacao.get(i).getId());
                     item.setCodigo(lSituacao.get(i).getId());
-                    item.setDescricao(lSituacao.get(i).getNome());
+                    item.setDescricao(lSituacao.get(i).getDescricao());
                     combo.addItem(item);
                 }
             }
@@ -210,7 +211,7 @@ public class CombosDAO {
                 for (int i = 0; i < lTipo.size(); i++) {
                     item = new ItemCombo();
                     item.setCodigo(lTipo.get(i).getId());
-                    item.setDescricao(lTipo.get(i).getNome());
+                    item.setDescricao(lTipo.get(i).getDescricao());
                     combo.addItem(item);
                 }
             }

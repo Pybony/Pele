@@ -1,5 +1,5 @@
 package br.com.chamados.model;
-// Generated 29/11/2015 11:17:34 by Hibernate Tools 4.3.1
+// Generated 10/12/2015 21:08:11 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -14,7 +14,6 @@ public class Pessoa  implements java.io.Serializable {
 
      private Integer id;
      private Cidade cidade;
-     private Empresa empresa;
      private String nome;
      private int idade;
      private Date dataNascimento;
@@ -22,16 +21,14 @@ public class Pessoa  implements java.io.Serializable {
      private String telefone;
      private String cpf;
      private String rg;
-     private Set chamados = new HashSet(0);
      private Set funcionarios = new HashSet(0);
 
     public Pessoa() {
     }
 
 	
-    public Pessoa(Cidade cidade, Empresa empresa, String nome, int idade, Date dataNascimento, String email, String telefone, String cpf, String rg) {
+    public Pessoa(Cidade cidade, String nome, int idade, Date dataNascimento, String email, String telefone, String cpf, String rg) {
         this.cidade = cidade;
-        this.empresa = empresa;
         this.nome = nome;
         this.idade = idade;
         this.dataNascimento = dataNascimento;
@@ -40,9 +37,8 @@ public class Pessoa  implements java.io.Serializable {
         this.cpf = cpf;
         this.rg = rg;
     }
-    public Pessoa(Cidade cidade, Empresa empresa, String nome, int idade, Date dataNascimento, String email, String telefone, String cpf, String rg, Set chamados, Set funcionarios) {
+    public Pessoa(Cidade cidade, String nome, int idade, Date dataNascimento, String email, String telefone, String cpf, String rg, Set funcionarios) {
        this.cidade = cidade;
-       this.empresa = empresa;
        this.nome = nome;
        this.idade = idade;
        this.dataNascimento = dataNascimento;
@@ -50,7 +46,6 @@ public class Pessoa  implements java.io.Serializable {
        this.telefone = telefone;
        this.cpf = cpf;
        this.rg = rg;
-       this.chamados = chamados;
        this.funcionarios = funcionarios;
     }
    
@@ -67,13 +62,6 @@ public class Pessoa  implements java.io.Serializable {
     
     public void setCidade(Cidade cidade) {
         this.cidade = cidade;
-    }
-    public Empresa getEmpresa() {
-        return this.empresa;
-    }
-    
-    public void setEmpresa(Empresa empresa) {
-        this.empresa = empresa;
     }
     public String getNome() {
         return this.nome;
@@ -123,13 +111,6 @@ public class Pessoa  implements java.io.Serializable {
     
     public void setRg(String rg) {
         this.rg = rg;
-    }
-    public Set getChamados() {
-        return this.chamados;
-    }
-    
-    public void setChamados(Set chamados) {
-        this.chamados = chamados;
     }
     public Set getFuncionarios() {
         return this.funcionarios;

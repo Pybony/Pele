@@ -229,7 +229,7 @@ public class JfMenu extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem14);
 
-        jMenuItem15.setText("jMenuItem15");
+        jMenuItem15.setText("Chamados");
         jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem15ActionPerformed(evt);

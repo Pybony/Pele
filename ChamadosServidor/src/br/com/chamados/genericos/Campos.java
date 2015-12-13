@@ -97,7 +97,7 @@ public class Campos {
             } else if (c[i] instanceof JComboBox) {
                 JComboBox cb = (JComboBox) c[i];
 
-                if (cb.getSelectedIndex() <= 0) {
+                if (cb.getSelectedIndex() <= 0 || cb.getSelectedItem() == null) {
 //                    System.out.println(cb.getName());
                     erros.add("O campo " + cb.getName() + " deve ser preenchido.");
                 }

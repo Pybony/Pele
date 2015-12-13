@@ -173,8 +173,6 @@ public class EmpresaDao {
             String sql = "SELECT COUNT(*) FROM Empresa";
             Integer result = Integer.parseInt(dao.count(sql).toString());
 
-            System.out.println(result);
-
             dadosTabela = new Object[result][5];
 
         } catch (Exception e) {
@@ -187,7 +185,6 @@ public class EmpresaDao {
         try {
             for (int i = 0; i < empresa.size(); i++) {
 
-                System.out.println(empresa.get(i).getId());
                 dadosTabela[i][0] = empresa.get(i).getId();
                 dadosTabela[i][1] = empresa.get(i).getNome();
                 dadosTabela[i][2] = empresa.get(i).getCgc();

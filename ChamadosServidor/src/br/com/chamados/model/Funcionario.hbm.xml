@@ -1,16 +1,13 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 29/11/2015 11:17:34 by Hibernate Tools 4.3.1 -->
+<!-- Generated 10/12/2015 21:08:12 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="br.com.chamados.model.Funcionario" table="funcionario" catalog="chamados" optimistic-lock="version">
+    <class name="br.com.chamados.model.Funcionario" table="funcionario" catalog="chamados2" optimistic-lock="version">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
         </id>
-        <many-to-one name="cidade" class="br.com.chamados.model.Cidade" fetch="select">
-            <column name="cidade_id" not-null="true" />
-        </many-to-one>
         <many-to-one name="empresa" class="br.com.chamados.model.Empresa" fetch="select">
             <column name="empresa_id" not-null="true" />
         </many-to-one>
@@ -23,23 +20,38 @@
         <many-to-one name="setor" class="br.com.chamados.model.Setor" fetch="select">
             <column name="setor_id" not-null="true" />
         </many-to-one>
-        <property name="dataAdmicao" type="date">
-            <column name="data_admicao" length="10" not-null="true" />
+        <property name="dataAdmicao" type="timestamp">
+            <column name="data_admicao" length="19" not-null="true" />
         </property>
-        <property name="dataDesligamento" type="date">
-            <column name="data_desligamento" length="10" />
+        <property name="dataDesligamento" type="timestamp">
+            <column name="data_desligamento" length="19" />
         </property>
-        <set name="chamados" table="chamado" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="funcionario_id" />
-            </key>
-            <one-to-many class="br.com.chamados.model.Chamado" />
-        </set>
+        <property name="email" type="string">
+            <column name="email" length="150" />
+        </property>
         <set name="usuarios" table="usuario" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="funcionario_id" not-null="true" />
             </key>
             <one-to-many class="br.com.chamados.model.Usuario" />
+        </set>
+        <set name="chamadosForFuncionarioAberturaId" table="chamado" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="funcionario_abertura_id" not-null="true" />
+            </key>
+            <one-to-many class="br.com.chamados.model.Chamado" />
+        </set>
+        <set name="chamadosForFuncionarioAtendenteId" table="chamado" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="funcionario_atendente_id" />
+            </key>
+            <one-to-many class="br.com.chamados.model.Chamado" />
+        </set>
+        <set name="chamadosForFuncionarioSolicitanteId" table="chamado" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="funcionario_solicitante_id" not-null="true" />
+            </key>
+            <one-to-many class="br.com.chamados.model.Chamado" />
         </set>
     </class>
 </hibernate-mapping>

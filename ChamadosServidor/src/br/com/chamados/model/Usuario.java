@@ -1,5 +1,5 @@
 package br.com.chamados.model;
-// Generated 29/11/2015 11:17:34 by Hibernate Tools 4.3.1
+// Generated 10/12/2015 21:08:11 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -16,6 +16,7 @@ public class Usuario  implements java.io.Serializable {
      private String login;
      private String senha;
      private Set permissoeses = new HashSet(0);
+     private Set auditorias = new HashSet(0);
 
     public Usuario() {
     }
@@ -26,11 +27,12 @@ public class Usuario  implements java.io.Serializable {
         this.login = login;
         this.senha = senha;
     }
-    public Usuario(Funcionario funcionario, String login, String senha, Set permissoeses) {
+    public Usuario(Funcionario funcionario, String login, String senha, Set permissoeses, Set auditorias) {
        this.funcionario = funcionario;
        this.login = login;
        this.senha = senha;
        this.permissoeses = permissoeses;
+       this.auditorias = auditorias;
     }
    
     public Integer getId() {
@@ -67,6 +69,13 @@ public class Usuario  implements java.io.Serializable {
     
     public void setPermissoeses(Set permissoeses) {
         this.permissoeses = permissoeses;
+    }
+    public Set getAuditorias() {
+        return this.auditorias;
+    }
+    
+    public void setAuditorias(Set auditorias) {
+        this.auditorias = auditorias;
     }
 
 

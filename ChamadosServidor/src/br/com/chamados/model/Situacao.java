@@ -1,5 +1,5 @@
 package br.com.chamados.model;
-// Generated 29/11/2015 11:17:34 by Hibernate Tools 4.3.1
+// Generated 10/12/2015 21:08:11 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -11,28 +11,23 @@ import java.util.Set;
 public class Situacao  implements java.io.Serializable {
 
 
-     private int id;
+     private Integer id;
      private String descricao;
      private Set chamados = new HashSet(0);
 
     public Situacao() {
     }
 
-	
-    public Situacao(int id) {
-        this.id = id;
-    }
-    public Situacao(int id, String descricao, Set chamados) {
-       this.id = id;
+    public Situacao(String descricao, Set chamados) {
        this.descricao = descricao;
        this.chamados = chamados;
     }
    
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
     
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     public String getDescricao() {
@@ -49,10 +44,6 @@ public class Situacao  implements java.io.Serializable {
     public void setChamados(Set chamados) {
         this.chamados = chamados;
     }
-    public String getNome() {
-        return getDescricao();
-    }
-
 
 
 
