@@ -71,6 +71,7 @@ public class DAO<T> {
                 JOptionPane.showMessageDialog(null, "Registro não encontrado.");
             }
         } catch (HibernateException e) {
+            JOptionPane.showMessageDialog(null, "Não foi possível exluir este registro. Ele pode possuir ligações com outros cadastros.");
             transacion.rollback();
             e.printStackTrace();
             logger.error(e.getMessage());
@@ -102,6 +103,11 @@ public class DAO<T> {
         openSession();
         SQLQuery query = session.createSQLQuery(sql);
         return query.uniqueResult();
+    }
+    
+    public void nrQuerySQL(String sql){
+        openSession();
+        session.createSQLQuery(sql);
     }
 
     public Object count(String sql) {

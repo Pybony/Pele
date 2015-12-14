@@ -39,6 +39,12 @@ public class UsuarioDao {
         return usuario;
     }
 
+    public static Usuario getUsuario(String login, String senha) {
+        DAO<Usuario> daoUsuario = new DAO<>();
+        Usuario retorno = daoUsuario.query("SELECT u FROM Usuario u WHERE login = '" + login + "' AND senha = '" + senha + "'").get(0);
+        return retorno;
+    }
+
     public static void popularTabela(JTable tabela, String descricaoDe, String descricaoAte) {
         // dados da tabela
         Object[][] dadosTabela = null;

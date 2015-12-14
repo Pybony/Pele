@@ -6,6 +6,9 @@
 package br.com.chamados.view;
 
 import br.com.chamados.control.DAO;
+import br.com.chamados.dao.AuditoriaDao;
+import br.com.chamados.dao.PermissoesDao;
+import br.com.chamados.dao.UsuarioDao;
 import br.com.chamados.genericos.Cookies;
 import br.com.chamados.model.Permissoes;
 import br.com.chamados.model.Usuario;
@@ -139,13 +142,12 @@ public class JfLogin extends javax.swing.JFrame {
 
     private void jbLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLogarActionPerformed
         if (HabilitaCampos.validar(jpLogin)) {
-            String login = jtLogin.getText().toString();
+            String login = jtLogin.getText();
             String senha = new String(jpSenha.getPassword());
-            DAO<Usuario> daoUsuario = new DAO<>();
-            DAO<Permissoes> daoPermissoes = new DAO<>();
             try {
-                Usuario usuario = daoUsuario.query("SELECT u FROM Usuario u WHERE login = '" + login + "' AND senha = '" + senha + "'").get(0);
-                List<Permissoes> listaPermissoes = daoPermissoes.query("SELECT p FROM Permissoes p WHERE usuario = " + usuario.getId());
+                AuditoriaDao.limpaAuditoria();
+                Usuario usuario = UsuarioDao.getUsuario(login, senha);
+                List<Permissoes> listaPermissoes = PermissoesDao.getListaPermissoes(usuario.getId());
                 Cookies.usuario = usuario;
                 Cookies.listaPermissoes = listaPermissoes;
                 new JfMenu().setVisible(true);

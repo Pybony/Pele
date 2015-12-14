@@ -30,6 +30,12 @@ public class PermissoesDao {
         dao.delete(permissoes);
     }
 
+    public static List<Permissoes> getListaPermissoes(int idUsuario) {
+        DAO<Permissoes> daoPermissoes = new DAO<>();
+        List<Permissoes> retorno = daoPermissoes.query("SELECT p FROM Permissoes p WHERE usuario = " + idUsuario);
+        return retorno;
+    }
+
     public static Permissoes vaPara(String idTela, String idUsuario) {
         Permissoes permissoes = new Permissoes();
         try {
