@@ -25,7 +25,7 @@ public class JdAdicionarComentario extends javax.swing.JDialog {
      */
     private Chamado chamadoComentario;
     private static JdMostrarInteracao jdMostrarInteracao;
-    private JfMenu jfMenu;
+    private static JfMenu jfMenu;
     
     
     public JdAdicionarComentario(java.awt.Frame parent, boolean modal) {
@@ -77,20 +77,19 @@ public class JdAdicionarComentario extends javax.swing.JDialog {
             }
         });
 
-        jScrollPane1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jScrollPane1MouseClicked(evt);
-            }
-        });
-
         jtComentario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Data", "Comentário", "Autor"
+                "Id", "Data", "Comentário", "Autor"
             }
         ));
+        jtComentario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtComentarioMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtComentario);
 
         javax.swing.GroupLayout jpAdicionarComentarioLayout = new javax.swing.GroupLayout(jpAdicionarComentario);
@@ -148,11 +147,11 @@ public class JdAdicionarComentario extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jScrollPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseClicked
+    private void jtComentarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtComentarioMouseClicked
         if (evt.getClickCount() == 2) {
             selecionarInteracao();
         }
-    }//GEN-LAST:event_jScrollPane1MouseClicked
+    }//GEN-LAST:event_jtComentarioMouseClicked
 
     /**
      * @param args the command line arguments

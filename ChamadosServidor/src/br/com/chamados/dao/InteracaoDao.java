@@ -20,7 +20,7 @@ import javax.swing.table.TableColumn;
  * @author jonascr86
  */
 public class InteracaoDao {
-    
+
     public static Interacao vaPara(String id) {
         Interacao interacao = new Interacao();
         try {
@@ -45,6 +45,7 @@ public class InteracaoDao {
         }
         return interacao;
     }
+
     public static void salvar(Interacao interacao) {
         DAO<Interacao> dao = new DAO<>();
         dao.save(interacao);
@@ -54,22 +55,24 @@ public class InteracaoDao {
         DAO<Interacao> dao = new DAO<>();
         dao.delete(interacao);
     }
-    
-    public static List<Interacao> obterInteracao(Interacao criterio){
-        
+
+    public static List<Interacao> obterInteracao(Interacao criterio) {
+
         DAO<Interacao> dao = new DAO<>();
-        
+
         String sql = "SELECT c FROM Interacao c";
         ArrayList<String> where = new ArrayList<>();
 
         if (criterio != null) {
-            
+
             if (criterio.getId() != null) {
                 where.add(" id = " + criterio.getId());
             }
-            
-            if (criterio.getChamado().getId() != null && !criterio.getChamado().getId().equals("")) {
-                where.add(" chamado_id = '" + criterio.getChamado().getId() + "'");
+
+            if (criterio.getChamado() != null) {
+                if (!criterio.getChamado().getId().equals("")) {
+                    where.add(" chamado_id = '" + criterio.getChamado().getId() + "'");
+                }
             }
         }
 
@@ -85,17 +88,17 @@ public class InteracaoDao {
             }
             count++;
         }
-        
+
         if (!mount.equals("")) {
 
             sql += " WHERE " + mount;
         }
         System.out.println(sql);
         List<Interacao> interacao = dao.query(sql);
-        
+
         return interacao;
     }
-    
+
     public static void popularTabela(JTable tabela, Interacao criterio) {
 
         DAO<Interacao> dao = new DAO<>();
@@ -105,10 +108,11 @@ public class InteracaoDao {
         Object[][] dadosTabela = null;
 
         // cabecalho da tabela
-        Object[] cabecalho = new Object[3];
-        cabecalho[0] = "Data";
-        cabecalho[1] = "Descrição";
-        cabecalho[2] = "Autor";
+        Object[] cabecalho = new Object[4];
+        cabecalho[0] = "Id";
+        cabecalho[1] = "Data";
+        cabecalho[2] = "Descrição";
+        cabecalho[3] = "Autor";
 
         // cria matriz de acordo com nº de registros da tabela
         try {
@@ -117,7 +121,7 @@ public class InteracaoDao {
                     + "ORDER BY data DESC";
             Integer result = Integer.parseInt(dao.count(sql).toString());
 
-            dadosTabela = new Object[result][3];
+            dadosTabela = new Object[result][4];
 
         } catch (Exception e) {
             System.out.println("Erro ao consultar qtde interacaos: " + e);
@@ -125,15 +129,15 @@ public class InteracaoDao {
 
         interacao = obterInteracao(criterio);
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/YYYY");
-       
 
         // efetua consulta de dados no banco e atribui no componente JTable
         try {
             for (int i = 0; i < interacao.size(); i++) {
 
-                dadosTabela[i][0] = formatter.format(interacao.get(i).getData());
-                dadosTabela[i][1] = interacao.get(i).getDescricao();
-                dadosTabela[i][2] = interacao.get(i).getFuncionario().getPessoa().getNome();
+                dadosTabela[i][0] = interacao.get(i).getId();
+                dadosTabela[i][1] = formatter.format(interacao.get(i).getData());
+                dadosTabela[i][2] = interacao.get(i).getDescricao();
+                dadosTabela[i][3] = interacao.get(i).getFuncionario().getPessoa().getNome();
             }
 
         } catch (Exception e) {
