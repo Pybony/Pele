@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 10/12/2015 21:08:12 by Hibernate Tools 4.3.1 -->
+<!-- Generated 14/12/2015 00:31:21 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="br.com.chamados.model.Chamado" table="chamado" catalog="chamados2" optimistic-lock="version">
         <id name="id" type="java.lang.Integer">
@@ -14,14 +14,11 @@
         <many-to-one name="empresa" class="br.com.chamados.model.Empresa" fetch="select">
             <column name="empresa_id" />
         </many-to-one>
-        <many-to-one name="funcionarioByFuncionarioAberturaId" class="br.com.chamados.model.Funcionario" fetch="select">
-            <column name="funcionario_abertura_id" />
-        </many-to-one>
         <many-to-one name="funcionarioByFuncionarioAtendenteId" class="br.com.chamados.model.Funcionario" fetch="select">
             <column name="funcionario_atendente_id" />
         </many-to-one>
         <many-to-one name="funcionarioByFuncionarioSolicitanteId" class="br.com.chamados.model.Funcionario" fetch="select">
-            <column name="funcionario_solicitante_id" />
+            <column name="funcionario_solicitante_id" not-null="true" />
         </many-to-one>
         <many-to-one name="origem" class="br.com.chamados.model.Origem" fetch="select">
             <column name="origem_id" />
@@ -42,7 +39,7 @@
             <column name="descricao" length="45" not-null="true" />
         </property>
         <property name="dataAbertura" type="timestamp">
-            <column name="data_abertura" length="19" />
+            <column name="data_abertura" length="19" not-null="true" />
         </property>
         <property name="dataFechamento" type="timestamp">
             <column name="data_fechamento" length="19" />

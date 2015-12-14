@@ -7,6 +7,7 @@ package br.com.chamados.view.chamado;
 
 import br.com.chamados.config.LogChamados;
 import br.com.chamados.dao.ChamadoDao;
+import br.com.chamados.dao.InteracaoDao;
 import br.com.chamados.genericos.AcoesPainel;
 import br.com.chamados.genericos.Campos;
 import br.com.chamados.genericos.Cookies;
@@ -15,6 +16,7 @@ import br.com.chamados.model.CategoriaUm;
 import br.com.chamados.model.Chamado;
 import br.com.chamados.model.Empresa;
 import br.com.chamados.model.Funcionario;
+import br.com.chamados.model.Interacao;
 import br.com.chamados.model.Origem;
 import br.com.chamados.model.Prioridade;
 import br.com.chamados.model.Situacao;
@@ -22,18 +24,27 @@ import br.com.chamados.model.Tipo;
 import br.com.chamados.utils.CombosDAO;
 import br.com.chamados.utils.ItemCombo;
 import br.com.chamados.utils.JCalendar;
+import br.com.chamados.view.JfMenu;
+import static br.com.chamados.view.JfMenu.desktop;
 import br.com.chamados.view.JpDefault;
+import com.mchange.v1.xml.StdErrErrorHandler;
+import java.awt.Frame;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.SimpleFormatter;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import org.apache.log4j.Logger;
@@ -48,6 +59,11 @@ public class JiChamado extends JInternalFrame implements AcoesPainel {
     private JpDefault jpDefault;
     private boolean tab = false;
     private Chamado chamado;
+    private Chamado interacaoChamado;
+    private Chamado oldChamado;
+    private List<String> teste;
+    private static JdAdicionarComentario jdAdicionarComentario;
+    private static JfMenu jfMenu;
 
     /**
      * Creates new form JiChamado
@@ -63,6 +79,7 @@ public class JiChamado extends JInternalFrame implements AcoesPainel {
         jpDefault.setBounds(JpDefault.X, JpDefault.Y, JpDefault.WIDTH, JpDefault.HEIGHT);
         jpDefault.setVisibleJbInserir(true);
         jpDefault.setVisibleJbDeletar(true);
+        jbAddComentario.setVisible(false);
         this.setSize(JpDefault.WIDTH + 20, JpDefault.HEIGHT + 600);
         jPaneEdit.setBorder(BorderFactory.createEmptyBorder(100, 20, 0, 0));
         jPaneEdit.add(jpDefault);
@@ -72,8 +89,16 @@ public class JiChamado extends JInternalFrame implements AcoesPainel {
         new CombosDAO().popularPrioridade(jcbPrioridade, 0);
         new CombosDAO().popularSituacao(jcbSituacao, 0);
         new CombosDAO().popularOrigem(jcbOrigem, 0);
-        
-        ChamadoDao.popularTabela(jtChamado, chamado);
+
+        Funcionario funcionarioAtendente = new Funcionario();
+        funcionarioAtendente.setId(Cookies.usuario.getId());
+
+        Chamado chamadoTable = new Chamado();
+        chamadoTable.setFuncionarioByFuncionarioAtendenteId(funcionarioAtendente);
+
+        ChamadoDao.popularTabela(jtChamado, chamadoTable);
+
+        chamado = new Chamado();
     }
 
     /**
@@ -117,6 +142,7 @@ public class JiChamado extends JInternalFrame implements AcoesPainel {
         jcbOrigem = new javax.swing.JComboBox<>();
         jcbCategoria = new javax.swing.JComboBox<>();
         jcbAbertura = new JCalendar();
+        jbAddComentario = new javax.swing.JButton();
         jPanelShow = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -247,6 +273,13 @@ public class JiChamado extends JInternalFrame implements AcoesPainel {
 
         jcbAbertura.setName("Início"); // NOI18N
 
+        jbAddComentario.setText("Adicionar comentário");
+        jbAddComentario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAddComentarioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPaneEditLayout = new javax.swing.GroupLayout(jPaneEdit);
         jPaneEdit.setLayout(jPaneEditLayout);
         jPaneEditLayout.setHorizontalGroup(
@@ -283,7 +316,8 @@ public class JiChamado extends JInternalFrame implements AcoesPainel {
                                 .addComponent(jtfTarefaPai, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jbBuscarPai, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jcbAbertura, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jcbAbertura, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbAddComentario)))
                     .addGroup(jPaneEditLayout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addGroup(jPaneEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -301,7 +335,7 @@ public class JiChamado extends JInternalFrame implements AcoesPainel {
                                 .addGap(18, 18, 18)
                                 .addComponent(jbBuscarPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane2))))
-                .addContainerGap(169, Short.MAX_VALUE))
+                .addContainerGap(335, Short.MAX_VALUE))
         );
         jPaneEditLayout.setVerticalGroup(
             jPaneEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -354,7 +388,9 @@ public class JiChamado extends JInternalFrame implements AcoesPainel {
                             .addGroup(jPaneEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jcbPrevista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel17))
-                            .addGap(102, 102, 102)))))
+                            .addGap(18, 18, 18)
+                            .addComponent(jbAddComentario)
+                            .addGap(58, 58, 58)))))
         );
 
         JPane.addTab("Criação de chamados", jPaneEdit);
@@ -383,7 +419,7 @@ public class JiChamado extends JInternalFrame implements AcoesPainel {
             .addGroup(jPanelShowLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 898, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(187, Short.MAX_VALUE))
         );
         jPanelShowLayout.setVerticalGroup(
             jPanelShowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -399,7 +435,7 @@ public class JiChamado extends JInternalFrame implements AcoesPainel {
         jpIteracoes.setLayout(jpIteracoesLayout);
         jpIteracoesLayout.setHorizontalGroup(
             jpIteracoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 931, Short.MAX_VALUE)
+            .addGap(0, 1097, Short.MAX_VALUE)
         );
         jpIteracoesLayout.setVerticalGroup(
             jpIteracoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -412,7 +448,7 @@ public class JiChamado extends JInternalFrame implements AcoesPainel {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(JPane)
+            .addComponent(JPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1105, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -425,7 +461,6 @@ public class JiChamado extends JInternalFrame implements AcoesPainel {
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         Util.centralizar(this);
         jpDefault.setAcoesCadastro(this);
-        vaPara("0");
     }//GEN-LAST:event_formComponentShown
 
     private void JPaneStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_JPaneStateChanged
@@ -442,7 +477,7 @@ public class JiChamado extends JInternalFrame implements AcoesPainel {
             tab = false;
             ChamadoDao.popularTabela(jtChamado, null);
         }
-        
+
     }//GEN-LAST:event_JPaneStateChanged
 
     private void jbBuscarPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarPessoaActionPerformed
@@ -454,6 +489,13 @@ public class JiChamado extends JInternalFrame implements AcoesPainel {
             selecionarChamado();
         }
     }//GEN-LAST:event_jtChamadoMouseClicked
+
+    private void jbAddComentarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAddComentarioActionPerformed
+
+        jdAdicionarComentario = new JdAdicionarComentario(jfMenu, true, chamado);
+        jdAdicionarComentario.setVisible(true);
+        jdAdicionarComentario.toFront();
+    }//GEN-LAST:event_jbAddComentarioActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane JPane;
@@ -474,6 +516,7 @@ public class JiChamado extends JInternalFrame implements AcoesPainel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JButton jbAddComentario;
     private javax.swing.JButton jbBuscarPai;
     private javax.swing.JButton jbBuscarPessoa;
     private javax.swing.JComboBox<String> jcbAbertura;
@@ -539,6 +582,14 @@ public class JiChamado extends JInternalFrame implements AcoesPainel {
         Origem origem = new Origem();
         Situacao situacao = new Situacao();
         Tipo tipo = new Tipo();
+        Interacao interacao = new Interacao();
+
+        if (chamado.getId() != null) {
+            Chamado buscaChamado = new Chamado();
+            buscaChamado.setId(chamado.getId());
+            oldChamado = new Chamado();
+            oldChamado = ChamadoDao.obterChamado(buscaChamado).get(0).getClone();
+        }
 
         /**
          * Empresa do funcionário solicitante.
@@ -608,11 +659,12 @@ public class JiChamado extends JInternalFrame implements AcoesPainel {
         chamado.setEmpresa(empresa);
 
         chamado.setFuncionarioByFuncionarioAtendenteId(funcionarioAtendente);
-        chamado.setFuncionarioByFuncionarioAberturaId(funcionarioAbertura);
         chamado.setFuncionarioByFuncionarioSolicitanteId(funcionarioSolicitante);
 
         if (validarCampos()) {
             ChamadoDao.salvar(chamado);
+            salvarInteracao();
+            limparCampos();
         }
     }
 
@@ -645,6 +697,7 @@ public class JiChamado extends JInternalFrame implements AcoesPainel {
         bChamado.setId(chamadoId);
         chamado = ChamadoDao.obterChamado(bChamado).get(0);
         abrirPrimeiraAba();
+        mostrarBotaoComentario(true);
     }
 
     private void preencherFormulario() {
@@ -658,13 +711,12 @@ public class JiChamado extends JInternalFrame implements AcoesPainel {
 
         jtfTitulo.setText(chamado.getTitulo());
         jtaDescricao.setText(chamado.getDescricao());
-
+        
         try {
-            preencherCampoData(chamado.getDataPrevista(), jcbPrevista);
-            preencherCampoData(chamado.getDataAbertura(), jcbAbertura);
+            preencherCampoData((Date) chamado.getDataPrevista(),(JCalendar) jcbPrevista);
+            preencherCampoData((Date) chamado.getDataAbertura(),(JCalendar) jcbAbertura);
         } catch (Exception e) {
         }
-
     }
 
     public void abrirPrimeiraAba() {
@@ -678,10 +730,83 @@ public class JiChamado extends JInternalFrame implements AcoesPainel {
         new CombosDAO().definirItemCombo(jcb, item);
     }
 
-    private void preencherCampoData(Date dataChamado, JComboBox calendar) {
+    private void preencherCampoData(Date dataChamado, JCalendar calendar) {
         GregorianCalendar GDataPrevista = new GregorianCalendar();
-        GDataPrevista.setGregorianChange(dataChamado);
-
-        calendar.setSelectedItem(GDataPrevista);
+        GDataPrevista.setTime(dataChamado);
+        
+        calendar.setSelectedItem((GregorianCalendar) GDataPrevista);
     }
+
+    private void salvarInteracao() {
+        Interacao interacao = new Interacao();
+        String descricao = "";
+        
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/YYYY");
+
+        if (oldChamado == null) {
+            descricao += "Chamado " + chamado.getTitulo() + " criado";
+        } else {
+            if (oldChamado.getTitulo() != chamado.getTitulo()) {
+                descricao += "Titulo alterado de " + oldChamado.getTitulo() + " para " + chamado.getTitulo() + "\n";
+            }
+
+            if (oldChamado.getOrigem().getId() != chamado.getOrigem().getId()) {
+                descricao += "Oregem alterada de " + oldChamado.getOrigem().getDescricao() + " para " + chamado.getOrigem().getDescricao() + "\n";
+            }
+
+            if (oldChamado.getCategoriaUm().getId() != chamado.getCategoriaUm().getId()) {
+                descricao += "Categoria alterada de " + oldChamado.getCategoriaUm().getDescricao() + " para " + chamado.getCategoriaUm().getDescricao() + "\n";
+            }
+
+            if (oldChamado.getDescricao() != chamado.getDescricao() && !chamado.getDescricao().equals("")) {
+                descricao += "Descrição alterada de " + oldChamado.getDescricao() + " para " + chamado.getDescricao() + "\n";
+            }
+
+            if (oldChamado.getPrioridade().getId() != chamado.getPrioridade().getId()) {
+                descricao += "Categoria alterada de " + oldChamado.getPrioridade().getDescricao() + " para " + chamado.getPrioridade().getDescricao() + "\n";
+            }
+
+            if (oldChamado.getSituacao().getId() != chamado.getSituacao().getId()) {
+                descricao += "Situação alterada de " + oldChamado.getSituacao().getDescricao() + " para " + chamado.getSituacao().getDescricao() + "\n";
+            }
+
+            if (oldChamado.getTipo().getId() != chamado.getTipo().getId()) {
+                descricao += "Tipo alterado de " + oldChamado.getTipo().getDescricao() + " para " + chamado.getTipo().getDescricao() + "\n";
+            }
+
+            if (oldChamado.getDataPrevista() != chamado.getDataPrevista()) {
+                if (oldChamado.getDataPrevista() != null) {
+                    descricao += "Data prevista alterada de " + formatter.format(oldChamado.getDataPrevista().getTime()) + " para " + formatter.format(chamado.getDataPrevista().getTime()) + "\n";
+                }else{
+                    descricao += "Data prevista " + formatter.format(chamado.getDataPrevista().getTime()) + " adicionada";
+                }
+            }
+        }
+
+        interacao.setDescricao(descricao);
+        interacao.setData(new Date());
+        interacao.setChamado(chamado);
+        interacao.setFuncionario(Cookies.usuario.getFuncionario());
+        InteracaoDao.salvar(interacao);
+    }
+
+    private void limparCampos() {
+        Campos.limpar(jpCombos);
+        Campos.limpar(jpTitulo);
+        Campos.limpar(jpTipo);
+        jtaDescricao.setText("");
+//        jcbAbertura.setSelectedItem(null);
+//        jcbPrevista.setSelectedItem(null);
+        zerarChamado();
+    }
+
+    private void zerarChamado() {
+        chamado = new Chamado();
+        mostrarBotaoComentario(false);
+    }
+
+    private void mostrarBotaoComentario(Boolean mostrar) {
+        jbAddComentario.setVisible(mostrar);
+    }
+
 }

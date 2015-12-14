@@ -6,7 +6,7 @@
 package br.com.chamados.dao;
 
 import br.com.chamados.control.DAO;
-import br.com.chamados.model.Chamado;
+import br.com.chamados.model.Interacao;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,47 +19,47 @@ import javax.swing.table.TableColumn;
  *
  * @author jonascr86
  */
-public class ChamadoDao {
+public class InteracaoDao {
     
-    public static Chamado vaPara(String id) {
-        Chamado chamado = new Chamado();
+    public static Interacao vaPara(String id) {
+        Interacao interacao = new Interacao();
         try {
             String sql = "";
             if (id.equals("0")) {
-                sql = "SELECT c FROM Chamado c WHERE id >= " + id + " ORDER BY id";
+                sql = "SELECT c FROM Interacao c WHERE id >= " + id + " ORDER BY id";
             } else {
-                sql = "SELECT c FROM Chamado c WHERE id = " + id;
+                sql = "SELECT c FROM Interacao c WHERE id = " + id;
             }
-            DAO<Chamado> dao = new DAO<>();
-            List<Chamado> lista = dao.query(sql);
+            DAO<Interacao> dao = new DAO<>();
+            List<Interacao> lista = dao.query(sql);
             if (lista.size() == 0) {
                 if (!id.equals("0")) {
                     JOptionPane.showMessageDialog(null, "Id não encontrado.");
                 }
-                chamado = null;
+                interacao = null;
             } else {
-                chamado = lista.get(0);
+//                interacao = lista.get(0);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return chamado;
+        return interacao;
     }
-    public static void salvar(Chamado chamado) {
-        DAO<Chamado> dao = new DAO<>();
-        dao.save(chamado);
+    public static void salvar(Interacao interacao) {
+        DAO<Interacao> dao = new DAO<>();
+        dao.save(interacao);
     }
 
-    public static void deletar(Chamado chamado) {
-        DAO<Chamado> dao = new DAO<>();
-        dao.delete(chamado);
+    public static void deletar(Interacao interacao) {
+        DAO<Interacao> dao = new DAO<>();
+        dao.delete(interacao);
     }
     
-    public static List<Chamado> obterChamado(Chamado criterio){
+    public static List<Interacao> obterInteracao(Interacao criterio){
         
-        DAO<Chamado> dao = new DAO<>();
+        DAO<Interacao> dao = new DAO<>();
         
-        String sql = "SELECT c FROM Chamado c";
+        String sql = "SELECT c FROM Interacao c";
         ArrayList<String> where = new ArrayList<>();
 
         if (criterio != null) {
@@ -68,18 +68,9 @@ public class ChamadoDao {
                 where.add(" id = " + criterio.getId());
             }
             
-            if (criterio.getTitulo() != null && !criterio.getTitulo().equals("")) {
-                where.add(" titulo = '" + criterio.getTitulo() + "'");
+            if (criterio.getChamado().getId() != null && !criterio.getChamado().getId().equals("")) {
+                where.add(" chamado_id = '" + criterio.getChamado().getId() + "'");
             }
-
-            if (criterio.getFuncionarioByFuncionarioSolicitanteId() != null && !criterio.getFuncionarioByFuncionarioSolicitanteId().equals("")) {
-                where.add(" funcionario_solicitante_id = '" + criterio.getFuncionarioByFuncionarioSolicitanteId() + "'");
-            }
-            
-            if (criterio.getFuncionarioByFuncionarioAtendenteId() != null && !criterio.getFuncionarioByFuncionarioAtendenteId().equals("")) {
-                where.add(" funcionario_atendente_id = '" + criterio.getFuncionarioByFuncionarioAtendenteId() + "'");
-            }
-            
         }
 
         int size = where.size();
@@ -99,64 +90,50 @@ public class ChamadoDao {
 
             sql += " WHERE " + mount;
         }
-
-        List<Chamado> chamado = dao.query(sql);
+        System.out.println(sql);
+        List<Interacao> interacao = dao.query(sql);
         
-        return chamado;
+        return interacao;
     }
     
-    public static void popularTabela(JTable tabela, Chamado criterio) {
+    public static void popularTabela(JTable tabela, Interacao criterio) {
 
-        DAO<Chamado> dao = new DAO<>();
-        List<Chamado> chamado;
+        DAO<Interacao> dao = new DAO<>();
+        List<Interacao> interacao;
 
         // dados da tabela
         Object[][] dadosTabela = null;
 
         // cabecalho da tabela
-        Object[] cabecalho = new Object[7];
-        cabecalho[0] = "Id";
-        cabecalho[1] = "Título";
-        cabecalho[2] = "Solicitante";
-        cabecalho[3] = "Atribuído para";
-        cabecalho[4] = "Situção";
-        cabecalho[5] = "Data de Abertura";
-        cabecalho[6] = "Data prevista";
+        Object[] cabecalho = new Object[3];
+        cabecalho[0] = "Data";
+        cabecalho[1] = "Descrição";
+        cabecalho[2] = "Autor";
 
         // cria matriz de acordo com nº de registros da tabela
         try {
-            String sql = "SELECT COUNT(*) FROM Chamado";
+            String sql = "SELECT COUNT(*) FROM Interacao "
+                    + "WHERE chamado_id = " + criterio.getChamado().getId() + " "
+                    + "ORDER BY data DESC";
             Integer result = Integer.parseInt(dao.count(sql).toString());
 
-            dadosTabela = new Object[result][7];
+            dadosTabela = new Object[result][3];
 
         } catch (Exception e) {
-            System.out.println("Erro ao consultar qtde chamados: " + e);
+            System.out.println("Erro ao consultar qtde interacaos: " + e);
         }
 
-        chamado = obterChamado(criterio);
+        interacao = obterInteracao(criterio);
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/YYYY");
+       
 
         // efetua consulta de dados no banco e atribui no componente JTable
         try {
-            for (int i = 0; i < chamado.size(); i++) {
+            for (int i = 0; i < interacao.size(); i++) {
 
-                dadosTabela[i][0] = chamado.get(i).getId();
-                dadosTabela[i][1] = chamado.get(i).getTitulo();
-                dadosTabela[i][2] = chamado.get(i).getFuncionarioByFuncionarioSolicitanteId().getPessoa().getNome();
-                dadosTabela[i][3] = chamado.get(i).getFuncionarioByFuncionarioAtendenteId().getPessoa().getNome();
-                dadosTabela[i][4] = chamado.get(i).getSituacao().getDescricao();
-                if(chamado.get(i).getDataAbertura() != null){
-                    dadosTabela[i][5] = formatter.format(chamado.get(i).getDataAbertura());
-                }else{
-                    dadosTabela[i][5] = chamado.get(i).getDataAbertura();
-                }
-                
-                if(chamado.get(i).getDataPrevista() != null){
-                    dadosTabela[i][6] = formatter.format(chamado.get(i).getDataPrevista());
-                }else{
-                    dadosTabela[i][6] = chamado.get(i).getDataPrevista();
-                }
+                dadosTabela[i][0] = formatter.format(interacao.get(i).getData());
+                dadosTabela[i][1] = interacao.get(i).getDescricao();
+                dadosTabela[i][2] = interacao.get(i).getFuncionario().getPessoa().getNome();
             }
 
         } catch (Exception e) {

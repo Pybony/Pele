@@ -1,30 +1,27 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 10/12/2015 21:08:12 by Hibernate Tools 4.3.1 -->
+<!-- Generated 14/12/2015 00:31:21 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="br.com.chamados.model.Interacao" table="interacao" catalog="chamados2" optimistic-lock="version">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
         </id>
-        <many-to-one name="acompanhamento" class="br.com.chamados.model.Acompanhamento" fetch="select">
-            <column name="acompanhamento_id" not-null="true" />
-        </many-to-one>
         <many-to-one name="chamado" class="br.com.chamados.model.Chamado" fetch="select">
             <column name="chamado_id" not-null="true" />
         </many-to-one>
+        <many-to-one name="funcionario" class="br.com.chamados.model.Funcionario" fetch="select">
+            <column name="funcionario_id" not-null="true" />
+        </many-to-one>
         <property name="descricao" type="string">
-            <column name="descricao" length="45" not-null="true" />
+            <column name="descricao" length="1000" not-null="true" />
         </property>
         <property name="data" type="timestamp">
             <column name="data" length="19" not-null="true" />
         </property>
         <property name="autorId" type="java.lang.Integer">
             <column name="autor_id" />
-        </property>
-        <property name="tipoAutor" type="java.lang.Character">
-            <column name="tipoAutor" length="1" />
         </property>
         <property name="solucao" type="java.lang.Boolean">
             <column name="solucao" />

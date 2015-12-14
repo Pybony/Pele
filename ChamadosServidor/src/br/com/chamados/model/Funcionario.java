@@ -1,5 +1,5 @@
 package br.com.chamados.model;
-// Generated 10/12/2015 21:08:11 by Hibernate Tools 4.3.1
+// Generated 14/12/2015 00:31:21 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -21,7 +21,7 @@ public class Funcionario  implements java.io.Serializable {
      private Date dataDesligamento;
      private String email;
      private Set usuarios = new HashSet(0);
-     private Set chamadosForFuncionarioAberturaId = new HashSet(0);
+     private Set interacaos = new HashSet(0);
      private Set chamadosForFuncionarioAtendenteId = new HashSet(0);
      private Set chamadosForFuncionarioSolicitanteId = new HashSet(0);
 
@@ -36,7 +36,7 @@ public class Funcionario  implements java.io.Serializable {
         this.setor = setor;
         this.dataAdmicao = dataAdmicao;
     }
-    public Funcionario(Empresa empresa, Funcao funcao, Pessoa pessoa, Setor setor, Date dataAdmicao, Date dataDesligamento, String email, Set usuarios, Set chamadosForFuncionarioAberturaId, Set chamadosForFuncionarioAtendenteId, Set chamadosForFuncionarioSolicitanteId) {
+    public Funcionario(Empresa empresa, Funcao funcao, Pessoa pessoa, Setor setor, Date dataAdmicao, Date dataDesligamento, String email, Set usuarios, Set interacaos, Set chamadosForFuncionarioAtendenteId, Set chamadosForFuncionarioSolicitanteId) {
        this.empresa = empresa;
        this.funcao = funcao;
        this.pessoa = pessoa;
@@ -45,7 +45,7 @@ public class Funcionario  implements java.io.Serializable {
        this.dataDesligamento = dataDesligamento;
        this.email = email;
        this.usuarios = usuarios;
-       this.chamadosForFuncionarioAberturaId = chamadosForFuncionarioAberturaId;
+       this.interacaos = interacaos;
        this.chamadosForFuncionarioAtendenteId = chamadosForFuncionarioAtendenteId;
        this.chamadosForFuncionarioSolicitanteId = chamadosForFuncionarioSolicitanteId;
     }
@@ -113,12 +113,12 @@ public class Funcionario  implements java.io.Serializable {
     public void setUsuarios(Set usuarios) {
         this.usuarios = usuarios;
     }
-    public Set getChamadosForFuncionarioAberturaId() {
-        return this.chamadosForFuncionarioAberturaId;
+    public Set getInteracaos() {
+        return this.interacaos;
     }
     
-    public void setChamadosForFuncionarioAberturaId(Set chamadosForFuncionarioAberturaId) {
-        this.chamadosForFuncionarioAberturaId = chamadosForFuncionarioAberturaId;
+    public void setInteracaos(Set interacaos) {
+        this.interacaos = interacaos;
     }
     public Set getChamadosForFuncionarioAtendenteId() {
         return this.chamadosForFuncionarioAtendenteId;
